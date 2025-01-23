@@ -1,4 +1,3 @@
-
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/widgets/loading_widgets.dart';
 import 'package:flutter/cupertino.dart';
