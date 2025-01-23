@@ -1,6 +1,5 @@
 import 'package:diary/core/DI/locator.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
-import 'package:diary/presentation/languages/views/languages_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
