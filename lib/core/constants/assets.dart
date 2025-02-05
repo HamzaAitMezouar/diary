@@ -3,4 +3,7 @@ abstract class Assets {
   static String fr = "assets/icons/fr.png";
 
   static String en = "assets/icons/en.png";
+  static String google = "assets/icons/google.png";
+
+  static String facebook = "assets/icons/facebook.png";
 }

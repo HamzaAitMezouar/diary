@@ -1,3 +1,4 @@
+import 'package:diary/presentation/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,5 +41,5 @@ class HomeScreen extends ConsumerWidget {
 final List<Widget> _pages = [
   const Center(child: Text('Home Page')),
   const Center(child: Text('Search Page')),
-  const Center(child: Text('Profile Page')),
+  ProfileScreen()
 ];

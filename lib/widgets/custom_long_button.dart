@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../core/exports.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
-    super.key,
-    required this.onTap,
-    required this.title,
-    this.backgorundColor,
-    this.forgroundColor,
-    this.isLoading,
-    this.loadingColor,
-    this.style,
-    this.height,
-    this.border,
-  });
+  const CustomButton(
+      {super.key,
+      required this.onTap,
+      required this.title,
+      this.backgorundColor,
+      this.forgroundColor,
+      this.isLoading,
+      this.loadingColor,
+      this.style,
+      this.height,
+      this.border,
+      this.icon});
   final Function() onTap;
   final String title;
   final Color? backgorundColor;
@@ -22,6 +22,7 @@ class CustomButton extends StatelessWidget {
   final TextStyle? style;
   final bool? isLoading;
   final Color? loadingColor;
+  final Widget? icon;
   final double? height;
   final BorderRadius? border;
   @override
@@ -38,13 +39,27 @@ class CustomButton extends StatelessWidget {
           border: Border.all(color: backgorundColor ?? AppColors.tibbleGrauBg),
         ),
         child: isLoading == true
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator.adaptive(),
               )
-            : Padding(
-                padding: Paddings.horizontalXxs,
-                child: Text(title, style: style),
-              ),
+            : icon != null
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: D.xs),
+                        child: icon!,
+                      ),
+                      Text(title, style: style),
+                      SizedBox(
+                        width: D.xs,
+                      )
+                    ],
+                  )
+                : Padding(
+                    padding: Paddings.horizontalXxs,
+                    child: Text(title, style: style),
+                  ),
       ),
     );
   }

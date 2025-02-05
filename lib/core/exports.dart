@@ -5,3 +5,4 @@ export './constants/dimensions.dart';
 
 export './constants/paddings.dart';
 export './constants/string.dart';
+export './constants/text_style.dart';
