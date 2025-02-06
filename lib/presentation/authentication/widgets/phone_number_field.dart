@@ -24,7 +24,9 @@ class PhoneNumberTextField extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: D.xs),
           child: InternationalPhoneNumberInput(
+            textStyle: TextStyles.montserrat13,
             countries: const ["MA"],
+            selectorTextStyle: TextStyles.montserrat13,
             onInputChanged: (PhoneNumber number) {
               ref.read(phoneNumberProvider.notifier).state = number;
             },

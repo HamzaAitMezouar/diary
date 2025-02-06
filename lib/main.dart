@@ -29,7 +29,7 @@ class MyApp extends ConsumerWidget {
         Locale('fr'),
         Locale('ar'),
       ],
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
