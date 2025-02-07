@@ -3,14 +3,14 @@ class Failure {
   const Failure({required this.errorMessage});
 }
 
-class ServerFailure extends Failure {
-  ServerFailure({required super.errorMessage});
+class UnexpectedFailure extends Failure {
+  UnexpectedFailure({required super.errorMessage});
+}
+
+class CostumeFailure extends Failure {
+  CostumeFailure({required super.errorMessage});
 }
 
 class CacheFailure extends Failure {
   CacheFailure({required super.errorMessage});
-}
-
-class InternetFailure extends Failure {
-  InternetFailure({required super.errorMessage});
 }

@@ -2,4 +2,13 @@ abstract class Urls {
   static String baseUrl = "http://10.0.2.2:3040/api/v1/";
 
   static String refreshToken = "${baseUrl}token/refresh_token";
+
+  static String auth = "${baseUrl}auth/";
+  static String requestOtp = "${auth}request-otp";
+  static String verifyOtp = "${auth}verify-otp";
+  static String resenOtp = "${auth}resend-otp";
+  static String loginMail = "${auth}login-email";
+  static String socialMediaLogin = "${auth}social-media-login";
+  static String verifyEmail = "${auth}verify-email/:encryptedEmail";
+  static String logout = "${auth}log-out";
 }
