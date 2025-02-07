@@ -1,7 +1,7 @@
 import 'package:diary/core/DI/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
-import '../../data/repositories/token/token_repository.dart';
+import '../../domain/repositories/token/token_repository.dart';
 
 class AuthInterceptor extends Interceptor {
   final TokenRepository _tokenRepository = locator<TokenRepository>();
