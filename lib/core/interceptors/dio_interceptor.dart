@@ -4,8 +4,9 @@ import 'package:dio_smart_retry/dio_smart_retry.dart';
 import '../../domain/repositories/token/token_repository.dart';
 
 class AuthInterceptor extends Interceptor {
-  final TokenRepository _tokenRepository = locator<TokenRepository>();
-
+  final TokenRepository _tokenRepository;
+  final Dio _dio;
+  AuthInterceptor(this._dio, this._tokenRepository);
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
@@ -15,7 +16,7 @@ class AuthInterceptor extends Interceptor {
           if (r.accessToken == null && r.refreshToken == null) return handler.next(err);
 
           err.requestOptions.headers['Authorization'] = 'Bearer ${r.accessToken}';
-          final response = await locator<Dio>().fetch(err.requestOptions);
+          final response = await _dio.fetch(err.requestOptions);
           return handler.resolve(response);
         } on DioException catch (e) {
           return handler.next(e);

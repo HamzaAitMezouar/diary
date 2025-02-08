@@ -1,30 +1,32 @@
 import 'package:diary/core/constants/urls.dart';
+import 'package:diary/domain/repositories/token/token_repository.dart';
 import 'package:dio/dio.dart';
 
 import '../interceptors/dio_interceptor.dart';
 
-class DioLocator {
-  DioLocator();
-
-  Dio _createDio() {
-    return Dio(BaseOptions(
+class PublicDio {
+  Dio call() {
+    Dio dio = Dio(BaseOptions(
       baseUrl: Urls.baseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
     ));
-  }
-
-  Dio createPublicDio() {
-    final dio = _createDio();
     dio.interceptors.add(RetryInterceptorCustom(dio: dio));
 
     return dio;
   }
+}
 
-  Dio createAuthDio() {
-    final dio = _createDio();
-
-    dio.interceptors.add(AuthInterceptor());
+class AuthDio {
+  final TokenRepository _tokenRepository;
+  AuthDio(this._tokenRepository);
+  Dio call() {
+    Dio dio = Dio(BaseOptions(
+      baseUrl: Urls.baseUrl,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ));
+    dio.interceptors.add(AuthInterceptor(dio, _tokenRepository));
 
     dio.interceptors.add(RetryInterceptorCustom(dio: dio));
 

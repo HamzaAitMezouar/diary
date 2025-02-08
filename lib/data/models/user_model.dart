@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-enum Provider { google, facebook, github, email }
+enum SocialMediaProvider { google, facebook, github, email }
 
 class UserModel {
   final String id;
@@ -10,7 +10,7 @@ class UserModel {
   final String? name;
   final String? otp;
   final DateTime? otpExpiration;
-  final Provider? provider;
+  final SocialMediaProvider? provider;
   final String? image;
   final bool isActive;
   final bool isVerified;
@@ -41,7 +41,8 @@ class UserModel {
       name: json["name"],
       otp: json["otp"],
       otpExpiration: json["otpExpiration"] != null ? DateTime.parse(json["otpExpiration"]) : null,
-      provider: json["provider"] != null ? Provider.values.firstWhere((e) => e.name == json["provider"]) : null,
+      provider:
+          json["provider"] != null ? SocialMediaProvider.values.firstWhere((e) => e.name == json["provider"]) : null,
       image: json["image"],
       isActive: json["isActive"] ?? true,
       isVerified: json["isVerified"] ?? false,
