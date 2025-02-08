@@ -16,7 +16,14 @@ final sharedPreferencesProvider = FutureProvider<SharedPreferences>((ref) async 
   return await SharedPreferences.getInstance();
 });
 
-final sharedPreferencesHelperProvider = Provider<SharedPreferencesHelper>((ref) {
-  final SharedPreferences sharedPreferences = ref.watch(sharedPreferencesProvider).requireValue;
-  return SharedPreferencesHelper(sharedPreferences);
-});
+class SharedPreferencesHelperNotifier extends AsyncNotifier<SharedPreferencesHelper> {
+  @override
+  Future<SharedPreferencesHelper> build() async {
+    final sharedPreferences = await ref.watch(sharedPreferencesProvider.future);
+    return SharedPreferencesHelper(sharedPreferences);
+  }
+}
+
+final sharedPreferencesHelperProvider = AsyncNotifierProvider<SharedPreferencesHelperNotifier, SharedPreferencesHelper>(
+  SharedPreferencesHelperNotifier.new,
+);

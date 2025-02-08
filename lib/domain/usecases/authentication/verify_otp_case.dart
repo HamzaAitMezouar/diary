@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../core/errors/errors.dart';
 import '../../../core/responses/datasource_responses.dart';
+import '../../entities/user_entity.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 
 class VerifyOtpUseCase {
@@ -9,7 +10,7 @@ class VerifyOtpUseCase {
 
   VerifyOtpUseCase(this.repository);
 
-  Future<Either<Failure, AuthResponse>> call(String phoneNumber, String code) {
+  Future<Either<Failure, UserEntity>> call(String phoneNumber, String code) {
     return repository.verifyOtpCode(phoneNumber, code);
   }
 }

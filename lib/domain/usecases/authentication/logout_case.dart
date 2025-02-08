@@ -5,7 +5,7 @@ class LogOutUseCase {
 
   LogOutUseCase(this.repository);
 
-  Future call(String phoneNumber, String code) {
+  Future call() {
     return repository.logout();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:diary/core/DI/locator.dart';
 import 'package:diary/core/constants/string.dart';
 import 'package:diary/core/helpers/shared_prefrences_helper.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_state.dart';
@@ -9,7 +10,7 @@ import '../../../core/DI/storage_provider.dart';
 class LocalizationNotifier extends StateNotifier<LocalizationState> {
   final SharedPreferencesHelper _sharedPreferencesHelper;
 
-  LocalizationNotifier(this._sharedPreferencesHelper) : super(const LocalizationState(locale: Locale("en"))) {
+  LocalizationNotifier(this._sharedPreferencesHelper) : super(LocalizationState(locale: const Locale("en"))) {
     _loadLocale();
   }
 
@@ -26,4 +27,4 @@ class LocalizationNotifier extends StateNotifier<LocalizationState> {
 }
 
 final localizationProvider = StateNotifierProvider<LocalizationNotifier, LocalizationState>(
-    (ref) => LocalizationNotifier(ref.watch(sharedPreferencesHelperProvider)));
+    (ref) => LocalizationNotifier(locator<SharedPreferencesHelper>()));

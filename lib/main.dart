@@ -1,3 +1,4 @@
+import 'package:diary/core/DI/locator.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,7 @@ import 'core/DI/router_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
   runApp(const ProviderScope(child: MyApp()));
 }
 

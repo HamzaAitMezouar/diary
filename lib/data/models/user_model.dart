@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../domain/entities/user_entity.dart';
+
 enum SocialMediaProvider { google, facebook, github, email }
 
 class UserModel {
@@ -30,6 +32,19 @@ class UserModel {
     this.isVerified = false,
     required this.createdAt,
   });
+  UserEntity toEntity() {
+    return UserEntity(
+      id: id,
+      email: email,
+      phone: phone,
+      name: name,
+      provider: provider,
+      image: image,
+      isActive: isActive,
+      isVerified: isVerified,
+      createdAt: createdAt,
+    );
+  }
 
   /// Factory constructor to create a `User` from JSON
   factory UserModel.fromJson(Map<String, dynamic> json) {

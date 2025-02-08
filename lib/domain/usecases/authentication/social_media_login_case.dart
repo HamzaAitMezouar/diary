@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../core/errors/errors.dart';
 import '../../../core/params/social_media_params.dart';
-import '../../../core/responses/datasource_responses.dart';
+import '../../entities/user_entity.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 
 class SocialMediaLoginUseCase {
@@ -10,7 +10,7 @@ class SocialMediaLoginUseCase {
 
   SocialMediaLoginUseCase(this.repository);
 
-  Future<Either<Failure, AuthResponse>> call(SocialMediaParams params) {
+  Future<Either<Failure, UserEntity>> call(SocialMediaParams params) {
     return repository.socialMediaLogin(params);
   }
 }
