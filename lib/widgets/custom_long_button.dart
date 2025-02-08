@@ -14,7 +14,9 @@ class CustomButton extends StatelessWidget {
       this.style,
       this.height,
       this.border,
-      this.icon});
+      this.icon,
+      this.disableColor,
+      this.isDisabled});
   final Function() onTap;
   final String title;
   final Color? backgorundColor;
@@ -25,17 +27,23 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
   final double? height;
   final BorderRadius? border;
+  final bool? isDisabled;
+  final Color? disableColor;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isLoading == true ? null : onTap,
+      onTap: isDisabled == true
+          ? null
+          : isLoading == true
+              ? null
+              : onTap,
       child: Container(
         margin: Paddings.horizontalXxs,
         alignment: Alignment.center,
         height: height ?? D.xxxl,
         decoration: BoxDecoration(
           borderRadius: border ?? Borders.b12,
-          color: backgorundColor ?? AppColors.tibbleGrauBg,
+          color: isDisabled == true ? disableColor : backgorundColor ?? AppColors.tibbleGrauBg,
           border: Border.all(color: backgorundColor ?? AppColors.tibbleGrauBg),
         ),
         child: isLoading == true
@@ -51,9 +59,9 @@ class CustomButton extends StatelessWidget {
                         child: icon!,
                       ),
                       Text(title, style: style),
-                      SizedBox(
+                      const SizedBox(
                         width: D.xs,
-                      )
+                      ),
                     ],
                   )
                 : Padding(

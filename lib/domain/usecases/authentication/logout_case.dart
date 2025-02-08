@@ -1,15 +1,11 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../core/errors/errors.dart';
-import '../../../core/responses/datasource_responses.dart';
 import '../../repositories/authentication/authentication_repository.dart';
 
-class VerifyOtpUseCase {
+class LogOutUseCase {
   final AuthenticationRepository repository;
 
-  VerifyOtpUseCase(this.repository);
+  LogOutUseCase(this.repository);
 
-  Future<Either<Failure, AuthResponse>> call(String phoneNumber, String code) {
-    return repository.verifyOtpCode(phoneNumber, code);
+  Future call(String phoneNumber, String code) {
+    return repository.logout();
   }
 }

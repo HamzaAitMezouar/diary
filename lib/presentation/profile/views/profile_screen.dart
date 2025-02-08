@@ -47,11 +47,11 @@ class ProfileScreen extends ConsumerWidget {
             PhoneNumberTextField(),
             xxsSpacer(),
             CustomButton(
+              isDisabled: phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!),
               border: Borders.b20,
               icon: SizedBox(height: D.md, child: Icon(CupertinoIcons.phone)),
-              backgorundColor: phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!)
-                  ? AppColors.grauVollfarbe
-                  : AppColors.error,
+              backgorundColor: AppColors.error,
+              disableColor: AppColors.grauVollfarbe,
               height: D.xxl,
               onTap: () {},
               style: TextStyles.montserrat13,
