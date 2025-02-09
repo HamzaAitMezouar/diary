@@ -686,6 +686,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1+4"
+<<<<<<< HEAD
   google_maps:
     dependency: transitive
     description:
@@ -734,6 +735,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.8"
+=======
+>>>>>>> beffd0f (add gogle and facebook auth and articles)
   google_sign_in:
     dependency: "direct main"
     description:
@@ -878,8 +881,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+<<<<<<< HEAD
   js_wrapping:
     dependency: transitive
+=======
+  json_annotation:
+    dependency: "direct main"
+>>>>>>> beffd0f (add gogle and facebook auth and articles)
     description:
       name: js_wrapping
       sha256: e385980f7c76a8c1c9a560dfb623b890975841542471eade630b2871d243851c
@@ -1451,6 +1459,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+<<<<<<< HEAD
   uuid:
     dependency: "direct main"
     description:
@@ -1459,6 +1468,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.1"
+=======
+>>>>>>> beffd0f (add gogle and facebook auth and articles)
   vector_math:
     dependency: transitive
     description:

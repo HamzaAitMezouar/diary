@@ -33,8 +33,14 @@ class SocialMediaServiceRepositoryImpl extends SocialMediaServiceRepository {
   }
 
   @override
-  Future<Either<Failure, SocialMediaUser>> loginWitnGoogle() {
-    // TODO: implement loginWitnGoogle
-    throw UnimplementedError();
+  Future<Either<Failure, SocialMediaUser>> loginWitnGoogle() async {
+    try {
+      final result = await _mediaServiceDatasource.loginWithGoogle();
+      return Right(result);
+    } on CustomException catch (e) {
+      return Left(CostumeFailure(errorMessage: e.message));
+    } on UnexpectedException catch (e) {
+      return Left(UnexpectedFailure(errorMessage: e.message));
+    }
   }
 }

@@ -1,11 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
+<<<<<<< HEAD
 <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 <uses-permission android:name="android.permission.USE_EXACT_ALARM" />   
 <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+=======
+
+>>>>>>> beffd0f (add gogle and facebook auth and articles)
     <application
         android:label="diary"
         android:icon="@mipmap/ic_launcher"
@@ -37,6 +41,7 @@
             <meta-data android:name="com.facebook.sdk.ClientToken" android:value="dd9439a7936989ca9de7cbfb26433acb"/>
 
         </activity>
+
 
         <meta-data
             android:name="flutterEmbedding"
