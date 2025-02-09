@@ -12,18 +12,9 @@ final secureStorageHelperProvider = Provider<SecureStorageHelper>((ref) {
   return SecureStorageHelper(ref.watch(secureStorageProvider));
 });
 
-final sharedPreferencesProvider = FutureProvider<SharedPreferences>((ref) async {
-  return await SharedPreferences.getInstance();
+final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+  throw UnimplementedError();
 });
 
-class SharedPreferencesHelperNotifier extends AsyncNotifier<SharedPreferencesHelper> {
-  @override
-  Future<SharedPreferencesHelper> build() async {
-    final sharedPreferences = await ref.watch(sharedPreferencesProvider.future);
-    return SharedPreferencesHelper(sharedPreferences);
-  }
-}
-
-final sharedPreferencesHelperProvider = AsyncNotifierProvider<SharedPreferencesHelperNotifier, SharedPreferencesHelper>(
-  SharedPreferencesHelperNotifier.new,
-);
+final sharedPreferencesHelperProvider =
+    Provider<SharedPreferencesHelper>((ref) => SharedPreferencesHelper(ref.watch(sharedPreferencesProvider)));

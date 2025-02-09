@@ -23,6 +23,8 @@ class PhoneAuthLoading extends AuthState {}
 
 class SendOtpSuccess extends AuthState {}
 
+class VerifyOtpSuccess extends AuthState {}
+
 class Authenticated extends AuthState {
   final UserEntity user;
 

@@ -11,8 +11,12 @@ class SecureStorageHelper {
     await _storage.write(key: 'refreshToken', value: token);
   }
 
-  Future<String?> getAccessToken() async {
-    return await _storage.read(key: 'accessToken');
+  Future<void> saveUser(String user) async {
+    await _storage.write(key: 'user', value: user);
+  }
+
+  Future<String?> getUserString() async {
+    return await _storage.read(key: 'user');
   }
 
   Future<String?> getRefreshToken() async {
@@ -22,5 +26,6 @@ class SecureStorageHelper {
   Future<void> clearTokens() async {
     await _storage.delete(key: 'accessToken');
     await _storage.delete(key: 'refreshToken');
+    await _storage.delete(key: 'user');
   }
 }

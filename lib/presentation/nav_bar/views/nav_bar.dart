@@ -2,10 +2,11 @@ import 'package:diary/presentation/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../home/views/home_page.dart';
 import '../controller/navbar_provider.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class NavBarScreen extends ConsumerWidget {
+  const NavBarScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,8 +39,4 @@ class HomeScreen extends ConsumerWidget {
   }
 }
 
-final List<Widget> _pages = [
-  const Center(child: Text('Home Page')),
-  const Center(child: Text('Search Page')),
-  ProfileScreen()
-];
+final List<Widget> _pages = [HomeScreen(), const Center(child: Text('Search Page')), ProfileScreen()];

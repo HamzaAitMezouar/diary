@@ -61,6 +61,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       final result = await remoteDataSource.socialMediaLogin(params);
       storageHelper.saveAccessToken(result.accessToken);
       storageHelper.saveRefreshToken(result.refreshToken);
+      storageHelper.saveUser(result.user.toJsonString());
       return Right(result.user.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
@@ -75,6 +76,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       final result = await remoteDataSource.verifyOtpCode(phoneNumber, code);
       storageHelper.saveAccessToken(result.accessToken);
       storageHelper.saveRefreshToken(result.refreshToken);
+      storageHelper.saveUser(result.user.toJsonString());
       return Right(result.user.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));

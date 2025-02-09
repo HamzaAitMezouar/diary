@@ -1,14 +1,25 @@
 import 'package:diary/core/DI/locator.dart';
+import 'package:diary/core/DI/storage_provider.dart';
+import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/DI/router_provider.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
-  runApp(const ProviderScope(child: MyApp()));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  runApp(ProviderScope(overrides: [
+    sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+  ], child: const MyApp()));
 }
 
 class MyApp extends ConsumerWidget {

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/data/models/facebook_user.dart';
 import 'package:diary/data/models/user_model.dart';
 import 'package:diary/domain/entities/user_entity.dart';
@@ -24,6 +25,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final LogOutUseCase logOutUseCase;
   final LoginWithFacebookUseCase loginWithFacebookUseCase;
   final LoginWithGoogleUsecase loginWithGoogleUsecase;
+  final Ref ref;
   AuthNotifier({
     required this.requestOtpUseCase,
     required this.verifyOtpUseCase,
@@ -32,14 +34,26 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.loginWithFacebookUseCase,
     required this.loginWithGoogleUsecase,
     required this.resendOtpUseCase,
-  }) : super(AuthInitial());
+    required this.ref,
+  }) : super(AuthInitial()) {
+    // Set an initial loading state
+    _initialize(); // Call the async method
+  }
+  _initialize() async {
+    String? userString = await ref.read(secureStorageHelperProvider).getUserString();
+    if (userString == null) {
+      state = Unauthenticated();
+      return;
+    }
+    state = Authenticated(UserModel.fromJsonString(userString!).toEntity());
+  }
 
   Future<void> requestOtp(String phoneNumber) async {
     state = PhoneAuthLoading();
     Either<Failure, bool> result = await requestOtpUseCase(phoneNumber);
     state = result.fold(
       (failure) => AuthError(failure.errorMessage),
-      (success) => success ? SendOtpSuccess() : AuthError(""),
+      (success) => success ? SendOtpSuccess() : AuthError("Something went wrong"),
     );
   }
 
@@ -48,7 +62,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     Either<Failure, bool> result = await resendOtpUseCase(phoneNumber);
     state = result.fold(
       (failure) => AuthError(failure.errorMessage),
-      (success) => success ? SendOtpSuccess() : AuthError(""),
+      (success) => success ? SendOtpSuccess() : AuthError("Something went wrong"),
     );
   }
 
@@ -78,7 +92,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     SocialMediaUser? socialMediaUser;
 
     Either<Failure, SocialMediaUser> facebookresult = await _loginWithProvider(provider);
-    facebookresult.fold((l) => AuthError(l.errorMessage), (r) => socialMediaUser = r);
+    facebookresult.fold((l) => state = AuthError(l.errorMessage), (r) => socialMediaUser = r);
     if (socialMediaUser == null) return;
     SocialMediaParams params = SocialMediaParams(
         email: socialMediaUser!.email!,
@@ -94,11 +108,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> logout() async {
     state = LogoutLoadingLoading();
-    Either<Failure, bool> result = await logOutUseCase();
-    state = result.fold(
-      (failure) => AuthError(failure.errorMessage),
-      (_) => AuthInitial(),
-    );
+    //Either<Failure, bool> result = await logOutUseCase();
+    await ref.read(secureStorageHelperProvider).clearTokens();
+    state = Unauthenticated();
+
+    /// = result.fold((failure) => AuthError(failure.errorMessage), (_) {
+    //  return
+    //});
   }
 }
 
@@ -111,5 +127,6 @@ final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref
     resendOtpUseCase: ref.watch(resendOtpUseCaseProvider),
     loginWithFacebookUseCase: ref.watch(loginWithFacebookUseCaseProvider),
     loginWithGoogleUsecase: ref.watch(loginWithGoogleUseCaseProvider),
+    ref: ref,
   );
 });

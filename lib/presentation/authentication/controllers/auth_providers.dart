@@ -6,8 +6,10 @@ import 'package:diary/data/datasource/authentication/social_media_service_dataso
 import 'package:diary/domain/repositories/authentication/social_media_service.dart';
 import 'package:diary/domain/usecases/authentication/facebook_login.dart';
 import 'package:diary/domain/usecases/authentication/google_login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../domain/repositories/authentication/authentication_repository.dart';
 import '../../../domain/usecases/authentication/logout_case.dart';
@@ -47,13 +49,22 @@ final logoutUseCaseProvider = Provider<LogOutUseCase>(
 );
 
 // social media services
-final facebookAuthProvider = FutureProvider<FacebookAuth>(
-  (ref) async => FacebookAuth.instance,
+final facebookAuthProvider = Provider<FacebookAuth>(
+  (ref) => FacebookAuth.i,
 );
+final googleSignInProvider = Provider<GoogleSignIn>(
+  (ref) => GoogleSignIn(
+    scopes: ['email', "displayName", "photoUrl"],
+  ),
+);
+final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
 final socialMediaDatasourceProvider = Provider<SocialMediaServiceDatasource>((ref) {
-  final facebookAuth = ref.watch(facebookAuthProvider).requireValue;
-  return SocialMediaServiceDatasourceImpl(facebookAuth);
+  final facebookAuth = ref.watch(facebookAuthProvider);
+  final googleSignin = ref.watch(googleSignInProvider);
+  final firebaseAuth = ref.watch(firebaseAuthProvider);
+
+  return SocialMediaServiceDatasourceImpl(facebookAuth, googleSignin, firebaseAuth);
 });
 
 final socialMediaServiceRepositoryProvider = Provider<SocialMediaServiceRepository>((ref) {

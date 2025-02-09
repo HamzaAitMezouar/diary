@@ -27,4 +27,4 @@ class LocalizationNotifier extends StateNotifier<LocalizationState> {
 }
 
 final localizationProvider = StateNotifierProvider<LocalizationNotifier, LocalizationState>(
-    (ref) => LocalizationNotifier(locator<SharedPreferencesHelper>()));
+    (ref) => LocalizationNotifier(ref.watch(sharedPreferencesHelperProvider)));

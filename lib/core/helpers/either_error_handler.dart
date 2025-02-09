@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../connection/connection.dart';
@@ -16,7 +18,7 @@ class ExceptionsHandler {
       return throw CustomException(message: translatedMessage);
     } on DioException catch (e) {
       String messageKey;
-
+      log(e.toString());
       switch (e.type) {
         case DioExceptionType.connectionTimeout:
           messageKey = 'timeout_error';
@@ -32,8 +34,7 @@ class ExceptionsHandler {
           break;
         case DioExceptionType.unknown:
         default:
-          messageKey = 'unknown_error';
-          break;
+          throw CustomException(message: e.response?.data?["message"] ?? "Unexcpected error");
       }
 
       String translatedMessage = localizationService.translate(messageKey);
