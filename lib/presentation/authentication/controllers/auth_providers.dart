@@ -2,8 +2,9 @@ import 'package:diary/core/DI/dio_provider.dart';
 import 'package:diary/core/DI/exception_handler_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/data/datasource/authentication/authentication_datasource.dart';
-import 'package:diary/data/datasource/authentication/social_media_service_datasource.dart';
-import 'package:diary/domain/repositories/authentication/social_media_service.dart';
+import 'package:diary/data/datasource/authentication/social_media__datasource.dart';
+import 'package:diary/data/datasource/authentication/social_media_services.dart';
+import 'package:diary/domain/repositories/authentication/social_media_repository.dart';
 import 'package:diary/domain/usecases/authentication/facebook_login.dart';
 import 'package:diary/domain/usecases/authentication/google_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -59,12 +60,25 @@ final googleSignInProvider = Provider<GoogleSignIn>(
 );
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
-final socialMediaDatasourceProvider = Provider<SocialMediaServiceDatasource>((ref) {
-  final facebookAuth = ref.watch(facebookAuthProvider);
+final googlesigninServiceProvider = Provider<GoogleSignInService>((ref) {
   final googleSignin = ref.watch(googleSignInProvider);
+  return GoogleSignInServiceImpl(googleSignin);
+});
+final facebookigninServiceProvider = Provider<FacebookAuthService>((ref) {
+  final facebookservice = ref.watch(facebookAuthProvider);
+  return FacebookAuthServiceImpl(facebookservice);
+});
+final firebaseloginServiceProvider = Provider<FirebaseAuthService>((ref) {
   final firebaseAuth = ref.watch(firebaseAuthProvider);
+  return FirebaseAuthServiceImpl(firebaseAuth);
+});
+final socialMediaDatasourceProvider = Provider<SocialMediaServiceDatasource>((ref) {
+  final facebookAuth = ref.watch(facebookigninServiceProvider);
+  final googlesigninService = ref.watch(googlesigninServiceProvider);
 
-  return SocialMediaServiceDatasourceImpl(facebookAuth, googleSignin, firebaseAuth);
+  final firebaseAuth = ref.watch(firebaseloginServiceProvider);
+
+  return SocialMediaServiceDatasourceImpl(facebookAuth, googlesigninService, firebaseAuth);
 });
 
 final socialMediaServiceRepositoryProvider = Provider<SocialMediaServiceRepository>((ref) {

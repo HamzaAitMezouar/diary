@@ -3,7 +3,7 @@ import 'package:diary/data/models/facebook_user.dart';
 
 import '../../../core/errors/errors.dart';
 import '../../../core/errors/exceptions.dart';
-import '../../../data/datasource/authentication/social_media_service_datasource.dart';
+import '../../../data/datasource/authentication/social_media__datasource.dart';
 
 abstract class SocialMediaServiceRepository {
   Future<Either<Failure, SocialMediaUser>> loginWithFacebook();

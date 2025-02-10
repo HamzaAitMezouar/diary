@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/helpers/secure_storage_helper.dart';
 import 'package:diary/data/datasource/authentication/authentication_datasource.dart';
-import 'package:diary/data/datasource/authentication/social_media_service_datasource.dart';
+import 'package:diary/data/datasource/authentication/social_media__datasource.dart';
 import 'package:diary/data/models/facebook_user.dart';
 import 'package:diary/domain/entities/user_entity.dart';
 

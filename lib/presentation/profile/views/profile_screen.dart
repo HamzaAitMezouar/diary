@@ -5,6 +5,7 @@ import 'package:diary/core/exports.dart';
 import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/data/models/user_model.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
+import 'package:diary/widgets/loading_widgets.dart';
 import 'package:diary/widgets/theme_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final authState = ref.watch(authNotifierProvider);
-    if (authState is AuthInitial) return CircularProgressIndicator();
-    if (authState is Authenticated)
+    if (authState is AuthInitial) return SettingsLoading();
+    if (authState is Authenticated) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -39,6 +40,7 @@ class ProfileScreen extends ConsumerWidget {
           Center(child: Text(authState.user.email ?? "${authState.user.phone}")),
         ],
       );
+    }
     return AuthenticationScreen();
   }
 }
