@@ -3,6 +3,7 @@ import 'package:diary/core/DI/exception_handler_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/data/datasource/token/token_datasource.dart';
 import 'package:diary/domain/repositories/token/token_repository.dart';
+import 'package:diary/presentation/authentication/controllers/session_notifier.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,5 +22,6 @@ final tokenRepositoryProvider = Provider<TokenRepository>((ref) {
 });
 
 final authDioProvider = Provider<Dio>((ref) {
-  return AuthDio(ref.watch(tokenRepositoryProvider)).call();
+  final sessionNot = ref.watch(sessionProvider.notifier);
+  return AuthDio(ref.watch(tokenRepositoryProvider), sessionNot).call();
 });

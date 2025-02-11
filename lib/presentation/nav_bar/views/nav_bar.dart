@@ -2,6 +2,8 @@ import 'package:diary/presentation/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../widgets/expired_session_dialog.dart';
+import '../../authentication/controllers/session_notifier.dart';
 import '../../home/views/home_page.dart';
 import '../controller/navbar_provider.dart';
 
@@ -11,14 +13,15 @@ class NavBarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentItem = ref.watch(navigationControllerProvider);
-    final navigationController = ref.read(navigationControllerProvider.notifier);
-
+    ref.listen(sessionProvider, (previous, next) {
+      if (next == true) ExpiredSessionDialog()(context, ref);
+    });
     return Scaffold(
       body: _pages[currentItem.index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentItem.index,
         onTap: (index) {
-          navigationController.selectItem(NavBarItem.values[index]);
+          ref.read(navigationControllerProvider.notifier).selectItem(NavBarItem.values[index]);
         },
         items: const [
           BottomNavigationBarItem(

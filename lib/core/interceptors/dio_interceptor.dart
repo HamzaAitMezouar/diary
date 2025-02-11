@@ -2,16 +2,22 @@ import 'package:diary/core/DI/locator.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import '../../domain/repositories/token/token_repository.dart';
+import '../../presentation/authentication/controllers/session_notifier.dart';
 
 class AuthInterceptor extends Interceptor {
   final TokenRepository _tokenRepository;
   final Dio _dio;
-  AuthInterceptor(this._dio, this._tokenRepository);
+  final SessionNotifier _sessionNotifier;
+
+  AuthInterceptor(this._dio, this._tokenRepository, this._sessionNotifier);
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401) {
       final response = await _tokenRepository.refreshToken();
-      response.fold((l) => handler.next(err), (r) async {
+      response.fold((l) {
+        _sessionNotifier.sessionExpired();
+        return handler.next(err);
+      }, (r) async {
         try {
           if (r.accessToken == null && r.refreshToken == null) return handler.next(err);
 
