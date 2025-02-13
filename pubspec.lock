@@ -687,6 +687,9 @@ packages:
     source: hosted
     version: "0.3.1+4"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7834ba6 (add map)
   google_maps:
     dependency: transitive
     description:
@@ -735,8 +738,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.8"
+<<<<<<< HEAD
 =======
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
+=======
+>>>>>>> 7834ba6 (add map)
   google_sign_in:
     dependency: "direct main"
     description:
@@ -785,6 +791,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+<<<<<<< HEAD
   hive:
     dependency: "direct main"
     description:
@@ -809,6 +816,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+=======
+>>>>>>> 7834ba6 (add map)
   html:
     dependency: transitive
     description:
@@ -882,12 +891,17 @@ packages:
     source: hosted
     version: "0.6.7"
 <<<<<<< HEAD
+<<<<<<< HEAD
   js_wrapping:
     dependency: transitive
 =======
   json_annotation:
     dependency: "direct main"
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
+=======
+  js_wrapping:
+    dependency: transitive
+>>>>>>> 7834ba6 (add map)
     description:
       name: js_wrapping
       sha256: e385980f7c76a8c1c9a560dfb623b890975841542471eade630b2871d243851c
