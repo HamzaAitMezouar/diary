@@ -57,6 +57,7 @@ dependencies:
   pinput: ^5.0.1
   firebase_auth: ^4.20.0
   json_annotation: ^4.9.0 
+  google_maps_flutter: ^2.6.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -89,6 +90,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
+    - assets/styles/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,7 +1,11 @@
+import 'package:diary/core/constants/assets.dart';
+import 'package:diary/presentation/map/views/map_screen.dart';
+import 'package:diary/presentation/medicine/views/medicine.dart';
 import 'package:diary/presentation/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/exports.dart';
 import '../../../widgets/expired_session_dialog.dart';
 import '../../authentication/controllers/session_notifier.dart';
 import '../../home/views/home_page.dart';
@@ -23,17 +27,37 @@ class NavBarScreen extends ConsumerWidget {
         onTap: (index) {
           ref.read(navigationControllerProvider.notifier).selectItem(NavBarItem.values[index]);
         },
-        items: const [
+        selectedLabelStyle: TextStyles.roboto13.copyWith(fontSize: 11),
+        unselectedLabelStyle: TextStyles.roboto13.copyWith(fontSize: 11),
+        selectedItemColor: AppColors.superDark,
+        unselectedItemColor: AppColors.superDark,
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Image.asset(
+              Assets.home,
+              height: D.md,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Image.asset(
+              Assets.drugs,
+              height: D.md,
+            ),
+            label: 'Medicine',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Image.asset(
+              Assets.map,
+              height: D.md,
+            ),
+            label: 'Pharmacy',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              Assets.profile,
+              height: D.md,
+            ),
             label: 'Profile',
           ),
         ],
@@ -42,4 +66,4 @@ class NavBarScreen extends ConsumerWidget {
   }
 }
 
-final List<Widget> _pages = [HomeScreen(), const Center(child: Text('Search Page')), ProfileScreen()];
+const List<Widget> _pages = [HomeScreen(), MedicineScreen(), MapScreen(), ProfileScreen()];

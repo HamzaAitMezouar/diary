@@ -8,7 +8,23 @@ class SettingsLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Image.asset(
-        Assets.settings,
+        Assets.settingsLoading,
+        height: D.xl,
+        width: D.xl,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
+
+class CustomLoading extends StatelessWidget {
+  const CustomLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Image.asset(
+        Assets.settingsLoading,
         height: D.xl,
         width: D.xl,
         fit: BoxFit.cover,

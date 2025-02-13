@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'navbar_provider.g.dart';
 
-enum NavBarItem { home, search, profile }
+enum NavBarItem { home, medicine, map, profile }
 
 @riverpod
 class NavigationController extends _$NavigationController {
