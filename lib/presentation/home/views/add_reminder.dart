@@ -1,4 +1,5 @@
 import 'package:diary/core/exports.dart';
+import 'package:diary/widgets/custom_long_button.dart';
 import 'package:diary/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

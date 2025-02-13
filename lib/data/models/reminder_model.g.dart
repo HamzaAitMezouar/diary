@@ -56,7 +56,5 @@ class ReminderModelAdapter extends TypeAdapter<ReminderModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReminderModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is ReminderModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

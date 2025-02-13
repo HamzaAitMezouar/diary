@@ -1,18 +1,17 @@
 import 'package:diary/core/DI/storage_provider.dart';
-import 'package:diary/core/services/notifications_service.dart';
-import 'package:diary/core/theme/app_theme.dart';
 import 'package:diary/data/models/reminder_model.dart';
-import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
-import 'package:diary/presentation/home/controller/notification_provider/reminder_notifications_provider.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/DI/router_provider.dart';
+import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
+import 'presentation/authentication/controllers/auth_notifier.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -792,6 +792,9 @@ packages:
     source: hosted
     version: "2.3.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 880573e (add ui reminder and hive)
   hive:
     dependency: "direct main"
     description:
@@ -816,8 +819,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+<<<<<<< HEAD
 =======
 >>>>>>> 7834ba6 (add map)
+=======
+>>>>>>> 880573e (add ui reminder and hive)
   html:
     dependency: transitive
     description:
