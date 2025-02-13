@@ -1,16 +1,44 @@
-import '../../domain/entities/reminder_entity.dart';
+import 'package:flutter/material.dart';
 
-class ReminderModel extends ReminderEntity {
+import '../../domain/entities/reminder_entity.dart';
+import 'package:hive/hive.dart';
+
+part 'reminder_model.g.dart';
+
+@HiveType(typeId: 0, adapterName: 'ReminderAdapter')
+class ReminderModel {
+  @HiveField(0)
+  final String id;
+  @HiveField(1)
+  final String medicineName;
+  @HiveField(2)
+  final DateTime time;
+  @HiveField(3)
+  final List<TimeOfDay> dosage;
+  @HiveField(4)
+  final String? notes;
+  @HiveField(5)
+  final bool isCompleted;
+
   ReminderModel({
-    required super.id,
-    required super.medicineName,
-    required super.time,
-    required super.dosage,
-    super.notes,
-    super.isCompleted,
+    required this.id,
+    required this.medicineName,
+    required this.time,
+    required this.dosage,
+    this.notes,
+    this.isCompleted = false,
   });
 
-  // Convert ReminderModel to a Map (for JSON or local storage)
+  ReminderModel copyWith({bool? isCompleted}) {
+    return ReminderModel(
+      id: id,
+      medicineName: medicineName,
+      isCompleted: isCompleted ?? this.isCompleted,
+      time: time,
+      dosage: dosage,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,

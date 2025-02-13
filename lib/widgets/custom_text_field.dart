@@ -8,13 +8,12 @@ class CustomTextField extends StatelessWidget {
   final String? text;
   final bool isPassword;
   final bool isNumber;
-  final bool isUsername;
+  final bool isParagraph;
   final bool? autocorrect;
   final String hintText;
   final Color? color;
   final int? maxLength;
   final String? prefixIcon;
-  final bool isNext;
   final bool isExpanded;
   final TextAlignVertical? textAlignVertical;
   final Color? textInputColor;
@@ -34,13 +33,12 @@ class CustomTextField extends StatelessWidget {
     this.text,
     this.isPassword = false,
     this.isNumber = false,
-    this.isUsername = false,
+    this.isParagraph = false,
     this.autocorrect,
     required this.hintText,
     this.color,
     this.maxLength,
     this.prefixIcon,
-    this.isNext = false,
     this.isExpanded = false,
     this.textAlignVertical,
     this.textInputColor,
@@ -70,8 +68,8 @@ class CustomTextField extends StatelessWidget {
           maxLength: maxLength,
           maxLines: maxLine ?? 1,
           keyboardType: textInputType ??
-              (isUsername
-                  ? TextInputType.text
+              (isParagraph
+                  ? TextInputType.multiline
                   : isNumber
                       ? TextInputType.number
                       : TextInputType.name),
@@ -82,7 +80,6 @@ class CustomTextField extends StatelessWidget {
           textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
           onChanged: onChanged,
           onFieldSubmitted: onSubmit,
-          textInputAction: isNext ? TextInputAction.next : TextInputAction.done,
           obscureText: isPassword,
           decoration: InputDecoration(
             suffixIcon: suffix,

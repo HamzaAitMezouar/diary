@@ -1,10 +1,11 @@
-import 'package:diary/core/DI/locator.dart';
 import 'package:diary/core/DI/storage_provider.dart';
-import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
+import 'package:diary/data/models/reminder_model.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/DI/router_provider.dart';
@@ -16,7 +17,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final sharedPreferences = await SharedPreferences.getInstance();
-
+  await Hive.initFlutter(); // Initialize Hive
+  await Hive.openBox<ReminderModel>('remindersBox'); // Open box before app starts
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWithValue(sharedPreferences),
   ], child: const MyApp()));

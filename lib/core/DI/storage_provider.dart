@@ -18,3 +18,7 @@ final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
 
 final sharedPreferencesHelperProvider =
     Provider<SharedPreferencesHelper>((ref) => SharedPreferencesHelper(ref.watch(sharedPreferencesProvider)));
+
+final hiveProvider = Provider<SharedPreferences>((ref) {
+  throw UnimplementedError();
+});

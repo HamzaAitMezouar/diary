@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,8 +10,8 @@ import 'add_reminder_state.dart';
 class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
   MedicineReminderNotifier()
       : super(MedicineReminderState(
-          intakeCount: 1, // Default: 1 intake per day
-          intakeTimes: [TimeOfDay(hour: 8, minute: 0)], medicineName: '', // Default time
+          intakeCount: 0,
+          intakeTimes: [], medicineName: '', // Default time
         ));
 
   /// Update the intake count & adjust times dynamically
@@ -20,9 +23,17 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
   }
 
   /// Update a specific intake time
-  void updateIntakeTime(int index, TimeOfDay newTime) {
+  void updateIntakeTime(int index, BuildContext context) async {
+    if (!context.mounted) return;
+    TimeOfDay? picked = !Platform.isIOS
+        ? await AppCupertinoTimePicker.showCupertinoTimePicker(context)
+        : await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.now(),
+          );
+    if (picked == null) return;
     List<TimeOfDay> updatedTimes = List.from(state.intakeTimes);
-    updatedTimes[index] = newTime;
+    updatedTimes[index] = picked;
     state = state.copyWith(intakeTimes: updatedTimes);
   }
 }
