@@ -1,12 +1,60 @@
+import 'package:diary/core/constants/dimensions.dart';
+import 'package:diary/core/exports.dart';
+import 'package:diary/core/extensions/conntext_extension.dart';
+import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/widgets/custom_long_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
-    return Scaffold();
+    return Scaffold(
+        body: CustomScrollView(
+      slivers: [
+        SliverList(
+            delegate: SliverChildListDelegate([
+          xxlSpacer(),
+          Card(
+            margin: Paddings.allXs,
+            shape: RoundedRectangleBorder(borderRadius: Borders.b10),
+            child: Padding(
+              padding: Paddings.allXs,
+              child: Column(
+                children: [
+                  Text(
+                    context.translate.noReminders,
+                    style: TextStyles.robotoBold13,
+                  ),
+                  Text(
+                    context.translate.stayHealthy,
+                    style: TextStyles.roboto13,
+                  )
+                ],
+              ),
+            ),
+          ),
+          xxlSpacer(),
+          CustomButton(
+            icon: Image.asset(
+              Assets.drugs,
+              height: D.xlg,
+              color: AppColors.superDark,
+            ),
+            height: D.xxl,
+            onTap: () {
+              context.goNamed(RoutesNames.addReminderPage);
+            },
+            title: "Add Medicine",
+            style: TextStyles.montserratBold15,
+          )
+        ])),
+      ],
+    ));
   }
 }
 

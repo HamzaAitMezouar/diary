@@ -41,7 +41,7 @@ class NavBarScreen extends ConsumerWidget {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              Assets.drugs,
+              Assets.drug,
               height: D.md,
             ),
             label: 'Medicine',

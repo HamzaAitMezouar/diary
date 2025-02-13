@@ -43,12 +43,12 @@ class _MapScreenState extends State<MapScreen> {
     cretaeMarkers();
   }
 
-  LatLng position = LatLng(32.3388, -6.353);
+  LatLng position = const LatLng(32.3388, -6.353);
   cretaeMarkers() async {
     final myMarker = await CustomMarkers.createMarker();
     markers.addAll([
       Marker(
-        markerId: MarkerId('my_marker'),
+        markerId: const MarkerId('my_marker'),
         position: position,
         icon: myMarker,
         onTap: () {
@@ -56,9 +56,9 @@ class _MapScreenState extends State<MapScreen> {
               context: context,
               builder: (context) {
                 return CupertinoAlertDialog(
-                  content: Text("This is your current location"),
+                  content: const Text("This is your current location"),
                   actions: [
-                    TextButton(
+                    const TextButton(
                       onPressed: null,
                       child: Text("Yes"),
                     ),
@@ -66,7 +66,7 @@ class _MapScreenState extends State<MapScreen> {
                       onPressed: () {
                         context.pop();
                       },
-                      child: Text("No"),
+                      child: const Text("No"),
                     ),
                   ],
                 );
@@ -74,11 +74,11 @@ class _MapScreenState extends State<MapScreen> {
         },
       ),
       Marker(
-          markerId: MarkerId('my_marker2'),
-          position: LatLng(32.33, -6.353),
+          markerId: const MarkerId('my_marker2'),
+          position: const LatLng(32.33, -6.353),
           icon: myMarker,
           zIndex: 7,
-          infoWindow: InfoWindow(
+          infoWindow: const InfoWindow(
             title: "Pharmacy Somaa",
           ))
     ]);
@@ -96,11 +96,11 @@ class _MapScreenState extends State<MapScreen> {
       mapToolbarEnabled: false,
       zoomControlsEnabled: false,
       style: mapStyle,
-      initialCameraPosition: CameraPosition(
+      initialCameraPosition: const CameraPosition(
         target: LatLng(32.3388, -6.353),
         zoom: 14,
       ),
-      minMaxZoomPreference: MinMaxZoomPreference(10, 35),
+      minMaxZoomPreference: const MinMaxZoomPreference(10, 35),
       onMapCreated: (GoogleMapController controller) {},
       onCameraMove: (position) {},
       markers: markers.toSet(),

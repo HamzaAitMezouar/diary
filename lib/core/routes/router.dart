@@ -1,6 +1,7 @@
 import 'package:diary/core/DI/locator.dart';
 import 'package:diary/core/helpers/shared_prefrences_helper.dart';
 import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/presentation/home/views/add_reminder.dart';
 import 'package:diary/presentation/languages/views/languages_screen.dart';
 import 'package:diary/presentation/otp_verification/views/otp_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,12 @@ class GoRouterProvider {
                   name: RoutesNames.otpPage,
                   builder: (context, state) {
                     return const OtpScreen();
+                  }),
+              GoRoute(
+                  path: Routes.addReminderPage,
+                  name: RoutesNames.addReminderPage,
+                  builder: (context, state) {
+                    return const AddReminderPage();
                   })
             ]),
       ],

@@ -2,5 +2,7 @@
      "fr": "Francais",
     "ar": "Arabe",
     "en":"Anglais",
-    "lang": "Langue"
+    "lang": "Langue",
+    "noReminders": " Pas encore de rappels !",
+    "stayHealthy": "Restez maître de votre santé avec des rappels intelligents \nNe manquez jamais une dose—ajoutez votre premier rappel de médicament maintenant et recevez une notification quand il est temps de le prendre.\nAppuyez sur le bouton 'Ajouter un médicament' pour commencer !"
 }

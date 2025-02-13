@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class TextStyles {
   static TextStyle montserrat13 = TextStyle(fontFamily: 'Montserrat', fontSize: 13, fontWeight: FontWeight.w500);
+  static TextStyle montserrat15 = TextStyle(fontFamily: 'Montserrat', fontSize: 15, fontWeight: FontWeight.w500);
 
   static TextStyle montserrat18 = TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.w500);
   static TextStyle montserrat22 = TextStyle(fontFamily: 'Montserrat', fontSize: 22, fontWeight: FontWeight.w500);
@@ -9,6 +10,7 @@ abstract class TextStyles {
   static TextStyle montserrat40 = TextStyle(fontFamily: 'Montserrat', fontSize: 30, fontWeight: FontWeight.w500);
 
   static TextStyle montserratBold13 = TextStyle(fontFamily: 'Montserrat', fontSize: 13, fontWeight: FontWeight.bold);
+  static TextStyle montserratBold15 = TextStyle(fontFamily: 'Montserrat', fontSize: 15, fontWeight: FontWeight.bold);
 
   static TextStyle montserratBold18 = TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.bold);
   static TextStyle montserratBold22 = TextStyle(fontFamily: 'Montserrat', fontSize: 22, fontWeight: FontWeight.bold);
