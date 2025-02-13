@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/models/reminder_model.dart';
 
 class ReminderEntity {
-  final String id;
+  final String? id;
   final String medicineName;
   final DateTime time;
   final List<TimeOfDay> dosage;
@@ -11,7 +11,7 @@ class ReminderEntity {
   final bool isCompleted;
 
   ReminderEntity({
-    required this.id,
+    this.id,
     required this.medicineName,
     required this.time,
     required this.dosage,

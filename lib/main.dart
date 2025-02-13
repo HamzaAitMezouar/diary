@@ -17,8 +17,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final sharedPreferences = await SharedPreferences.getInstance();
-  await Hive.initFlutter(); // Initialize Hive
-  await Hive.openBox<ReminderModel>('remindersBox'); // Open box before app starts
+  await Hive.initFlutter();
+  await Hive.openBox<ReminderModel>('remindersBox');
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWithValue(sharedPreferences),
   ], child: const MyApp()));

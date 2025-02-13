@@ -8,7 +8,7 @@ part 'reminder_model.g.dart';
 @HiveType(typeId: 0, adapterName: 'ReminderAdapter')
 class ReminderModel {
   @HiveField(0)
-  final String id;
+  final String? id;
   @HiveField(1)
   final String medicineName;
   @HiveField(2)
@@ -21,7 +21,7 @@ class ReminderModel {
   final bool isCompleted;
 
   ReminderModel({
-    required this.id,
+    this.id,
     required this.medicineName,
     required this.time,
     required this.dosage,

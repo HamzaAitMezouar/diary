@@ -1,33 +1,54 @@
+import 'package:diary/core/errors/exceptions.dart';
 import 'package:diary/data/models/reminder_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class ReminderLocalDataSource {
   Future<List<ReminderModel>> getPendingReminders();
-  Future<void> addReminder(ReminderModel reminder);
-  Future<void> markReminderAsCompleted(String reminderId);
+  Future<bool> addReminder(ReminderModel reminder);
+  Future<bool> markReminderAsCompleted(String reminderId);
 }
 
 class ReminderLocalDataSourceImpl extends ReminderLocalDataSource {
-  final Box<ReminderModel> reminderBox;
+  final Box<ReminderModel> _reminderBox;
 
-  ReminderLocalDataSourceImpl({required this.reminderBox});
+  ReminderLocalDataSourceImpl(this._reminderBox);
 
-  /// 1️⃣ Add a new reminder to Hive
   @override
-  Future<void> addReminder(ReminderModel reminder) async {
-    await reminderBox.put(reminder.id, reminder);
+  Future<bool> addReminder(ReminderModel reminder) async {
+    try {
+      await _reminderBox.put(reminder.id, reminder);
+      return true;
+    } on HiveError catch (e) {
+      throw CustomException(message: e.message.toString());
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
   }
 
   @override
   Future<List<ReminderModel>> getPendingReminders() async {
-    return reminderBox.values.where((r) => !r.isCompleted).toList();
+    try {
+      return _reminderBox.values.where((r) => !r.isCompleted).toList();
+    } on HiveError catch (e) {
+      throw CustomException(message: e.message.toString());
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
   }
 
   @override
-  Future<void> markReminderAsCompleted(String reminderId) async {
-    final reminder = reminderBox.get(reminderId);
-    if (reminder != null) {
-      reminderBox.put(reminderId, reminder.copyWith(isCompleted: true));
+  Future<bool> markReminderAsCompleted(String reminderId) async {
+    try {
+      final reminder = _reminderBox.get(reminderId);
+      if (reminder != null) {
+        await _reminderBox.put(reminderId, reminder.copyWith(isCompleted: true));
+        return true;
+      }
+      return false;
+    } on HiveError catch (e) {
+      throw CustomException(message: e.message.toString());
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
     }
   }
 }
