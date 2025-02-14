@@ -49,6 +49,8 @@ class AppColors {
   static const hlightedTextColor = AppColors.turquoise;
   static const activeButtonTextColor = AppColors.white;
   static const Color error = Color(0xFFEB5757);
+  static const Color blue = Colors.blue;
+
   static const Color success = Color(0xFF30D200);
   static const Color iconColorWhite = AppColors.white;
   static const Color borderColor = Color(0xFFEAEAEA);

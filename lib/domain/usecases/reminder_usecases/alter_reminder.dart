@@ -4,12 +4,12 @@ import 'package:diary/core/errors/errors.dart';
 
 import '../../repositories/reminder_repository/reminder_repository.dart';
 
-class MarkReminderAsCompleted {
+class MarkReminderAsCompletedUseCase {
   final ReminderRepository repository;
 
-  MarkReminderAsCompleted(this.repository);
+  MarkReminderAsCompletedUseCase(this.repository);
 
-  Future<Future<Either<Failure, bool>>> call(String id) async {
+  Future<Either<Failure, bool>> call(String id) async {
     return repository.markReminderAsCompleted(id);
   }
 }

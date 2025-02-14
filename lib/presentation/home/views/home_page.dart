@@ -2,7 +2,10 @@ import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/presentation/home/controller/home_provider.dart';
+import 'package:diary/presentation/home/controller/home_state.dart';
 import 'package:diary/widgets/custom_long_button.dart';
+import 'package:diary/widgets/loading_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,48 +16,75 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        SliverList(
-            delegate: SliverChildListDelegate([
-          xxlSpacer(),
-          Card(
-            margin: Paddings.allXs,
-            shape: RoundedRectangleBorder(borderRadius: Borders.b10),
-            child: Padding(
-              padding: Paddings.allXs,
-              child: Column(
-                children: [
-                  Text(
-                    context.translate.noReminders,
-                    style: TextStyles.robotoBold13,
-                  ),
-                  Text(
-                    context.translate.stayHealthy,
-                    style: TextStyles.roboto13,
-                  )
-                ],
-              ),
-            ),
-          ),
-          xxlSpacer(),
-          CustomButton(
-            icon: Image.asset(
-              Assets.drugs,
-              height: D.xlg,
-              color: AppColors.superDark,
-            ),
-            height: D.xxl,
-            onTap: () {
-              context.goNamed(RoutesNames.addReminderPage);
-            },
-            title: "Add Medicine",
-            style: TextStyles.montserratBold15,
-          )
-        ])),
-      ],
-    ));
+    final home = ref.watch(homeProvider);
+    return home is HomeLoading
+        ? CustomLoading()
+        : home is HomeLoaded
+            ? Scaffold(
+                body: CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          xxlSpacer(),
+                          home.reminders.isEmpty
+                              ? Card(
+                                  margin: Paddings.allXs,
+                                  shape: RoundedRectangleBorder(borderRadius: Borders.b10),
+                                  child: Padding(
+                                    padding: Paddings.allXs,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          context.translate.noReminders,
+                                          style: TextStyles.robotoBold13,
+                                        ),
+                                        Text(
+                                          context.translate.stayHealthy,
+                                          style: TextStyles.roboto13,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : Column(
+                                  children: [
+                                    ...home.reminders.map(
+                                      (reminder) => Padding(
+                                        padding: Paddings.allXs,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              reminder.medicineName.toString(),
+                                              style: TextStyles.robotoBold13,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                          xxlSpacer(),
+                          CustomButton(
+                            icon: Image.asset(
+                              Assets.drugs,
+                              height: D.xlg,
+                              color: AppColors.superDark,
+                            ),
+                            height: D.xxl,
+                            onTap: () {
+                              context.goNamed(RoutesNames.addReminderPage);
+                            },
+                            title: "Add Medicine",
+                            style: TextStyles.montserratBold15,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : Text("Error");
   }
 }
 

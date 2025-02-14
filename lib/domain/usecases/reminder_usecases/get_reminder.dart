@@ -5,12 +5,12 @@ import 'package:diary/core/errors/errors.dart';
 import '../../entities/reminder_entity.dart';
 import '../../repositories/reminder_repository/reminder_repository.dart';
 
-class GetPendingReminders {
+class GetRemindersUseCase {
   final ReminderRepository repository;
 
-  GetPendingReminders(this.repository);
+  GetRemindersUseCase(this.repository);
 
-  Future<Future<Either<Failure, List<ReminderEntity>>>> call() async {
+  Future<Either<Failure, List<ReminderEntity>>> call() async {
     return repository.getPendingReminders();
   }
 }

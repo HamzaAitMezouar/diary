@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../data/models/reminder_model.dart';
 
@@ -9,23 +10,33 @@ class ReminderEntity {
   final List<TimeOfDay> dosage;
   final String? notes;
   final bool isCompleted;
-
-  ReminderEntity({
-    this.id,
-    required this.medicineName,
-    required this.time,
-    required this.dosage,
-    this.notes,
-    this.isCompleted = false,
-  });
+  final String icon;
+  final List<DateTime> consumationDates;
+  ReminderEntity(
+      {this.id,
+      required this.medicineName,
+      required this.time,
+      required this.dosage,
+      this.notes,
+      this.isCompleted = false,
+      required this.consumationDates,
+      required this.icon});
   ReminderModel toModel() {
     return ReminderModel(
-      id: id,
+      id: Uuid().v4(),
       medicineName: medicineName,
       time: time,
-      dosage: dosage,
+      dosage: convertTimeOfDayListToStringList(dosage),
       notes: notes,
       isCompleted: isCompleted,
+      consumationDates: consumationDates,
+      icon: icon,
     );
+  }
+
+  List<String> convertTimeOfDayListToStringList(List<TimeOfDay> times) {
+    return times
+        .map((time) => '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}')
+        .toList();
   }
 }

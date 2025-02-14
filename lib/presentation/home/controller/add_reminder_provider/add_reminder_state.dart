@@ -28,3 +28,34 @@ class MedicineReminderState {
         note: note ?? this.note);
   }
 }
+
+class MedicineReminderLoading extends MedicineReminderState {
+  MedicineReminderLoading({
+    required super.intakeCount,
+    required super.intakeTimes,
+    required super.medicineName,
+    super.note,
+  });
+}
+
+class MedicineReminderDone extends MedicineReminderState {
+  MedicineReminderDone()
+      : super(
+          intakeCount: 0,
+          intakeTimes: [],
+          medicineName: '',
+          note: null,
+        );
+}
+
+class MedicineReminderError extends MedicineReminderState {
+  final String errorMessage;
+
+  MedicineReminderError({
+    required super.intakeCount,
+    required super.intakeTimes,
+    required super.medicineName,
+    super.note,
+    required this.errorMessage,
+  });
+}

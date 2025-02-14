@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:diary/core/errors/exceptions.dart';
 import 'package:diary/data/models/reminder_model.dart';
 import 'package:hive/hive.dart';
@@ -16,11 +18,13 @@ class ReminderLocalDataSourceImpl extends ReminderLocalDataSource {
   @override
   Future<bool> addReminder(ReminderModel reminder) async {
     try {
-      await _reminderBox.put(reminder.id, reminder);
+      await _reminderBox.add(reminder);
       return true;
     } on HiveError catch (e) {
+      log(e.toString());
       throw CustomException(message: e.message.toString());
     } catch (e) {
+      log(e.toString());
       throw UnexpectedException(message: e.toString());
     }
   }

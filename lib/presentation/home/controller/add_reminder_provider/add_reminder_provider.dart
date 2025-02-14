@@ -1,18 +1,25 @@
 import 'dart:io';
 
+import 'package:diary/domain/entities/reminder_entity.dart';
+import 'package:diary/domain/usecases/reminder_usecases/add_reminder.dart';
 import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/DI/use_cases_provider.dart';
 import 'add_reminder_state.dart';
 
 /// StateNotifier to manage medicine reminders
 class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
-  MedicineReminderNotifier()
+  Ref ref;
+  MedicineReminderNotifier(this.ref)
       : super(MedicineReminderState(
           intakeCount: 0,
           intakeTimes: [], medicineName: '', // Default time
         ));
+  onChange(String value) {
+    state = state.copyWith(medicineName: value);
+  }
 
   /// Update the intake count & adjust times dynamically
   void setIntakeCount(int count) {
@@ -36,9 +43,38 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
     updatedTimes[index] = picked;
     state = state.copyWith(intakeTimes: updatedTimes);
   }
+
+  addReminder() async {
+    state = MedicineReminderLoading(
+        intakeCount: state.intakeCount,
+        intakeTimes: state.intakeTimes,
+        medicineName: state.medicineName,
+        note: state.note);
+    final addReminderUseCase = ref.read(addReminderUseCaseProvider);
+    final response = await addReminderUseCase(ReminderEntity(
+      dosage: state.intakeTimes,
+      medicineName: state.medicineName,
+      notes: state.note,
+      time: DateTime.now(),
+      consumationDates: [],
+      icon: '',
+    ));
+    state = response.fold((l) {
+      return MedicineReminderError(
+          errorMessage: l.errorMessage,
+          intakeCount: state.intakeCount,
+          intakeTimes: state.intakeTimes,
+          medicineName: state.medicineName,
+          note: state.note);
+    }, (r) {
+      return MedicineReminderDone();
+    });
+  }
+
+  alterReminder() {}
 }
 
 /// Provider instance
 final medicineReminderProvider = StateNotifierProvider<MedicineReminderNotifier, MedicineReminderState>(
-  (ref) => MedicineReminderNotifier(),
+  (ref) => MedicineReminderNotifier(ref),
 );

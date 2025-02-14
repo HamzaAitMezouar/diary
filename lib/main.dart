@@ -18,6 +18,9 @@ void main() async {
   );
   final sharedPreferences = await SharedPreferences.getInstance();
   await Hive.initFlutter();
+
+  Hive.registerAdapter(ReminderModelAdapter());
+
   await Hive.openBox<ReminderModel>('remindersBox');
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWithValue(sharedPreferences),
@@ -32,6 +35,7 @@ class MyApp extends ConsumerWidget {
     final provider = ref.watch(localizationProvider);
 
     return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: ref.watch(goRouterProviderProvider).router,
         title: 'Language Selector App',
         locale: provider.locale,

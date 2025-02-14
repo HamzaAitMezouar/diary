@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:diary/core/exports.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:diary/widgets/custom_text_field.dart';
+import 'package:diary/widgets/loading_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controller/add_reminder_provider/add_reminder_provider.dart';
+import '../controller/add_reminder_provider/add_reminder_state.dart';
 
 class AddReminderPage extends ConsumerWidget {
   const AddReminderPage({super.key});
@@ -17,22 +19,45 @@ class AddReminderPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final addReminderProvider = ref.watch(medicineReminderProvider);
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Medicine Reminder",
+          style: TextStyles.montserratBold18,
+        ),
+        actions: [
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(D.xxl, D.xmd),
+                  padding: EdgeInsets.all(0),
+                  backgroundColor: AppColors.turquoise,
+                  foregroundColor: AppColors.white),
+              onPressed: (addReminderProvider.medicineName.isEmpty && addReminderProvider.intakeCount == 0)
+                  ? null
+                  : () {
+                      ref.read(medicineReminderProvider.notifier).addReminder();
+                    },
+              child: addReminderProvider is MedicineReminderLoading
+                  ? CupertinoActivityIndicator()
+                  : Text(
+                      "Save",
+                      style: TextStyles.roboto13,
+                    )),
+          xxxsSpacer(),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                xxxxlSpacer(),
-                Text(
-                  "Here you can add a reminder",
-                  textAlign: TextAlign.center,
-                  style: TextStyles.montserratBold30,
-                ),
                 xsSpacer(),
                 Padding(
                   padding: Paddings.allXs,
                   child: CustomTextField(
                       hintText: "Enter your Medicine name*",
+                      onChanged: (p0) {
+                        ref.read(medicineReminderProvider.notifier).onChange(p0);
+                      },
                       controller: TextEditingController(text: addReminderProvider.medicineName)),
                 ),
                 Padding(
@@ -56,15 +81,28 @@ class AddReminderPage extends ConsumerWidget {
                   padding: Paddings.horizontalXs,
                   child: Text("I take this medicine at: ", style: TextStyles.robotoBold13),
                 ),
-                Wrap(alignment: WrapAlignment.center, direction: Axis.horizontal, children: [
+                Wrap(spacing: D.xxxs, alignment: WrapAlignment.center, direction: Axis.horizontal, children: [
                   ...List.generate(
                       addReminderProvider.intakeCount,
-                      (index) => TextButton.icon(
-                          icon: Icon(Icons.access_time),
+                      (index) => ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: Borders.b12),
+                              minimumSize: Size(D.xxl, D.xlg),
+                              maximumSize: Size(D.xxxxxl, D.xxl),
+                              padding: EdgeInsets.zero,
+                              backgroundColor: AppColors.turquoise,
+                              foregroundColor: AppColors.white),
                           onPressed: () {
                             ref.read(medicineReminderProvider.notifier).updateIntakeTime(index, context);
                           },
-                          label: Text(addReminderProvider.intakeTimes[index].format(context))))
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.access_time),
+                              xxxxxsSpacer(),
+                              Text(addReminderProvider.intakeTimes[index].format(context)),
+                            ],
+                          )))
                 ]),
                 Padding(
                   padding: Paddings.horizontalXs,
@@ -80,14 +118,9 @@ class AddReminderPage extends ConsumerWidget {
                       hintText: "Note",
                       maxLine: 5,
                       maxLength: 500,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       controller: TextEditingController(text: addReminderProvider.note)),
                 ),
-                CustomButton(
-                    backgorundColor: AppColors.error,
-                    disableColor: AppColors.grauVollfarbe,
-                    isDisabled: (addReminderProvider.medicineName.isEmpty && addReminderProvider.intakeCount == 0),
-                    onTap: () {},
-                    title: "Confirm reminder"),
               ],
             ),
           ),
@@ -116,6 +149,9 @@ class IntakeNumber extends ConsumerWidget {
     int intakeCount = addReminderProvider.intakeCount;
     return Center(
       child: ToggleButtons(
+        selectedColor: AppColors.white,
+        fillColor: AppColors.turquoise,
+        borderRadius: Borders.b12,
         textStyle: TextStyles.montserrat13,
         isSelected: toggleButtons.map((e) => e == intakeCount).toList(),
         onPressed: (index) {

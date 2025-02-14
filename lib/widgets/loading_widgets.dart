@@ -24,7 +24,7 @@ class CustomLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Image.asset(
-        Assets.settingsLoading,
+        Assets.loading,
         height: D.xl,
         width: D.xl,
         fit: BoxFit.cover,
