@@ -45,7 +45,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = Unauthenticated();
       return;
     }
-    state = Authenticated(UserModel.fromJsonString(userString!).toEntity());
+    state = Authenticated(UserModel.fromJsonString(userString).toEntity());
   }
 
   Future<void> requestOtp(String phoneNumber) async {

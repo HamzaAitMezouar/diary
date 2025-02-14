@@ -1,5 +1,3 @@
-import 'package:diary/core/constants/app_colors.dart';
-import 'package:diary/core/constants/border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

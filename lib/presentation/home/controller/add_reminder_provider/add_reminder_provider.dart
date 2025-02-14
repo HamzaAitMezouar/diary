@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:diary/core/constants/assets.dart';
 import 'package:diary/domain/entities/reminder_entity.dart';
-import 'package:diary/domain/usecases/reminder_usecases/add_reminder.dart';
 import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +37,7 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
   /// Update the intake count & adjust times dynamically
   void setIntakeCount(int count) {
     List<TimeOfDay> newTimes = List.generate(
-        count, (index) => index < state.intakeTimes.length ? state.intakeTimes[index] : TimeOfDay(hour: 8, minute: 0));
+        count, (index) => index < state.intakeTimes.length ? state.intakeTimes[index] : const TimeOfDay(hour: 8, minute: 0));
 
     state = state.copyWith(intakeCount: count, intakeTimes: newTimes);
   }

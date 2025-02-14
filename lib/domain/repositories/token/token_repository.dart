@@ -1,10 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:diary/core/constants/urls.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/helpers/either_error_handler.dart';
 import 'package:diary/data/datasource/token/token_datasource.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import '../../../core/helpers/secure_storage_helper.dart';
 
 abstract class TokenRepository {

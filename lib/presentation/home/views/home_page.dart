@@ -1,4 +1,3 @@
-import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/core/routes/routes_names.dart';
@@ -6,7 +5,6 @@ import 'package:diary/presentation/home/controller/home_provider.dart';
 import 'package:diary/presentation/home/controller/home_state.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:diary/widgets/loading_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -58,8 +56,8 @@ class HomeScreen extends ConsumerWidget {
                                         decoration: BoxDecoration(
                                           borderRadius: Borders.b10,
                                           color: AppColors.borderColor,
-                                          boxShadow: [
-                                            const BoxShadow(
+                                          boxShadow: const [
+                                            BoxShadow(
                                               color: AppColors.grey,
                                               spreadRadius: 1,
                                               blurRadius: 2,

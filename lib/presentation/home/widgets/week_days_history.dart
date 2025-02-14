@@ -46,7 +46,7 @@ class _WeekDaysHistoryState extends State<WeekDaysHistory> {
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(D.xxxxs), color: AppColors.grey),
                   ),
                 ],
-              )).toList()
+              ))
     ]);
   }
 }

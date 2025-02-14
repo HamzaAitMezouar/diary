@@ -16,8 +16,8 @@ abstract class AuthenticationDatasource {
 }
 
 class AuthenticationDatasourceImpl extends AuthenticationDatasource {
-  Dio _dio;
-  ExceptionsHandler _exceptionsHandler;
+  final Dio _dio;
+  final ExceptionsHandler _exceptionsHandler;
   AuthenticationDatasourceImpl(this._dio, this._exceptionsHandler);
   @override
   Future loginMail(String email, String password) {

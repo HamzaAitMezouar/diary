@@ -1,7 +1,6 @@
 import 'package:diary/core/DI/use_cases_provider.dart';
 import 'package:diary/presentation/home/controller/home_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
 
 final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>(
   (ref) => HomeNotifier(ref),

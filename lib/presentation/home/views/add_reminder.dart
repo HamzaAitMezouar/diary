@@ -1,12 +1,8 @@
-import 'dart:math';
 
 import 'package:diary/core/exports.dart';
-import 'package:diary/widgets/custom_long_button.dart';
 import 'package:diary/widgets/custom_text_field.dart';
-import 'package:diary/widgets/loading_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -126,7 +122,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                         style: TextStyles.robotoBold13,
                       ),
                       xxxxsSpacer(),
-                      Icon(Icons.warning)
+                      const Icon(Icons.warning)
                     ],
                   ),
                 ),
@@ -134,7 +130,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                 const IntakeNumber(),
                 xxsSpacer(),
                 addReminderProvider.intakeCount == 0
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Text(
                         textAlign: TextAlign.center,
                         addReminderProvider.intakeCount == 1
@@ -143,7 +139,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                         style: TextStyles.robotoBold13),
                 xxxsSpacer(),
                 addReminderProvider.intakeCount == 0
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Padding(
                         padding: Paddings.horizontalXs,
                         child: Text("I take this medicine at: ", style: TextStyles.robotoBold13),

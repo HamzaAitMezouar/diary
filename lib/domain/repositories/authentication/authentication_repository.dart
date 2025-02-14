@@ -2,13 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/helpers/secure_storage_helper.dart';
 import 'package:diary/data/datasource/authentication/authentication_datasource.dart';
-import 'package:diary/data/datasource/authentication/social_media__datasource.dart';
-import 'package:diary/data/models/facebook_user.dart';
 import 'package:diary/domain/entities/user_entity.dart';
 
 import '../../../core/errors/exceptions.dart';
 import '../../../core/params/social_media_params.dart';
-import '../../../core/responses/datasource_responses.dart';
 
 abstract class AuthenticationRepository {
   Future<Either<Failure, bool>> requestOtpCode(String phoneNumber);

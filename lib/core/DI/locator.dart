@@ -1,6 +1,3 @@
-import 'package:diary/core/helpers/shared_prefrences_helper.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:get_it/get_it.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 // final locator = GetIt.instance;

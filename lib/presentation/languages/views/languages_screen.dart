@@ -1,7 +1,4 @@
-import 'dart:developer';
 
-import 'package:diary/core/constants/app_colors.dart';
-import 'package:diary/core/constants/assets.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
@@ -68,7 +65,7 @@ class LanguagesScreen extends ConsumerWidget {
               icon: Image.asset(Assets.en),
               label: context.translate.en,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(

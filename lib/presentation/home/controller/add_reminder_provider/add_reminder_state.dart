@@ -1,5 +1,4 @@
 import 'package:diary/core/constants/assets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
 /// State Model

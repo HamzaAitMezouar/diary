@@ -1,5 +1,4 @@
 import 'package:diary/domain/entities/reminder_entity.dart';
-import 'package:flutter/material.dart';
 
 /// 📌 Base State Model
 abstract class HomeState {

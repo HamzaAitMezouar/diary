@@ -12,7 +12,7 @@ abstract class ReminderRepository {
 }
 
 class ReminderRepositoryImpl extends ReminderRepository {
-  ReminderLocalDataSource _dataSource;
+  final ReminderLocalDataSource _dataSource;
   ReminderRepositoryImpl(this._dataSource);
   @override
   Future<Either<Failure, bool>> addReminder(ReminderEntity reminder) async {

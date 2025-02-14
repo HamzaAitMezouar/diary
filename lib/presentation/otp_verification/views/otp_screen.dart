@@ -27,7 +27,7 @@ class OtpScreen extends ConsumerWidget {
           SnackBar(
               backgroundColor: AppColors.error,
               behavior: SnackBarBehavior.floating, // Makes it float
-              margin: EdgeInsets.all(16), // Adjusts position
+              margin: const EdgeInsets.all(16), // Adjusts position
               shape: RoundedRectangleBorder(
                 borderRadius: Borders.b12, // Rounded corners
               ),

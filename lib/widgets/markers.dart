@@ -17,9 +17,9 @@ class CustomMarkers {
     final ui.Image image = frameInfo.image;
 
     // Create a Canvas to resize the image
-    final size = Size(80, 80); // Set the desired size for the marker
+    const size = Size(80, 80); // Set the desired size for the marker
     final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder, Rect.fromPoints(Offset(0, 0), Offset(size.width, size.height)));
+    final canvas = Canvas(recorder, Rect.fromPoints(const Offset(0, 0), Offset(size.width, size.height)));
 
     // Draw the image onto the canvas, resizing it
     canvas.drawImageRect(
