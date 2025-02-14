@@ -8,16 +8,43 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../controller/add_reminder_provider/add_reminder_provider.dart';
 import '../controller/add_reminder_provider/add_reminder_state.dart';
+import '../widgets/medicine_type_drop_down.dart';
 
-class AddReminderPage extends ConsumerWidget {
+class AddReminderPage extends ConsumerStatefulWidget {
   const AddReminderPage({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<AddReminderPage> createState() => _AddReminderPageState();
+}
+
+class _AddReminderPageState extends ConsumerState<AddReminderPage> {
+  TextEditingController nameController = TextEditingController(), noteController = TextEditingController();
+  @override
+  void dispose() {
+    nameController.dispose();
+    noteController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    ref.read(medicineReminderProvider.notifier).setIntakeCount(1);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final addReminderProvider = ref.watch(medicineReminderProvider);
+    DateTime now = DateTime.now();
+    ref.listen<MedicineReminderState>(medicineReminderProvider, (_, state) {
+      if (state is MedicineReminderDone) {
+        Navigator.pop(context);
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -27,8 +54,8 @@ class AddReminderPage extends ConsumerWidget {
         actions: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(D.xxl, D.xmd),
-                  padding: EdgeInsets.all(0),
+                  minimumSize: const Size(D.xxl, D.xmd),
+                  padding: const EdgeInsets.all(0),
                   backgroundColor: AppColors.turquoise,
                   foregroundColor: AppColors.white),
               onPressed: (addReminderProvider.medicineName.isEmpty && addReminderProvider.intakeCount == 0)
@@ -37,7 +64,7 @@ class AddReminderPage extends ConsumerWidget {
                       ref.read(medicineReminderProvider.notifier).addReminder();
                     },
               child: addReminderProvider is MedicineReminderLoading
-                  ? CupertinoActivityIndicator()
+                  ? const CupertinoActivityIndicator()
                   : Text(
                       "Save",
                       style: TextStyles.roboto13,
@@ -50,45 +77,90 @@ class AddReminderPage extends ConsumerWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                xsSpacer(),
                 Padding(
-                  padding: Paddings.allXs,
-                  child: CustomTextField(
-                      hintText: "Enter your Medicine name*",
-                      onChanged: (p0) {
-                        ref.read(medicineReminderProvider.notifier).onChange(p0);
-                      },
-                      controller: TextEditingController(text: addReminderProvider.medicineName)),
+                  padding: Paddings.horizontalXs,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "${now.day},",
+                            style: TextStyles.montserratBold22.copyWith(color: AppColors.superDark),
+                            children: [
+                              TextSpan(
+                                text: " ${DateFormat('MMMM').format(now)}, ${now.year},",
+                                style: TextStyles.montserrat13.copyWith(color: AppColors.superDark),
+                              ),
+                              TextSpan(
+                                text: " ${now.hour}:${now.minute},",
+                                style: TextStyles.montserrat13.copyWith(color: AppColors.superDark.withOpacity(0.5)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const DropdownWithWrap(),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: Paddings.horizontalXs,
                   child: Text(
-                    "How many time you take the medicine per day?* ",
+                    "Medicine name*",
                     style: TextStyles.robotoBold13,
                   ),
                 ),
-                xxxsSpacer(),
-                IntakeNumber(),
-                xxxsSpacer(),
-                Text(
-                    textAlign: TextAlign.center,
-                    addReminderProvider.intakeCount == 1
-                        ? "I take this medicine one time a day"
-                        : "I take this medicine ${addReminderProvider.intakeCount} times a day",
-                    style: TextStyles.robotoBold13),
-                xxxsSpacer(),
+                xxxxsSpacer(),
                 Padding(
                   padding: Paddings.horizontalXs,
-                  child: Text("I take this medicine at: ", style: TextStyles.robotoBold13),
+                  child: CustomTextField(
+                      style: TextStyles.robotoBold18,
+                      hintText: "Ex: Paracitamol",
+                      onChanged: (p0) {
+                        ref.read(medicineReminderProvider.notifier).onChange(p0);
+                      },
+                      controller: nameController),
                 ),
+                xxsSpacer(),
+                Padding(
+                  padding: Paddings.horizontalXs,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Medicine intake* ",
+                        style: TextStyles.robotoBold13,
+                      ),
+                      xxxxsSpacer(),
+                      Icon(Icons.warning)
+                    ],
+                  ),
+                ),
+                xxsSpacer(),
+                const IntakeNumber(),
+                xxsSpacer(),
+                addReminderProvider.intakeCount == 0
+                    ? SizedBox()
+                    : Text(
+                        textAlign: TextAlign.center,
+                        addReminderProvider.intakeCount == 1
+                            ? "I take this medicine one time a day"
+                            : "I take this medicine ${addReminderProvider.intakeCount} times a day",
+                        style: TextStyles.robotoBold13),
+                xxxsSpacer(),
+                addReminderProvider.intakeCount == 0
+                    ? SizedBox()
+                    : Padding(
+                        padding: Paddings.horizontalXs,
+                        child: Text("I take this medicine at: ", style: TextStyles.robotoBold13),
+                      ),
                 Wrap(spacing: D.xxxs, alignment: WrapAlignment.center, direction: Axis.horizontal, children: [
                   ...List.generate(
                       addReminderProvider.intakeCount,
                       (index) => ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(borderRadius: Borders.b12),
-                              minimumSize: Size(D.xxl, D.xlg),
-                              maximumSize: Size(D.xxxxxl, D.xxl),
+                              minimumSize: const Size(D.xxl, D.xlg),
+                              maximumSize: const Size(D.xxxxxl, D.xxl),
                               padding: EdgeInsets.zero,
                               backgroundColor: AppColors.turquoise,
                               foregroundColor: AppColors.white),
@@ -98,7 +170,7 @@ class AddReminderPage extends ConsumerWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.access_time),
+                              const Icon(Icons.access_time),
                               xxxxxsSpacer(),
                               Text(addReminderProvider.intakeTimes[index].format(context)),
                             ],
@@ -107,19 +179,23 @@ class AddReminderPage extends ConsumerWidget {
                 Padding(
                   padding: Paddings.horizontalXs,
                   child: Text(
-                    "You can add a specific note:",
+                    "Notes:",
                     style: TextStyles.robotoBold13,
                   ),
                 ),
                 Padding(
                   padding: Paddings.allXs,
                   child: CustomTextField(
-                      isParagraph: true,
-                      hintText: "Note",
-                      maxLine: 5,
-                      maxLength: 500,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      controller: TextEditingController(text: addReminderProvider.note)),
+                    isParagraph: true,
+                    hintText: "Enter a note",
+                    maxLine: 5,
+                    maxLength: 500,
+                    onChanged: (p0) {
+                      ref.read(medicineReminderProvider.notifier).onNoteChange(p0);
+                    },
+                    color: AppColors.tibbleGrauBg,
+                    controller: noteController,
+                  ),
                 ),
               ],
             ),

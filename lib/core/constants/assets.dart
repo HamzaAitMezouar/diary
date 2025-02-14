@@ -18,4 +18,15 @@ abstract class Assets {
   static String facebook = "assets/icons/facebook.png";
 
   static String placeholder = "assets/images/placeholder.jpg";
+
+  static String syrop = "assets/icons/med_icons/syrop.png";
+  static String bandage = "assets/icons/med_icons/bandage.png";
+  static String drop = "assets/icons/med_icons/drop.png";
+  static String injection = "assets/icons/med_icons/injection.png";
+  static String lotion = "assets/icons/med_icons/lotion.png";
+  static String nasal = "assets/icons/med_icons/nasal.png";
+  static String pill = "assets/icons/med_icons/pill.png";
+  static String spray = "assets/icons/med_icons/spray.png";
+  static String oxygen = "assets/icons/med_icons/oxygen.png";
+  static String inhaller = "assets/icons/med_icons/unhaler.png";
 }

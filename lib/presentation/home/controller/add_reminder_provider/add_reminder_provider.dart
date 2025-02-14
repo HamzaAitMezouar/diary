@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:diary/core/constants/assets.dart';
 import 'package:diary/domain/entities/reminder_entity.dart';
 import 'package:diary/domain/usecases/reminder_usecases/add_reminder.dart';
 import 'package:diary/widgets/cupertino_time_picker.dart';
@@ -14,11 +15,24 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
   Ref ref;
   MedicineReminderNotifier(this.ref)
       : super(MedicineReminderState(
+          icon: Assets.pill,
           intakeCount: 0,
           intakeTimes: [], medicineName: '', // Default time
         ));
   onChange(String value) {
     state = state.copyWith(medicineName: value);
+  }
+
+  onNoteChange(String value) {
+    state = state.copyWith(note: value);
+  }
+
+  initalize() {
+    state = MedicineReminderState(
+      icon: Assets.pill,
+      intakeCount: 0,
+      intakeTimes: [], medicineName: '', // Default time
+    );
   }
 
   /// Update the intake count & adjust times dynamically
@@ -27,6 +41,10 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
         count, (index) => index < state.intakeTimes.length ? state.intakeTimes[index] : TimeOfDay(hour: 8, minute: 0));
 
     state = state.copyWith(intakeCount: count, intakeTimes: newTimes);
+  }
+
+  changeIcon(String icon) {
+    state = state.copyWith(icon: icon);
   }
 
   /// Update a specific intake time
@@ -49,6 +67,7 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
         intakeCount: state.intakeCount,
         intakeTimes: state.intakeTimes,
         medicineName: state.medicineName,
+        icon: state.icon,
         note: state.note);
     final addReminderUseCase = ref.read(addReminderUseCaseProvider);
     final response = await addReminderUseCase(ReminderEntity(
@@ -65,6 +84,7 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
           intakeCount: state.intakeCount,
           intakeTimes: state.intakeTimes,
           medicineName: state.medicineName,
+          icon: state.icon,
           note: state.note);
     }, (r) {
       return MedicineReminderDone();

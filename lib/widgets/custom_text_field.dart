@@ -87,7 +87,7 @@ class CustomTextField extends StatelessWidget {
             isCollapsed: true,
             hintText: hintText,
             contentPadding: const EdgeInsets.only(left: D.sm),
-            hintStyle: TextStyles.montserrat15,
+            hintStyle: TextStyles.roboto13.copyWith(height: 1),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide.none,
