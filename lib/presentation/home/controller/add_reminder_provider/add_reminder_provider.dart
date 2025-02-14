@@ -76,7 +76,7 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
       notes: state.note,
       time: DateTime.now(),
       consumationDates: [],
-      icon: '',
+      icon: state.icon,
     ));
     state = response.fold((l) {
       return MedicineReminderError(

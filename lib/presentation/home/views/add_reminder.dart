@@ -31,18 +31,13 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
   }
 
   @override
-  void initState() {
-    ref.read(medicineReminderProvider.notifier).setIntakeCount(1);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final addReminderProvider = ref.watch(medicineReminderProvider);
     DateTime now = DateTime.now();
     ref.listen<MedicineReminderState>(medicineReminderProvider, (_, state) {
       if (state is MedicineReminderDone) {
         Navigator.pop(context);
+        ref.read(medicineReminderProvider.notifier).initalize();
       }
     });
     return Scaffold(

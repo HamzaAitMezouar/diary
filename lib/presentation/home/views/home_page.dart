@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../widgets/week_days_history.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -18,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final home = ref.watch(homeProvider);
     return home is HomeLoading
-        ? CustomLoading()
+        ? const CustomLoading()
         : home is HomeLoaded
             ? Scaffold(
                 body: CustomScrollView(
@@ -50,14 +52,49 @@ class HomeScreen extends ConsumerWidget {
                               : Column(
                                   children: [
                                     ...home.reminders.map(
-                                      (reminder) => Padding(
-                                        padding: Paddings.allXs,
-                                        child: Column(
+                                      (reminder) => Container(
+                                        margin: const EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxs),
+                                        padding: Paddings.allXxxxs,
+                                        decoration: BoxDecoration(
+                                          borderRadius: Borders.b10,
+                                          color: AppColors.borderColor,
+                                          boxShadow: [
+                                            const BoxShadow(
+                                              color: AppColors.grey,
+                                              spreadRadius: 1,
+                                              blurRadius: 2,
+                                              offset: Offset(1, 1),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Row(
                                           children: [
+                                            Card(
+                                              color: AppColors.sofGrey,
+                                              surfaceTintColor: AppColors.transparent,
+                                              child: Padding(
+                                                padding: Paddings.allXxxxs,
+                                                child: Image.asset(
+                                                  reminder.icon,
+                                                  height: D.xl,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error, stackTrace) {
+                                                    return Image.asset(
+                                                      Assets.pill,
+                                                      height: D.xl,
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            xxxsSpacer(),
                                             Text(
                                               reminder.medicineName.toString(),
-                                              style: TextStyles.robotoBold13,
+                                              style: TextStyles.robotoBold10.copyWith(fontSize: 12),
                                             ),
+                                            const Spacer(),
+                                            const WeekDaysHistory()
                                           ],
                                         ),
                                       ),
@@ -75,8 +112,9 @@ class HomeScreen extends ConsumerWidget {
                             onTap: () {
                               context.goNamed(RoutesNames.addReminderPage);
                             },
+                            backgorundColor: AppColors.turquoise,
                             title: "Add Medicine",
-                            style: TextStyles.montserratBold15,
+                            style: TextStyles.robotoBold13,
                           )
                         ],
                       ),
@@ -84,7 +122,7 @@ class HomeScreen extends ConsumerWidget {
                   ],
                 ),
               )
-            : Text("Error");
+            : const Text("Error");
   }
 }
 

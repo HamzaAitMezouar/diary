@@ -22,6 +22,7 @@ abstract class TextStyles {
   static TextStyle roboto22 = TextStyle(fontFamily: 'Roboto', fontSize: 22, fontWeight: FontWeight.w500);
   static TextStyle roboto30 = TextStyle(fontFamily: 'Roboto', fontSize: 30, fontWeight: FontWeight.w500);
   static TextStyle roboto40 = TextStyle(fontFamily: 'Roboto', fontSize: 40, fontWeight: FontWeight.w500);
+  static TextStyle robotoBold10 = TextStyle(fontFamily: 'Roboto', fontSize: 10, fontWeight: FontWeight.bold);
 
   static TextStyle robotoBold13 = TextStyle(fontFamily: 'Roboto', fontSize: 13, fontWeight: FontWeight.bold);
 
