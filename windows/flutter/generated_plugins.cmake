@@ -7,7 +7,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_auth
   firebase_core
   flutter_secure_storage_windows
+<<<<<<< HEAD
   geolocator_windows
+=======
+>>>>>>> db642aa (add medic and cate)
   permission_handler_windows
   secure_application
 )

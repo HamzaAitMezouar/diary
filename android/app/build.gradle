@@ -52,6 +52,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -69,6 +71,7 @@ flutter {
 
 dependencies {
         implementation 'com.facebook.android:facebook-login:latest_version'
-        
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+
 
 }

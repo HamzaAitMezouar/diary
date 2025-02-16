@@ -10,7 +10,10 @@
 #include <firebase_auth/firebase_auth_plugin_c_api.h>
 #include <firebase_core/firebase_core_plugin_c_api.h>
 #include <flutter_secure_storage_windows/flutter_secure_storage_windows_plugin.h>
+<<<<<<< HEAD
 #include <geolocator_windows/geolocator_windows.h>
+=======
+>>>>>>> db642aa (add medic and cate)
 #include <permission_handler_windows/permission_handler_windows_plugin.h>
 #include <secure_application/secure_application_plugin.h>
 
@@ -23,8 +26,11 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("FirebaseCorePluginCApi"));
   FlutterSecureStorageWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("FlutterSecureStorageWindowsPlugin"));
+<<<<<<< HEAD
   GeolocatorWindowsRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("GeolocatorWindows"));
+=======
+>>>>>>> db642aa (add medic and cate)
   PermissionHandlerWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("PermissionHandlerWindowsPlugin"));
   SecureApplicationPluginRegisterWithRegistrar(

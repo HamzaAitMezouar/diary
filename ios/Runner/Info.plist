@@ -25,8 +25,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
+<<<<<<< HEAD
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to find nearby pharmacies. and to show delivery location</string>
+=======
+>>>>>>> db642aa (add medic and cate)
 
     <key>NSAllowsArbitraryLoads</key>
     <true/>

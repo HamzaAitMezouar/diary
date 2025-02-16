@@ -169,14 +169,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  color:
-    dependency: transitive
-    description:
-      name: color
-      sha256: ddcdf1b3badd7008233f5acffaf20ca9f5dc2cd0172b75f68f24526a5f5725cb
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   connectivity_plus:
     dependency: "direct main"
     description:
@@ -241,14 +233,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
-  dartx:
-    dependency: transitive
-    description:
-      name: dartx
-      sha256: "8b25435617027257d43e6508b5fe061012880ddfdaa75a71d607c3de2a13d244"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
   dartz:
     dependency: "direct main"
     description:
@@ -422,22 +406,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
-  flutter_gen:
-    dependency: "direct main"
-    description:
-      name: flutter_gen
-      sha256: a727fbe4d9443ac05258ef7a987650f8d8f16b4f8c22cf98c1ac9183ac7f3eff
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.9.0"
-  flutter_gen_core:
-    dependency: transitive
-    description:
-      name: flutter_gen_core
-      sha256: "53890b653738f34363d9f0d40f82104c261716bd551d3ba65f648770b6764c21"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.9.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -826,6 +794,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 880573e (add ui reminder and hive)
 =======
@@ -838,6 +807,8 @@ packages:
     source: hosted
     version: "2.0.0"
 >>>>>>> e957533 (fix issyes)
+=======
+>>>>>>> db642aa (add medic and cate)
   hive:
     dependency: "direct main"
     description:
@@ -899,14 +870,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  image_size_getter:
-    dependency: transitive
-    description:
-      name: image_size_getter
-      sha256: "9a299e3af2ebbcfd1baf21456c3c884037ff524316c97d8e56035ea8fdf35653"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.0"
   internet_connection_checker:
     dependency: "direct main"
     description:
@@ -1093,6 +1056,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.4"
+<<<<<<< HEAD
   modal_bottom_sheet:
     dependency: "direct main"
     description:
@@ -1101,6 +1065,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+=======
+>>>>>>> db642aa (add medic and cate)
   nm:
     dependency: transitive
     description:
@@ -1125,14 +1091,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   path_provider:
     dependency: transitive
     description:
@@ -1507,6 +1465,7 @@ packages:
     source: hosted
     version: "0.6.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
   timezone:
     dependency: "direct main"
     description:
@@ -1518,13 +1477,21 @@ packages:
 =======
   time:
     dependency: transitive
+=======
+  timezone:
+    dependency: "direct main"
+>>>>>>> db642aa (add medic and cate)
     description:
-      name: time
-      sha256: "370572cf5d1e58adcb3e354c47515da3f7469dac3a95b447117e728e7be6f461"
+      name: timezone
+      sha256: ffc9d5f4d1193534ef051f9254063fa53d588609418c84299956c3db9383587d
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
     version: "2.1.5"
 >>>>>>> e957533 (fix issyes)
+=======
+    version: "0.10.0"
+>>>>>>> db642aa (add medic and cate)
   timing:
     dependency: transitive
     description:
@@ -1559,6 +1526,7 @@ packages:
     source: hosted
     version: "4.5.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
 =======
@@ -1579,6 +1547,8 @@ packages:
     source: hosted
     version: "1.1.11+1"
 >>>>>>> e957533 (fix issyes)
+=======
+>>>>>>> db642aa (add medic and cate)
   vector_math:
     dependency: transitive
     description:

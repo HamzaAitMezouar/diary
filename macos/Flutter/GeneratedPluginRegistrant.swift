@@ -19,6 +19,7 @@ import geolocator_apple
 =======
 import firebase_auth
 import firebase_core
+import flutter_local_notifications
 import flutter_secure_storage_macos
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
 import google_sign_in_ios
@@ -40,6 +41,7 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
 =======
   FLTFirebaseAuthPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseAuthPlugin"))
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
+  FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
   FLTGoogleSignInPlugin.register(with: registry.registrar(forPlugin: "FLTGoogleSignInPlugin"))
