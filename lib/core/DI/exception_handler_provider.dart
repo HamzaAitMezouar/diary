@@ -13,6 +13,5 @@ final networkInfoProvider = Provider<NetworkInfo>((ref) {
 });
 
 final exceptionsHandlerProvider = Provider<ExceptionsHandler>((ref) {
-  return ExceptionsHandler(
-      localizationService: ref.watch(errosLocalizationServiceProvider), networkInfo: ref.watch(networkInfoProvider));
+  return ExceptionsHandler(ref.watch(errosLocalizationServiceProvider), ref.watch(networkInfoProvider));
 });

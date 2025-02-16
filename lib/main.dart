@@ -1,5 +1,7 @@
 import 'package:diary/core/DI/storage_provider.dart';
+import 'package:diary/core/services/notifications_service.dart';
 import 'package:diary/data/models/reminder_model.dart';
+import 'package:diary/presentation/home/controller/notification_provider/reminder_notifications_provider.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   final sharedPreferences = await SharedPreferences.getInstance();
   await Hive.initFlutter();
 
@@ -32,7 +35,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final provider = ref.watch(localizationProvider);
-
     return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: ref.watch(goRouterProviderProvider).router,

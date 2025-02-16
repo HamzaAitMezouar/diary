@@ -11,4 +11,7 @@ abstract class Urls {
   static String socialMediaLogin = "${auth}social-media-login";
   static String verifyEmail = "${auth}verify-email/:encryptedEmail";
   static String logout = "${auth}log-out";
+
+  static String medicament = "${baseUrl}medicament";
+  static String category = "${baseUrl}category";
 }
