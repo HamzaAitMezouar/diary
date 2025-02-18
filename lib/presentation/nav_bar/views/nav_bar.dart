@@ -28,13 +28,14 @@ class NavBarScreen extends ConsumerWidget {
         },
         selectedLabelStyle: TextStyles.roboto13.copyWith(fontSize: 11),
         unselectedLabelStyle: TextStyles.roboto13.copyWith(fontSize: 11),
-        selectedItemColor: AppColors.superDark,
-        unselectedItemColor: AppColors.superDark,
+        selectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
+        unselectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
               Assets.home,
               height: D.md,
+              color: Theme.of(context).textTheme.labelLarge?.color,
             ),
             label: 'Home',
           ),
@@ -42,12 +43,14 @@ class NavBarScreen extends ConsumerWidget {
             icon: Image.asset(
               Assets.drug,
               height: D.md,
+              color: Theme.of(context).textTheme.labelLarge?.color,
             ),
             label: 'Medicine',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               Assets.map,
+              color: Theme.of(context).textTheme.labelLarge?.color,
               height: D.md,
             ),
             label: 'Pharmacy',
@@ -55,6 +58,7 @@ class NavBarScreen extends ConsumerWidget {
           BottomNavigationBarItem(
             icon: Image.asset(
               Assets.profile,
+              color: Theme.of(context).textTheme.labelLarge?.color,
               height: D.md,
             ),
             label: 'Profile',

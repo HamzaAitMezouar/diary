@@ -40,3 +40,9 @@ class CustomException implements Exception {
 
   CustomException({required this.message});
 }
+
+class PermissionException implements Exception {
+  final String message;
+
+  PermissionException({required this.message});
+}

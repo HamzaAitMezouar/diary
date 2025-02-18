@@ -1,3 +1,4 @@
+import 'package:diary/domain/repositories/location/location_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
 import 'package:diary/domain/repositories/reminder_repository/reminder_repository.dart';
@@ -16,4 +17,9 @@ final medicamentRepositoryProvider = Provider<MedicamentRepository>((ref) {
 final medicamentsCategoriesRepositoryProvider = Provider<MedicamentCategoryRepository>((ref) {
   final medicamentCategoryDataSource = ref.watch(medicamentsCategoriesDataSourceProvider);
   return MedicamentCategoryRepositoryImpl(medicamentCategoryDataSource);
+});
+
+final locationRepositoryProvider = Provider<LocationRepository>((ref) {
+  final datasource = ref.watch(locationDatasourceProvider);
+  return LocationRepositoryImpl(dataSource: datasource);
 });

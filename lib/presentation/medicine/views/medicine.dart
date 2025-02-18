@@ -4,6 +4,7 @@ import 'package:diary/presentation/medicine/controllers/medicaments_categories_c
 import 'package:diary/presentation/medicine/controllers/medicaments_controller/medicament_provider.dart';
 import 'package:diary/presentation/medicine/controllers/medicaments_controller/medicaments_state.dart';
 import 'package:diary/widgets/custom_text_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,32 +17,36 @@ class MedicineScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Scaffold(
-        appBar: AppBar(),
-        body: RefreshIndicator(
-          onRefresh: () async {
-            ref.read(medicamentProvider.notifier).loadMedicament();
-            ref.read(categoryProvider.notifier).loadCategory();
-            return;
-          },
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
+        body: SafeArea(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          ref.read(medicamentProvider.notifier).loadMedicament();
+          ref.read(categoryProvider.notifier).loadCategory();
+          return;
+        },
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: Paddings.horizontalXs,
+              sliver: SliverToBoxAdapter(
                   child: CustomTextField(
                 controller: TextEditingController(),
                 hintText: "Search",
                 suffix: Icon(Icons.search),
               )),
-              SliverToBoxAdapter(
-                child: xsSpacer(),
-              ),
-              CategoriesPage(),
-              SliverToBoxAdapter(
-                child: xsSpacer(),
-              ),
-              MedicamentsPage()
-            ],
-          ),
-        ));
+            ),
+            SliverToBoxAdapter(
+              child: xsSpacer(),
+            ),
+            CategoriesPage(),
+            SliverToBoxAdapter(
+              child: xsSpacer(),
+            ),
+            MedicamentsPage()
+          ],
+        ),
+      ),
+    ));
   }
 }
 
@@ -95,7 +100,7 @@ class CategoriesPage extends ConsumerWidget {
                 ),
                 Container(
                   padding: Paddings.allXxxs,
-                  decoration: BoxDecoration(color: AppColors.white.withOpacity(0.8), borderRadius: Borders.b12),
+                  decoration: BoxDecoration(borderRadius: Borders.b12),
                   child: Text(
                     categoryState.categories[index].name,
                     style: TextStyles.montserratBold13,
@@ -171,10 +176,7 @@ class MedicamentCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxxs),
       decoration: BoxDecoration(
         borderRadius: Borders.b12,
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(color: AppColors.grey, spreadRadius: 1, blurRadius: 2, offset: Offset(1, 1)),
-        ],
+        color: Theme.of(context).cardColor,
       ),
       padding: Paddings.allXxxxs,
       child: Row(

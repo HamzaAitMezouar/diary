@@ -1,4 +1,3 @@
-
 import 'package:diary/core/exports.dart';
 import 'package:diary/widgets/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +28,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
   @override
   Widget build(BuildContext context) {
     final addReminderProvider = ref.watch(medicineReminderProvider);
+    nameController.text = addReminderProvider.medicineName;
     DateTime now = DateTime.now();
     ref.listen<MedicineReminderState>(medicineReminderProvider, (_, state) {
       if (state is MedicineReminderDone) {
@@ -38,6 +38,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
     });
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
           "Medicine Reminder",
           style: TextStyles.montserratBold18,
@@ -45,11 +46,10 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
         actions: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(D.xxl, D.xmd),
-                  padding: const EdgeInsets.all(0),
-                  backgroundColor: AppColors.turquoise,
-                  foregroundColor: AppColors.white),
-              onPressed: (addReminderProvider.medicineName.isEmpty && addReminderProvider.intakeCount == 0)
+                minimumSize: const Size(D.xxl, D.xmd),
+                padding: const EdgeInsets.all(0),
+              ),
+              onPressed: (addReminderProvider.medicineName.isEmpty || addReminderProvider.intakeCount == 0)
                   ? null
                   : () {
                       ref.read(medicineReminderProvider.notifier).addReminder();
@@ -68,6 +68,7 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                xxsSpacer(),
                 Padding(
                   padding: Paddings.horizontalXs,
                   child: Row(
@@ -76,16 +77,13 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                         child: RichText(
                           text: TextSpan(
                             text: "${now.day},",
-                            style: TextStyles.montserratBold22.copyWith(color: AppColors.superDark),
+                            style: TextStyles.montserratBold22
+                                .copyWith(color: Theme.of(context).textTheme.bodyLarge?.color),
                             children: [
                               TextSpan(
-                                text: " ${DateFormat('MMMM').format(now)}, ${now.year},",
-                                style: TextStyles.montserrat13.copyWith(color: AppColors.superDark),
-                              ),
-                              TextSpan(
-                                text: " ${now.hour}:${now.minute},",
-                                style: TextStyles.montserrat13.copyWith(color: AppColors.superDark.withOpacity(0.5)),
-                              ),
+                                  text: " ${DateFormat('MMMM').format(now)}, ${now.year},",
+                                  style: TextStyles.montserrat13),
+                              TextSpan(text: " ${now.hour}:${now.minute},", style: TextStyles.montserrat13),
                             ],
                           ),
                         ),
@@ -144,12 +142,13 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                         padding: Paddings.horizontalXs,
                         child: Text("I take this medicine at: ", style: TextStyles.robotoBold13),
                       ),
-                Wrap(spacing: D.xxxs, alignment: WrapAlignment.center, direction: Axis.horizontal, children: [
+                Wrap(alignment: WrapAlignment.center, direction: Axis.horizontal, children: [
                   ...List.generate(
                       addReminderProvider.intakeCount,
                       (index) => ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: Borders.b12),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                              side: BorderSide(color: Theme.of(context).cardColor, width: 1),
                               minimumSize: const Size(D.xxl, D.xlg),
                               maximumSize: const Size(D.xxxxxl, D.xxl),
                               padding: EdgeInsets.zero,
@@ -184,7 +183,6 @@ class _AddReminderPageState extends ConsumerState<AddReminderPage> {
                     onChanged: (p0) {
                       ref.read(medicineReminderProvider.notifier).onNoteChange(p0);
                     },
-                    color: AppColors.tibbleGrauBg,
                     controller: noteController,
                   ),
                 ),

@@ -19,7 +19,6 @@ class PhoneNumberTextField extends ConsumerWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: Borders.b20,
-          color: AppColors.tibbleGrauBg,
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: D.xs),
@@ -44,7 +43,6 @@ class PhoneNumberTextField extends ConsumerWidget {
             spaceBetweenSelectorAndTextField: 0.0,
             keyboardType: const TextInputType.numberWithOptions(),
             inputBorder: InputBorder.none,
-            cursorColor: AppColors.white,
             hintText: "Enter your Phone Number",
             inputDecoration: InputDecoration(
               labelStyle: TextStyles.montserrat13,

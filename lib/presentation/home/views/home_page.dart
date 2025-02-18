@@ -56,27 +56,19 @@ class HomeScreen extends ConsumerWidget {
                                           margin: const EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxs),
                                           padding: Paddings.allXxxxs,
                                           decoration: BoxDecoration(
+                                            color: Theme.of(context).cardColor,
                                             borderRadius: Borders.b10,
-                                            color: AppColors.borderColor,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: AppColors.grey,
-                                                spreadRadius: 1,
-                                                blurRadius: 2,
-                                                offset: Offset(1, 1),
-                                              ),
-                                            ],
                                           ),
                                           child: Row(
                                             children: [
                                               Card(
-                                                color: AppColors.sofGrey,
-                                                surfaceTintColor: AppColors.transparent,
+                                                color: Theme.of(context).primaryColor.withOpacity(0.1),
                                                 child: Padding(
                                                   padding: Paddings.allXxxxs,
                                                   child: Image.asset(
                                                     reminder.icon,
                                                     height: D.xl,
+                                                    color: Theme.of(context).textTheme.displayLarge?.color,
                                                     fit: BoxFit.cover,
                                                     errorBuilder: (context, error, stackTrace) {
                                                       return Image.asset(
@@ -106,13 +98,11 @@ class HomeScreen extends ConsumerWidget {
                               icon: Image.asset(
                                 Assets.drugs,
                                 height: D.xlg,
-                                color: AppColors.superDark,
                               ),
                               height: D.xxl,
                               onTap: () {
                                 context.goNamed(RoutesNames.addReminderPage);
                               },
-                              backgorundColor: AppColors.turquoise,
                               title: "Add Medicine",
                               style: TextStyles.robotoBold13,
                             )

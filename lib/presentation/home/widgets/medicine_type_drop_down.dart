@@ -62,7 +62,6 @@ class DropdownWithWrapState extends ConsumerState<DropdownWithWrap> {
           child: Material(
             elevation: 4,
             borderRadius: Borders.b12,
-            color: AppColors.backgroundColor,
             child: Padding(
               padding: Paddings.allXxxxs,
               child: Wrap(
@@ -79,17 +78,15 @@ class DropdownWithWrapState extends ConsumerState<DropdownWithWrap> {
                         width: D.xl,
                         height: D.xl,
                         padding: const EdgeInsets.all(8),
-                        decoration:
-                            BoxDecoration(color: AppColors.sofGrey, borderRadius: Borders.b12, boxShadow: const [
-                          BoxShadow(
-                            color: AppColors.grey,
-                            spreadRadius: 1,
-                            blurRadius: 3,
-                            offset: Offset(1, 1),
-                          ),
-                        ]),
+                        decoration: BoxDecoration(borderRadius: Borders.b12, color: Theme.of(context).cardColor),
                         child: Center(
-                          child: Image.asset(medTypes[index], width: D.xmd, height: D.xmd, fit: BoxFit.cover),
+                          child: Image.asset(
+                            medTypes[index],
+                            width: D.xmd,
+                            height: D.xmd,
+                            fit: BoxFit.cover,
+                            color: Theme.of(context).textTheme.labelLarge?.color,
+                          ),
                         ),
                       ));
                 }),
@@ -106,20 +103,21 @@ class DropdownWithWrapState extends ConsumerState<DropdownWithWrap> {
     final reminderState = ref.watch(medicineReminderProvider);
     return Container(
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(color: AppColors.sofGrey, borderRadius: Borders.b12, boxShadow: const [
-        BoxShadow(
-          color: AppColors.grey,
-          spreadRadius: 1,
-          blurRadius: 3,
-          offset: Offset(1, 1),
-        ),
-      ]),
+      decoration: BoxDecoration(
+        borderRadius: Borders.b12,
+      ),
       child: Center(
         child: CompositedTransformTarget(
           link: _layerLink,
           child: GestureDetector(
             onTap: toggleDropdown,
-            child: Image.asset(reminderState.icon, width: 30, height: 30, fit: BoxFit.cover),
+            child: Image.asset(
+              reminderState.icon,
+              width: 30,
+              height: 30,
+              fit: BoxFit.cover,
+              color: Theme.of(context).textTheme.labelLarge?.color,
+            ),
           ),
         ),
       ),

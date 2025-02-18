@@ -12,7 +12,6 @@ class AppCupertinoTimePicker {
       builder: (context) => Container(
         height: D.xxxxxxl * 2.5,
         decoration: const BoxDecoration(
-          color: AppColors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),

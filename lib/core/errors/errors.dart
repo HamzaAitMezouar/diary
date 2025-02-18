@@ -14,3 +14,7 @@ class CostumeFailure extends Failure {
 class CacheFailure extends Failure {
   CacheFailure({required super.errorMessage});
 }
+
+class PermissionFailure extends Failure {
+  PermissionFailure({required super.errorMessage});
+}

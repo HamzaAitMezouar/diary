@@ -69,8 +69,6 @@ class AuthenticationScreen extends ConsumerWidget {
               isDisabled: phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!),
               border: Borders.b20,
               icon: const SizedBox(height: D.md, child: Icon(CupertinoIcons.phone)),
-              backgorundColor: AppColors.error,
-              disableColor: AppColors.grauVollfarbe,
               height: D.xxl,
               isLoading: authState is PhoneAuthLoading,
               onTap: () {
@@ -85,7 +83,6 @@ class AuthenticationScreen extends ConsumerWidget {
             CustomButton(
               border: Borders.b20,
               icon: SizedBox(height: D.md, child: Image.asset(Assets.google)),
-              backgorundColor: AppColors.grauVollfarbe,
               height: D.xxl,
               isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.google,
               onTap: () {
@@ -98,7 +95,6 @@ class AuthenticationScreen extends ConsumerWidget {
             CustomButton(
               border: Borders.b20,
               icon: SizedBox(height: D.md, child: Image.asset(Assets.facebook)),
-              backgorundColor: AppColors.grauVollfarbe,
               height: D.xxl,
               isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.facebook,
               onTap: () {
