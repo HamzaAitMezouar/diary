@@ -1,3 +1,4 @@
+import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/medicine/controllers/medicaments_categories_controller/categories_provider.dart';
 import 'package:diary/presentation/medicine/controllers/medicaments_categories_controller/categories_state.dart';
@@ -8,8 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/exports.dart';
+import '../../order_medicine/controller/selected_medecine_provider.dart';
 
 class MedicineScreen extends ConsumerWidget {
   const MedicineScreen({super.key});
@@ -162,7 +165,7 @@ class MedicamentsPage extends ConsumerWidget {
   }
 }
 
-class MedicamentCard extends StatelessWidget {
+class MedicamentCard extends ConsumerWidget {
   const MedicamentCard({
     super.key,
     required this.medicament,
@@ -171,56 +174,63 @@ class MedicamentCard extends StatelessWidget {
   final MedicamentEntity medicament;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxxs),
-      decoration: BoxDecoration(
-        borderRadius: Borders.b12,
-        color: Theme.of(context).cardColor,
-      ),
-      padding: Paddings.allXxxxs,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ArticleImageWidget(medicament: medicament),
-          xsSpacer(),
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                xsSpacer(),
-                Text(
-                  medicament.manufacturer ?? "",
-                  maxLines: 1,
-                  style: TextStyles.roboto13.copyWith(fontSize: 10),
-                ),
-                Text(medicament.name, overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyles.montserratBold13),
-                xxxsSpacer(),
-                Text(
-                  medicament.name,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                  style: TextStyles.roboto13.copyWith(fontSize: 10),
-                ),
-                xxsSpacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      medicament.ppv.toString(),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.end,
-                      maxLines: 3,
-                      style: TextStyles.robotoBold13.copyWith(color: AppColors.black),
-                    ),
-                    xxxsSpacer(),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+  Widget build(BuildContext context, ref) {
+    return GestureDetector(
+      onTap: () {
+        ref.read(selectedMedicineProvider.notifier).selectMedicine(medicament);
+        context.goNamed(RoutesNames.orderMedicine);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxxs),
+        decoration: BoxDecoration(
+          borderRadius: Borders.b12,
+          color: Theme.of(context).cardColor,
+        ),
+        padding: Paddings.allXxxxs,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ArticleImageWidget(medicament: medicament),
+            xsSpacer(),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  xsSpacer(),
+                  Text(
+                    medicament.manufacturer ?? "",
+                    maxLines: 1,
+                    style: TextStyles.roboto13.copyWith(fontSize: 10),
+                  ),
+                  Text(medicament.name,
+                      overflow: TextOverflow.ellipsis, maxLines: 2, style: TextStyles.montserratBold13),
+                  xxxsSpacer(),
+                  Text(
+                    medicament.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: TextStyles.roboto13.copyWith(fontSize: 10),
+                  ),
+                  xxsSpacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        medicament.ppv.toString(),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
+                        maxLines: 3,
+                        style: TextStyles.robotoBold13.copyWith(color: AppColors.black),
+                      ),
+                      xxxsSpacer(),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

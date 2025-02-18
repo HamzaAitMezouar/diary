@@ -76,6 +76,7 @@ class AuthenticationScreen extends ConsumerWidget {
                 FocusManager.instance.primaryFocus?.unfocus();
                 ref.read(authNotifierProvider.notifier).requestOtp(phoneNumber.phoneNumber!);
               },
+              backgorundColor: AppColors.turquoise.withOpacity(0.7),
               style: TextStyles.montserrat13,
               title: 'Continue with Phone Number',
             ),

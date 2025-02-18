@@ -1,5 +1,6 @@
 import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/presentation/home/views/add_reminder.dart';
+import 'package:diary/presentation/order_medicine/views/order_medicine_page.dart';
 import 'package:diary/presentation/otp_verification/views/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +39,13 @@ class GoRouterProvider {
                   name: RoutesNames.addReminderPage,
                   builder: (context, state) {
                     return const AddReminderPage();
-                  })
+                  }),
+              GoRoute(
+                  path: Routes.orderMedicine,
+                  name: RoutesNames.orderMedicine,
+                  builder: (context, state) {
+                    return const OrderMedicinePage();
+                  }),
             ]),
       ],
       errorBuilder: (context, e) {
