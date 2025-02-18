@@ -21,7 +21,11 @@ import firebase_auth
 import firebase_core
 import flutter_local_notifications
 import flutter_secure_storage_macos
+<<<<<<< HEAD
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
+=======
+import geolocator_apple
+>>>>>>> 07560f2 (add theme)
 import google_sign_in_ios
 import path_provider_foundation
 import shared_preferences_foundation
@@ -43,7 +47,11 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   FlutterLocalNotificationsPlugin.register(with: registry.registrar(forPlugin: "FlutterLocalNotificationsPlugin"))
   FlutterSecureStoragePlugin.register(with: registry.registrar(forPlugin: "FlutterSecureStoragePlugin"))
+<<<<<<< HEAD
 >>>>>>> beffd0f (add gogle and facebook auth and articles)
+=======
+  GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
+>>>>>>> 07560f2 (add theme)
   FLTGoogleSignInPlugin.register(with: registry.registrar(forPlugin: "FLTGoogleSignInPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
