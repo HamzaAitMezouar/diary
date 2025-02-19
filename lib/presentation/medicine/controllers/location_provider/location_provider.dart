@@ -2,7 +2,7 @@ import 'package:diary/core/DI/use_cases_provider.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/location_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final categoryProvider = StateNotifierProvider<LocatioNotifier, LocationState>(
+final positionProvider = StateNotifierProvider<LocatioNotifier, LocationState>(
   (ref) => LocatioNotifier(ref),
 );
 
