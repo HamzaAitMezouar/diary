@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/location_state.dart';
+import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/exports.dart';
@@ -121,6 +124,12 @@ class _UserLocationMapState extends ConsumerState<UserLocationMap> {
         ],
       );
     }
-    return const SizedBox();
+    return CustomButton(
+      onTap: () {
+        context.goNamed(RoutesNames.mapSearchPage);
+      },
+      title: "Choose from map",
+      style: TextStyles.montserratBold15,
+    );
   }
 }

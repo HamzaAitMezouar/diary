@@ -11,8 +11,8 @@ import '../../medicine/controllers/location_provider/location_provider.dart';
 import '../widgets/animated_delvery_type.dart';
 import '../widgets/delivery_type_map.dart';
 
-class BuyMedicamentBottomSheet extends ConsumerWidget {
-  const BuyMedicamentBottomSheet({
+class CheckoutPage extends ConsumerWidget {
+  const CheckoutPage({
     super.key,
   });
 
@@ -56,7 +56,7 @@ class BuyMedicamentBottomSheet extends ConsumerWidget {
                     ),
                     checkout.deliveryType == null ? xxsSpacer() : const SizedBox(),
                     const AnimatedDeliveryType(),
-                    const DeliveryTypeMapWidget()
+                    const DeliveryTypeMapWidget(),
                   ],
                 ),
               ),

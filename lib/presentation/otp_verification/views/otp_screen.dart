@@ -15,9 +15,9 @@ import '../controller/otp_coldown_provider.dart';
 class OtpScreen extends ConsumerWidget {
   const OtpScreen({
     super.key,
-    this.isBuyProductScreen,
+    this.navigateTo,
   });
-  final bool? isBuyProductScreen;
+  final String? navigateTo;
   @override
   Widget build(BuildContext context, ref) {
     final authState = ref.watch(authNotifierProvider);
@@ -41,8 +41,9 @@ class OtpScreen extends ConsumerWidget {
         ref.read(otpCooldownProvider.notifier).startCooldown();
       }
       if (next is Authenticated) {
-        if (isBuyProductScreen == true) {
+        if (navigateTo != null) {
           context.pop();
+          context.goNamed(navigateTo!);
           return;
         }
         context.replaceNamed(RoutesNames.introPage);

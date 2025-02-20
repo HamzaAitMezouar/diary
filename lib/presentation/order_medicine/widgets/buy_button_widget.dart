@@ -1,3 +1,4 @@
+import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/presentation/authentication/views/authentication.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../core/exports.dart';
@@ -29,9 +31,9 @@ class BuyWidget extends ConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        const Row(
           children: [
-            const Text("Location:"),
+            Text("Location:"),
           ],
         ),
         CustomButton(
@@ -40,17 +42,19 @@ class BuyWidget extends ConsumerWidget {
           ),
           backgorundColor: const Color.fromARGB(255, 9, 120, 90),
           onTap: () {
+            if (authState is Authenticated) {
+              Future.delayed(Duration.zero).then(
+                (value) => ref.read(checkoutProvider.notifier).selectCheckout(
+                      CheckoutEntity(medicament: medicament!),
+                    ),
+              );
+              context.goNamed(RoutesNames.checkoutPgae);
+              return;
+            }
             showBarModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  if (authState is Authenticated) {
-                    Future.delayed(Duration.zero).then(
-                      (value) => ref.read(checkoutProvider.notifier).selectCheckout(
-                            CheckoutEntity(medicament: medicament!),
-                          ),
-                    );
-                  }
-                  return authState is Authenticated ? BuyMedicamentBottomSheet() : AuthenticationScreen();
+                  return const AuthenticationScreen();
                 });
           },
           title: "Buy now",

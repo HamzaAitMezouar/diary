@@ -5,6 +5,8 @@ import 'package:diary/presentation/medicine/controllers/location_provider/locati
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../../../../domain/entities/location_entity.dart';
+
 final positionProvider = StateNotifierProvider<LocatioNotifier, LocationState>(
   (ref) => LocatioNotifier(ref),
 );
@@ -12,7 +14,9 @@ final positionProvider = StateNotifierProvider<LocatioNotifier, LocationState>(
 class LocatioNotifier extends StateNotifier<LocationState> {
   Ref ref;
   LocatioNotifier(this.ref) : super(InitLocationState()) {
-    getUserLocation();
+    getUserLocation().then(
+      (value) => _getNearestPharmacy(),
+    );
   }
 
   Future<void> getUserLocation() async {
@@ -21,10 +25,22 @@ class LocatioNotifier extends StateNotifier<LocationState> {
       String? address = await _getAddressFromLatLng(r.latitude, r.longitude);
       log(address.toString());
 
-      return UserLocationState(r.copyWith(address));
+      return UserLocationState(r.copyWith(address: address));
     });
 
     log(state.toString());
+  }
+
+  Future _getNearestPharmacy() async {
+    if (state is UserLocationState) {
+      UserLocationState currentState = state as UserLocationState;
+      LocationEntity locationEntity = currentState.locationEntity;
+      final res = await ref.read(getNearestPharmacyUsecasesProvider)(locationEntity.latitude, locationEntity.longitude);
+      res.fold((l) => null, (r) {
+        if (r.isEmpty) return;
+        state = UserLocationState(currentState.locationEntity.copyWith(pharmacy: r.first));
+      });
+    }
   }
 
   Future<String?> _getAddressFromLatLng(double lat, double lng) async {

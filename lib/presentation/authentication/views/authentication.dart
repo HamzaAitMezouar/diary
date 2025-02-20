@@ -37,7 +37,7 @@ class AuthenticationScreen extends ConsumerWidget {
       }
       if (next is SendOtpSuccess) {
         ref.read(otpCooldownProvider.notifier).startCooldown();
-        context.goNamed(RoutesNames.otpPage);
+        context.goNamed(RoutesNames.otpPage, pathParameters: {"navigateTo": RoutesNames.checkoutPgae});
       }
     });
     return Material(

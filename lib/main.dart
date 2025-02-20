@@ -2,6 +2,7 @@ import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/core/services/notifications_service.dart';
 import 'package:diary/core/theme/app_theme.dart';
 import 'package:diary/data/models/reminder_model.dart';
+import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/home/controller/notification_provider/reminder_notifications_provider.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,6 +37,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final provider = ref.watch(localizationProvider);
+    ref.watch(authNotifierProvider);
     return MaterialApp.router(
         theme: AppThemes.getLightTheme(),
         debugShowCheckedModeBanner: false,

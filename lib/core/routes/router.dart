@@ -1,4 +1,6 @@
 import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/presentation/checkout/views/checkout_page.dart';
+import 'package:diary/presentation/checkout/widgets/choose_lcation_from_map.dart';
 import 'package:diary/presentation/home/views/add_reminder.dart';
 import 'package:diary/presentation/order_medicine/views/order_medicine_page.dart';
 import 'package:diary/presentation/otp_verification/views/otp_screen.dart';
@@ -32,7 +34,10 @@ class GoRouterProvider {
                   path: Routes.otpPage,
                   name: RoutesNames.otpPage,
                   builder: (context, state) {
-                    return const OtpScreen();
+                    final String? navigateTo = state.pathParameters['navigateTo'];
+                    return OtpScreen(
+                      navigateTo: navigateTo,
+                    );
                   }),
               GoRoute(
                   path: Routes.addReminderPage,
@@ -45,7 +50,23 @@ class GoRouterProvider {
                   name: RoutesNames.orderMedicine,
                   builder: (context, state) {
                     return const OrderMedicinePage();
-                  }),
+                  },
+                  routes: [
+                    GoRoute(
+                        path: Routes.checkoutPgae,
+                        name: RoutesNames.checkoutPgae,
+                        builder: (context, state) {
+                          return const CheckoutPage();
+                        },
+                        routes: [
+                          GoRoute(
+                              path: Routes.mapSearchPage,
+                              name: RoutesNames.mapSearchPage,
+                              builder: (context, state) {
+                                return MapLocationPicker();
+                              }),
+                        ]),
+                  ]),
             ]),
       ],
       errorBuilder: (context, e) {

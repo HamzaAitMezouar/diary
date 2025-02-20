@@ -31,13 +31,13 @@ class OrderMedicinePage extends ConsumerWidget {
         : Scaffold(
             body: CustomScrollView(
               slivers: [
-                ProductDescriptionAppBar(),
+                const ProductDescriptionAppBar(),
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: D.xxxxxxl * 2,
                     child: Stack(
                       alignment: Alignment.center,
-                      children: [Image.network(medicament.imageUrl ?? ""), LikeButton(), ShareButton()],
+                      children: [Image.network(medicament.imageUrl ?? ""), const LikeButton(), const ShareButton()],
                     ),
                   ),
                 ),
@@ -57,13 +57,13 @@ class OrderMedicinePage extends ConsumerWidget {
                               TextStyles.robotoBold10.copyWith(color: Theme.of(context).primaryColor.withOpacity(0.8)),
                         ),
                         PriceDetailsWidget(medicament: medicament),
-                        Divider(
+                        const Divider(
                           height: D.xmd,
                           thickness: 0.2,
                         ),
                         xxxsSpacer(),
-                        BuyWidget(),
-                        Divider(
+                        const BuyWidget(),
+                        const Divider(
                           height: D.xmd,
                           thickness: 0.2,
                         ),
@@ -119,7 +119,7 @@ class OrderMedicinePage extends ConsumerWidget {
                           style: TextStyles.robotoBold13.copyWith(
                             color: AppColors.white.withOpacity(0.9),
                           ),
-                          backgorundColor: Color.fromARGB(255, 9, 120, 90),
+                          backgorundColor: const Color.fromARGB(255, 9, 120, 90),
                           onTap: () {},
                           title: " Add To Cart")
                     ],

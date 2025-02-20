@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
                   : isNumber
                       ? TextInputType.number
                       : TextInputType.name),
-          autofocus: autofocus ?? true,
+          autofocus: autofocus ?? false,
           autocorrect: autocorrect ?? true,
           expands: isExpanded,
           textAlign: TextAlign.left,
