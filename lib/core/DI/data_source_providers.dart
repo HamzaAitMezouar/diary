@@ -4,6 +4,7 @@ import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/data/datasource/location/location_datasource.dart';
 import 'package:diary/data/datasource/medicament_category/medicament_category_datasourca.dart';
 import 'package:diary/data/datasource/medicaments/medicament_remote_datasource/medicament_remote_datasource.dart';
+import 'package:diary/data/datasource/pharmacy/pharmacy_datasource.dart';
 import 'package:diary/data/datasource/reminder_datasource/reminder_local_datasource.dart';
 import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,4 +30,11 @@ final medicamentsCategoriesDataSourceProvider = Provider<MedicamentsCategoryData
 
 final locationDatasourceProvider = Provider<LocationDataSource>((ref) {
   return LocationDataSourceImpl();
+});
+
+// pharma
+final pharmacyDataSourceProvider = Provider<PharmacyDatasource>((ref) {
+  final authDio = ref.watch(authDioProvider);
+  final exceptionHandler = ref.watch(exceptionsHandlerProvider);
+  return PharmacyDatasourceImpl(authDio, exceptionHandler);
 });

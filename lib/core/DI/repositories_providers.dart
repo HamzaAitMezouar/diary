@@ -1,6 +1,7 @@
 import 'package:diary/domain/repositories/location/location_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
+import 'package:diary/domain/repositories/pharmacy/pharmacy_repositoy.dart';
 import 'package:diary/domain/repositories/reminder_repository/reminder_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,4 +23,10 @@ final medicamentsCategoriesRepositoryProvider = Provider<MedicamentCategoryRepos
 final locationRepositoryProvider = Provider<LocationRepository>((ref) {
   final datasource = ref.watch(locationDatasourceProvider);
   return LocationRepositoryImpl(dataSource: datasource);
+});
+
+// pharma
+final pharmacyRepositoryProvider = Provider<PharmacyRepository>((ref) {
+  final pharmacyprovider = ref.watch(pharmacyDataSourceProvider);
+  return PharmacyRepositoryImpl(pharmacyprovider);
 });

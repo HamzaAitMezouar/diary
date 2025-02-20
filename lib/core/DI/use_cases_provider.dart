@@ -2,6 +2,7 @@ import 'package:diary/core/DI/repositories_providers.dart';
 import 'package:diary/domain/usecases/location/get_user_location_usecase.dart';
 import 'package:diary/domain/usecases/medicament/get_medicament_usecase.dart';
 import 'package:diary/domain/usecases/medicament_category/get_medicament_category_usecase.dart';
+import 'package:diary/domain/usecases/pharmacy/get_nearest_pharmacy_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/usecases/reminder_usecases/add_reminder.dart';
@@ -37,4 +38,11 @@ final getMedicamentsCategoriesUsecasesProvider = Provider<GetMedicamentsCaregory
 final getUserLocationUsecasesProvider = Provider<GetUserLocation>((ref) {
   final repo = ref.watch(locationRepositoryProvider);
   return GetUserLocation(repository: repo);
+});
+
+// pharma
+
+final getNearestPharmacyUsecasesProvider = Provider<GetNearestPharmacyUseCase>((ref) {
+  final repo = ref.watch(pharmacyRepositoryProvider);
+  return GetNearestPharmacyUseCase(repo);
 });
