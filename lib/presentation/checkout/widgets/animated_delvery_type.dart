@@ -48,6 +48,7 @@ class AnimatedDeliveryType extends ConsumerWidget {
                   ref.read(checkoutProvider.notifier).changeDeliveryType(DeliveryType.pharmacy);
                   return;
                 }
+                ref.read(positionProvider.notifier).getUserLocation();
                 ref.read(checkoutProvider.notifier).changeDeliveryType(DeliveryType.home);
               },
               child: Container(
