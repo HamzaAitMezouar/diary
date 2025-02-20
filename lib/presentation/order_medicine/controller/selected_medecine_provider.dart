@@ -11,6 +11,12 @@ class SelectedMedicineNotifier extends StateNotifier<MedicamentEntity?> {
   void clearSelection() {
     state = null;
   }
+
+  changeQuantity(int quantity) {
+    if (state != null) {
+      state = state!.copyWith(selectedQuantiy: quantity);
+    }
+  }
 }
 
 final selectedMedicineProvider = StateNotifierProvider<SelectedMedicineNotifier, MedicamentEntity?>(

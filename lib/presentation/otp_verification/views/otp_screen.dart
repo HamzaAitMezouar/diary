@@ -13,8 +13,11 @@ import '../../authentication/controllers/phone_number_provider.dart';
 import '../controller/otp_coldown_provider.dart';
 
 class OtpScreen extends ConsumerWidget {
-  const OtpScreen({super.key});
-
+  const OtpScreen({
+    super.key,
+    this.isBuyProductScreen,
+  });
+  final bool? isBuyProductScreen;
   @override
   Widget build(BuildContext context, ref) {
     final authState = ref.watch(authNotifierProvider);
@@ -38,6 +41,10 @@ class OtpScreen extends ConsumerWidget {
         ref.read(otpCooldownProvider.notifier).startCooldown();
       }
       if (next is Authenticated) {
+        if (isBuyProductScreen == true) {
+          context.pop();
+          return;
+        }
         context.replaceNamed(RoutesNames.introPage);
       }
     });

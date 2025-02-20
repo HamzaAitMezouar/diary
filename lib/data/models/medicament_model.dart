@@ -73,18 +73,18 @@ class MedicamentModel {
       };
   MedicamentEntity toEntity() {
     return MedicamentEntity(
-      id: id,
-      name: name,
-      presentation: presentation,
-      manufacturer: manufacturer,
-      composition: composition,
-      status: status,
-      ppv: ppv,
-      hospitalPrice: hospitalPrice,
-      table: table,
-      productNature: productNature,
-      imageUrl: imageUrl,
-      category: category.toEntity(),
-    );
+        id: id,
+        name: name,
+        presentation: presentation,
+        manufacturer: manufacturer,
+        composition: composition,
+        status: status,
+        ppv: ppv,
+        hospitalPrice: hospitalPrice,
+        table: table,
+        productNature: productNature,
+        imageUrl: imageUrl,
+        category: category.toEntity(),
+        selectedQuantiy: 1);
   }
 }

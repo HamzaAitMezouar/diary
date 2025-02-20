@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:diary/core/errors/exceptions.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -15,11 +17,13 @@ class LocationDataSourceImpl extends LocationDataSource {
       }
 
       if (permission == LocationPermission.deniedForever) {
+        log("message");
         throw CustomException(message: "Location permissions are permanently denied.");
       }
 
       return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     } catch (e) {
+      log(e.toString());
       throw CustomException(message: e.toString());
     }
   }

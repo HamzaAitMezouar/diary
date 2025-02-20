@@ -15,7 +15,7 @@ class MedicamentEntity {
   String? productNature;
   String? imageUrl;
   CategoryEntity category;
-
+  int selectedQuantiy;
   MedicamentEntity({
     this.id,
     required this.name,
@@ -29,7 +29,25 @@ class MedicamentEntity {
     this.productNature,
     this.imageUrl,
     required this.category,
+    this.selectedQuantiy = 1,
   });
+  MedicamentEntity copyWith({int? selectedQuantiy}) {
+    return MedicamentEntity(
+        id: id,
+        presentation: presentation,
+        manufacturer: manufacturer,
+        name: name,
+        status: status,
+        hospitalPrice: hospitalPrice,
+        productNature: productNature,
+        imageUrl: imageUrl,
+        composition: composition,
+        ppv: ppv,
+        table: table,
+        category: category,
+        selectedQuantiy: selectedQuantiy ?? this.selectedQuantiy);
+  }
+
   MedicamentModel toModel() {
     return MedicamentModel(
       id: id,

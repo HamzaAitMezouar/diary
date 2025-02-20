@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../widgets/buy_button_widget.dart';
 import '../widgets/circular_buttons.dart';
 import '../widgets/price_details.dart';
 import '../widgets/product_appbar.dart';
@@ -21,7 +22,6 @@ class OrderMedicinePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final medicament = ref.watch(selectedMedicineProvider);
-    final position = ref.watch(positionProvider);
     return medicament == null
         ? const Scaffold(
             body: Center(
@@ -62,26 +62,7 @@ class OrderMedicinePage extends ConsumerWidget {
                           thickness: 0.2,
                         ),
                         xxxsSpacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text("Location:"),
-                                Text(position is UserLocationState ? position.locationEntity.latitude.toString() : "")
-                              ],
-                            ),
-                            CustomButton(
-                              style: TextStyles.robotoBold13.copyWith(
-                                color: AppColors.white.withOpacity(0.9),
-                              ),
-                              backgorundColor: Color.fromARGB(255, 9, 120, 90),
-                              onTap: () {},
-                              title: "Buy now",
-                              height: D.xl,
-                            )
-                          ],
-                        ),
+                        BuyWidget(),
                         Divider(
                           height: D.xmd,
                           thickness: 0.2,
@@ -95,6 +76,7 @@ class OrderMedicinePage extends ConsumerWidget {
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
                           style: TextStyles.roboto13,
                         ),
+                        xxxxlSpacer(),
                       ],
                     ),
                   ),

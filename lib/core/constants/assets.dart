@@ -10,6 +10,8 @@ abstract class Assets {
   static String home = "assets/icons/home.png";
   static String drug = "assets/icons/drugs.png";
   static String drugs = "assets/icons/drug.png";
+  static String pickup = "assets/icons/pickup.png";
+  static String delivery = "assets/icons/delivery.png";
 
   static String map = "assets/icons/map.png";
   static String profile = "assets/icons/user.png";

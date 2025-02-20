@@ -40,73 +40,77 @@ class AuthenticationScreen extends ConsumerWidget {
         context.goNamed(RoutesNames.otpPage);
       }
     });
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            xxlSpacer(),
-            Padding(
-              padding: Paddings.horizontalXs,
-              child: Text(
-                "Welcome back! Let’s get you started.",
-                textAlign: TextAlign.center,
-                style: TextStyles.montserrat40,
-              ),
+    return Material(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: CustomScrollView(slivers: [
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                xxlSpacer(),
+                Padding(
+                  padding: Paddings.horizontalXs,
+                  child: Text(
+                    "Welcome back! Let’s get you started.",
+                    textAlign: TextAlign.center,
+                    style: TextStyles.montserrat40,
+                  ),
+                ),
+                Padding(
+                  padding: Paddings.horizontalXs,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    "Create an account to enjoy the full experience.",
+                    style: TextStyles.montserrat18.copyWith(fontSize: 15),
+                  ),
+                ),
+                xlSpacer(),
+                const PhoneNumberTextField(),
+                xxsSpacer(),
+                CustomButton(
+                  isDisabled: phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!),
+                  border: Borders.b20,
+                  icon: const SizedBox(height: D.md, child: Icon(CupertinoIcons.phone)),
+                  height: D.xxl,
+                  isLoading: authState is PhoneAuthLoading,
+                  onTap: () {
+                    if (phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!)) return;
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    ref.read(authNotifierProvider.notifier).requestOtp(phoneNumber.phoneNumber!);
+                  },
+                  backgorundColor: AppColors.turquoise.withOpacity(0.7),
+                  style: TextStyles.montserrat13,
+                  title: 'Continue with Phone Number',
+                ),
+                xmdSpacer(),
+                CustomButton(
+                  border: Borders.b20,
+                  icon: SizedBox(height: D.md, child: Image.asset(Assets.google)),
+                  height: D.xxl,
+                  isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.google,
+                  onTap: () {
+                    ref.read(authNotifierProvider.notifier).socialMediaLogin(SocialMediaProvider.google);
+                  },
+                  style: TextStyles.montserrat13,
+                  title: 'Continue with Google',
+                ),
+                xsSpacer(),
+                CustomButton(
+                  border: Borders.b20,
+                  icon: SizedBox(height: D.md, child: Image.asset(Assets.facebook)),
+                  height: D.xxl,
+                  isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.facebook,
+                  onTap: () {
+                    ref.read(authNotifierProvider.notifier).socialMediaLogin(SocialMediaProvider.facebook);
+                  },
+                  style: TextStyles.montserrat13,
+                  title: 'Continue with Facebook',
+                ),
+                xsSpacer(),
+              ],
             ),
-            Padding(
-              padding: Paddings.horizontalXs,
-              child: Text(
-                textAlign: TextAlign.center,
-                "Create an account to enjoy the full experience.",
-                style: TextStyles.montserrat18.copyWith(fontSize: 15),
-              ),
-            ),
-            xlSpacer(),
-            const PhoneNumberTextField(),
-            xxsSpacer(),
-            CustomButton(
-              isDisabled: phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!),
-              border: Borders.b20,
-              icon: const SizedBox(height: D.md, child: Icon(CupertinoIcons.phone)),
-              height: D.xxl,
-              isLoading: authState is PhoneAuthLoading,
-              onTap: () {
-                if (phoneNumber.phoneNumber == null || !regex.hasMatch(phoneNumber.phoneNumber!)) return;
-                FocusManager.instance.primaryFocus?.unfocus();
-                ref.read(authNotifierProvider.notifier).requestOtp(phoneNumber.phoneNumber!);
-              },
-              backgorundColor: AppColors.turquoise.withOpacity(0.7),
-              style: TextStyles.montserrat13,
-              title: 'Continue with Phone Number',
-            ),
-            xmdSpacer(),
-            CustomButton(
-              border: Borders.b20,
-              icon: SizedBox(height: D.md, child: Image.asset(Assets.google)),
-              height: D.xxl,
-              isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.google,
-              onTap: () {
-                ref.read(authNotifierProvider.notifier).socialMediaLogin(SocialMediaProvider.google);
-              },
-              style: TextStyles.montserrat13,
-              title: 'Continue with Google',
-            ),
-            xsSpacer(),
-            CustomButton(
-              border: Borders.b20,
-              icon: SizedBox(height: D.md, child: Image.asset(Assets.facebook)),
-              height: D.xxl,
-              isLoading: authState is SocialMediaLoading && authState.provider == SocialMediaProvider.facebook,
-              onTap: () {
-                ref.read(authNotifierProvider.notifier).socialMediaLogin(SocialMediaProvider.facebook);
-              },
-              style: TextStyles.montserrat13,
-              title: 'Continue with Facebook',
-            ),
-            xsSpacer(),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
   }

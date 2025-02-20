@@ -73,7 +73,7 @@ class PriceDetailsWidget extends StatelessWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          (2 * medicament.ppv).toString() + " MAD",
+                          (medicament.selectedQuantiy * medicament.ppv).toStringAsFixed(2) + " MAD",
                           style: TextStyles.montserratBold15.copyWith(color: AppColors.quickRed),
                         ),
                       ],
