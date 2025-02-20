@@ -26,10 +26,15 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to find nearby pharmacies. and to show delivery location</string>
 =======
 >>>>>>> db642aa (add medic and cate)
+=======
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to find nearby pharmacies. and to show delivery location</string>
+>>>>>>> 8af1148 (add checkout screen)
 
     <key>NSAllowsArbitraryLoads</key>
     <true/>

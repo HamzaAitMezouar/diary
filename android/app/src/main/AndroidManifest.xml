@@ -5,10 +5,15 @@
 <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 =======
 >>>>>>> db642aa (add medic and cate)
+=======
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+>>>>>>> 8af1148 (add checkout screen)
     <application
         android:label="diary"
         android:icon="@mipmap/ic_launcher"

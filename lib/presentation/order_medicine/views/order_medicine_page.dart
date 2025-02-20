@@ -22,7 +22,6 @@ class OrderMedicinePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final medicament = ref.watch(selectedMedicineProvider);
-    final position = ref.watch(positionProvider);
     return medicament == null
         ? const Scaffold(
             body: Center(
