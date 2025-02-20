@@ -83,7 +83,9 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
         });
         _mapController.animateCamera(CameraUpdate.newLatLng(newPosition));
       }
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
 
   @override
