@@ -1,8 +1,8 @@
 import 'package:diary/core/exports.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/location_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/location_state.dart';
+import 'package:diary/presentation/medicine/controllers/location_provider/position_provider.dart';
+import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
 import 'package:diary/presentation/order_medicine/controller/selected_medecine_provider.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/cupertino.dart';

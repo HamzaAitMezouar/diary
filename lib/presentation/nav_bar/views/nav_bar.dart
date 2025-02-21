@@ -1,3 +1,4 @@
+import 'package:diary/presentation/map/controller/map_style_notifier.dart';
 import 'package:diary/presentation/map/views/map_screen.dart';
 import 'package:diary/presentation/medicine/views/medicine.dart';
 import 'package:diary/presentation/profile/views/profile_screen.dart';

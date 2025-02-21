@@ -14,8 +14,8 @@ import '../../../core/exports.dart';
 import '../../../widgets/custom_long_button.dart';
 import '../../authentication/controllers/auth_notifier.dart';
 import '../../checkout/views/checkout_page.dart';
-import '../../medicine/controllers/location_provider/location_provider.dart';
-import '../../medicine/controllers/location_provider/location_state.dart';
+import '../../medicine/controllers/location_provider/position_provider.dart';
+import '../../medicine/controllers/location_provider/position_state.dart';
 import '../controller/selected_medecine_provider.dart';
 
 class BuyWidget extends ConsumerWidget {

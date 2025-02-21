@@ -4,16 +4,8 @@
 <uses-permission android:name="android.permission.USE_EXACT_ALARM" />   
 <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-=======
->>>>>>> db642aa (add medic and cate)
-=======
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
->>>>>>> 8af1148 (add checkout screen)
     <application
         android:label="diary"
         android:icon="@mipmap/ic_launcher"
@@ -54,10 +46,7 @@
             <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
             <intent-filter>
-<<<<<<< HEAD
-=======
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
->>>>>>> db642aa (add medic and cate)
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                  <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
@@ -65,6 +54,8 @@
         </receiver>
     </application>
 
+    <queries>
+        <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>
         </intent>

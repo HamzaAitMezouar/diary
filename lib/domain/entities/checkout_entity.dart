@@ -1,13 +1,15 @@
 import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
+import 'package:diary/domain/entities/pharmacy_entiy.dart';
 
 enum DeliveryType { home, pharmacy }
 
 class CheckoutEntity {
   final MedicamentEntity medicament;
   final DeliveryType? deliveryType;
-  final String? pharmacy;
+  final PharmacyEntity? pharmacy;
   final LocationEntity? address;
+
   CheckoutEntity({
     required this.medicament,
     this.deliveryType,
@@ -18,7 +20,7 @@ class CheckoutEntity {
   CheckoutEntity copyWith({
     MedicamentEntity? medicament,
     DeliveryType? deliveryType,
-    String? pharmacy,
+    PharmacyEntity? pharmacy,
     LocationEntity? address,
   }) {
     return CheckoutEntity(

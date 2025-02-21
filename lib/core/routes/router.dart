@@ -7,6 +7,7 @@ import 'package:diary/presentation/otp_verification/views/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../presentation/nav_bar/views/nav_bar.dart';
 import '../DI/storage_provider.dart';
@@ -63,7 +64,10 @@ class GoRouterProvider {
                               path: Routes.mapSearchPage,
                               name: RoutesNames.mapSearchPage,
                               builder: (context, state) {
-                                return MapLocationPicker();
+                                LatLng? latLng = state.extra as LatLng?;
+                                return MapLocationPicker(
+                                  latLng: latLng,
+                                );
                               }),
                         ]),
                   ]),

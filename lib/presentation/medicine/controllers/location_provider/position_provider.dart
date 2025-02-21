@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:diary/core/DI/use_cases_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/location_state.dart';
+import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 
@@ -27,6 +27,12 @@ class LocatioNotifier extends StateNotifier<LocationState> {
 
       return UserLocationState(r.copyWith(address: address));
     });
+
+    log(state.toString());
+  }
+
+  Future<void> manuallyEnterUserLocation(LocationEntity entiy) async {
+    state = UserLocationState(entiy);
 
     log(state.toString());
   }

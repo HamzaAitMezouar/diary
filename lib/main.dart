@@ -41,7 +41,7 @@ class MyApp extends ConsumerWidget {
     final provider = ref.watch(localizationProvider);
     ref.watch(authNotifierProvider);
     return MaterialApp.router(
-      theme: AppThemes.getLightTheme(),
+      theme: AppThemes.getDarkTheme(),
       debugShowCheckedModeBanner: false,
       routerConfig: ref.watch(goRouterProviderProvider).router,
       title: 'Language Selector App',

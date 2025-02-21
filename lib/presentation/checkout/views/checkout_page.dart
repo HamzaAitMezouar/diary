@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/exports.dart';
-import '../../medicine/controllers/location_provider/location_provider.dart';
+import '../../medicine/controllers/location_provider/position_provider.dart';
 import '../widgets/animated_delvery_type.dart';
 import '../widgets/delivery_type_map.dart';
 

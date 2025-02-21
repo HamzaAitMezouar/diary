@@ -1,24 +1,27 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:diary/presentation/map/controller/map_style_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/exports.dart';
 import '../../../widgets/markers.dart';
 
-class MapScreen extends StatefulWidget {
+class MapScreen extends ConsumerStatefulWidget {
   const MapScreen({super.key});
 
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  ConsumerState<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends ConsumerState<MapScreen> {
   @override
   void initState() {
     initMap();
@@ -26,20 +29,8 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   List<Marker> markers = [];
-  String mapStyle = "";
-  initMap() {
-    if (Platform.isAndroid) {
-      rootBundle.loadString('assets/styles/map_style.txt').then((string) {
-        mapStyle = string;
-        setState(() {});
-      });
-    } else {
-      rootBundle.loadString('assets/styles/map_style.json').then((string) {
-        mapStyle = string;
-        setState(() {});
-      });
-    }
 
+  initMap() {
     cretaeMarkers();
   }
 
@@ -89,6 +80,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final mapStyle = ref.watch(mapStyleProvider);
     return GoogleMap(
       compassEnabled: false,
       myLocationButtonEnabled: false,
