@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/checkout/widgets/map_and_address_card.dart';
@@ -7,16 +5,12 @@ import 'package:diary/presentation/medicine/controllers/location_provider/positi
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/exports.dart';
-import '../../../domain/entities/location_entity.dart';
 import '../../../widgets/info_diaog.dart';
-import '../../map/controller/map_style_notifier.dart';
 import '../../medicine/controllers/location_provider/position_provider.dart';
 import '../controllers/checkout_provider.dart';
 
