@@ -139,7 +139,7 @@ class ScheduleTypeCard extends StatelessWidget {
 }
 
 Future<DateTime?> pickDateTime(BuildContext context) async {
-  if (!Platform.isAndroid) {
+  if (Platform.isAndroid) {
     DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now().add(Duration(hours: 1)),
@@ -153,7 +153,7 @@ Future<DateTime?> pickDateTime(BuildContext context) async {
     );
     if (time == null) return date;
     return DateTime(date.year, date.month, date.day, time.hour, time.minute);
-  } else if (!Platform.isIOS) {
+  } else if (Platform.isIOS) {
     DateTime? selectedDateTime = DateTime.now();
     await showCupertinoModalPopup(
       context: context,

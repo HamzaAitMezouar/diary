@@ -36,6 +36,11 @@ class SelectedMedicineNotifier extends StateNotifier<CheckoutEntity?> {
     state = ch;
   }
 
+  changePaymentType(PaymentType type) {
+    CheckoutEntity ch = state!.copyWith(paymentType: type);
+    state = ch;
+  }
+
   changeDeliveryAdress(LocationEntity entity) {
     if (state == null) return;
     CheckoutEntity ch = state!.copyWith(address: entity, deliveryType: DeliveryType.home);

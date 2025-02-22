@@ -29,7 +29,11 @@ class DeliveryTypeMapWidget extends ConsumerWidget {
         duration: Durations.extralong1,
         height: checkout?.deliveryType == null ? 0 : D.xxxxxxl * 2,
         width: double.infinity,
-        child: checkout?.deliveryType == DeliveryType.home ? const UserLocationMap() : const NearestPharmacyMap());
+        child: checkout?.deliveryType == DeliveryType.home
+            ? const UserLocationMap()
+            : checkout?.deliveryType == DeliveryType.pharmacy
+                ? const NearestPharmacyMap()
+                : const SizedBox());
   }
 }
 
@@ -47,7 +51,7 @@ class _UserLocationMapState extends ConsumerState<UserLocationMap> {
   Widget build(BuildContext context) {
     final position = ref.watch(positionProvider);
 
-    if (position is UserLocationState) return MapAddressCard();
+    if (position is UserLocationState) return const MapAddressCard();
     return Column(
       children: [
         Row(

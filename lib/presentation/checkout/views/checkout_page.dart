@@ -61,7 +61,8 @@ class CheckoutPage extends ConsumerWidget {
                     const DeliveryTypeMapWidget(),
                     xxxsSpacer(),
                     checkout.deliveryType == DeliveryType.home ? DeliveryScheduleType() : SizedBox(),
-                    PaymentMethodsWidget()
+                    PaymentMethodsWidget(),
+                    PriceSumamryWidget()
                   ],
                 ),
               ),
