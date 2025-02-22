@@ -25,7 +25,7 @@ class MedicamentModel {
   String? productNature;
   String? imageUrl;
   CategoryModel category;
-
+  int selectedQuantiy;
   MedicamentModel({
     this.id,
     required this.name,
@@ -39,6 +39,7 @@ class MedicamentModel {
     this.productNature,
     this.imageUrl,
     required this.category,
+    this.selectedQuantiy = 1,
   });
 
   factory MedicamentModel.fromJson(Map<String, dynamic> json) => MedicamentModel(
@@ -53,7 +54,8 @@ class MedicamentModel {
       table: json["table"],
       productNature: json["productNature"],
       imageUrl: json["imageUrl"],
-      category: CategoryModel(name: "TEST")
+      category: CategoryModel(name: "TEST"),
+      selectedQuantiy: json["selectedQuantiy"]
       // CategoryModel.fromJson(json["category"]),
       );
 
@@ -70,6 +72,7 @@ class MedicamentModel {
         "productNature": productNature,
         "imageUrl": imageUrl,
         "category": category.toJson(),
+        "selectedQuantiy": selectedQuantiy
       };
   MedicamentEntity toEntity() {
     return MedicamentEntity(
@@ -85,6 +88,23 @@ class MedicamentModel {
         productNature: productNature,
         imageUrl: imageUrl,
         category: category.toEntity(),
-        selectedQuantiy: 1);
+        selectedQuantiy: selectedQuantiy);
+  }
+
+  MedicamentModel copyWith({int? quantity}) {
+    return MedicamentModel(
+      name: name,
+      composition: composition,
+      ppv: ppv,
+      table: table,
+      category: category,
+      presentation: presentation,
+      manufacturer: manufacturer,
+      status: status,
+      hospitalPrice: hospitalPrice,
+      productNature: productNature,
+      imageUrl: imageUrl,
+      selectedQuantiy: quantity ?? selectedQuantiy,
+    );
   }
 }
