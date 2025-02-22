@@ -1,10 +1,13 @@
 import 'package:diary/domain/entities/pharmacy_entiy.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/exports.dart';
+import '../../../core/routes/routes_names.dart';
 import '../../../widgets/markers.dart';
 import '../../map/controller/map_style_notifier.dart';
 import '../../medicine/controllers/location_provider/position_provider.dart';
@@ -52,8 +55,16 @@ class _NearestPharmacyMapState extends ConsumerState<NearestPharmacyMap> {
     final mapStyle = ref.watch(mapStyleProvider);
     if (position is UserLocationState) {
       if (position.locationEntity.pharmacy == null) {
-        return const SizedBox(
-          child: Text('No pharmacy near you'),
+        return Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Pick up from the nearest pharmacy is not yet allowed in your area yet',
+                textAlign: TextAlign.center,
+                style: TextStyles.robotoBold15,
+              ),
+            ),
+          ],
         );
       }
       PharmacyEntity pharma = position.locationEntity.pharmacy!;
@@ -106,8 +117,25 @@ class _NearestPharmacyMapState extends ConsumerState<NearestPharmacyMap> {
         ],
       );
     }
-    return const SizedBox(
-      child: Text('No pharmacy near you'),
+    return Row(
+      children: [
+        IconButton(
+            onPressed: () {
+              context.goNamed(RoutesNames.mapSearchPage);
+            },
+            icon: const Icon(
+              Icons.gps_fixed_outlined,
+              color: AppColors.red,
+            )),
+        xxxsSpacer(),
+        Expanded(
+          child: Text(
+            'Please choose your current location or allow GPS access',
+            textAlign: TextAlign.center,
+            style: TextStyles.robotoBold15,
+          ),
+        ),
+      ],
     );
   }
 }

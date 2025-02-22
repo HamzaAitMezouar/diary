@@ -60,13 +60,15 @@ class _UserLocationMapState extends ConsumerState<UserLocationMap> {
                       "Choose location from map");
                 },
                 icon: const Icon(Icons.info)),
-            CustomButton(
-              height: D.xxl,
-              onTap: () {
-                context.goNamed(RoutesNames.mapSearchPage);
-              },
-              title: "Choose from map",
-              style: TextStyles.montserratBold15,
+            Expanded(
+              child: CustomButton(
+                height: D.xxl,
+                onTap: () {
+                  context.goNamed(RoutesNames.mapSearchPage);
+                },
+                title: "Enter Your Desired Location",
+                style: TextStyles.montserratBold15,
+              ),
             ),
           ],
         ),

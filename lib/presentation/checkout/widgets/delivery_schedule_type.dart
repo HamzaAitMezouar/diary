@@ -104,7 +104,7 @@ class ScheduleTypeCard extends StatelessWidget {
           height: D.xl,
           margin: EdgeInsetsDirectional.only(end: 4),
           decoration: BoxDecoration(
-            color: !isActive ? Theme.of(context).cardColor : null,
+            color: !isActive ? Theme.of(context).cardColor.withOpacity(0.4) : null,
             borderRadius: BorderRadius.circular(8),
             gradient: !isActive
                 ? null
