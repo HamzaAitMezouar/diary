@@ -38,11 +38,11 @@ class HomeScreen extends ConsumerWidget {
                                       child: Column(
                                         children: [
                                           Text(
-                                            context.translate.noReminders,
+                                            " context.translate.noReminders",
                                             style: TextStyles.robotoBold13,
                                           ),
                                           Text(
-                                            context.translate.stayHealthy,
+                                            "context.translate.stayHealthy",
                                             style: TextStyles.roboto13,
                                           )
                                         ],

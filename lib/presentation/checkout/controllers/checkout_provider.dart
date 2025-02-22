@@ -22,9 +22,18 @@ class SelectedMedicineNotifier extends StateNotifier<CheckoutEntity?> {
       log("Get Adress");
     }
     if (type == DeliveryType.pharmacy) {
-      log("Get Nearest Pharmacy");
       return;
     }
+  }
+
+  changeDeliveryScheduleType(Deliveryschedule deliveryschedule) {
+    CheckoutEntity ch = state!.copyWith(deliveryschedule: deliveryschedule);
+    state = ch;
+  }
+
+  changeDeliveryTime(DateTime time) {
+    CheckoutEntity ch = state!.copyWith(deliveryTime: time);
+    state = ch;
   }
 
   changeDeliveryAdress(LocationEntity entity) {

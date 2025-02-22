@@ -15,7 +15,7 @@ class LocatioNotifier extends StateNotifier<LocationState> {
   Ref ref;
   LocatioNotifier(this.ref) : super(InitLocationState()) {
     getUserLocation().then(
-      (value) => _getNearestPharmacy(),
+      (value) => getNearestPharmacy(),
     );
   }
 
@@ -37,13 +37,15 @@ class LocatioNotifier extends StateNotifier<LocationState> {
     log(state.toString());
   }
 
-  Future _getNearestPharmacy() async {
+  Future getNearestPharmacy() async {
     if (state is UserLocationState) {
       UserLocationState currentState = state as UserLocationState;
       LocationEntity locationEntity = currentState.locationEntity;
       final res = await ref.read(getNearestPharmacyUsecasesProvider)(locationEntity.latitude, locationEntity.longitude);
-      res.fold((l) => null, (r) {
+      res.fold((l) => log(l.toString()), (r) {
+        log(r.toString());
         if (r.isEmpty) return;
+
         state = UserLocationState(currentState.locationEntity.copyWith(pharmacy: r.first));
       });
     }

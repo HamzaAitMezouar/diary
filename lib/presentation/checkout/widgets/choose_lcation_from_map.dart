@@ -2,7 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:diary/core/constants/app_colors.dart';
+import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/constants/paddings.dart';
+import 'package:diary/core/constants/text_style.dart';
+import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
@@ -31,7 +34,7 @@ class MapLocationPicker extends ConsumerStatefulWidget {
 
 class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
   late GoogleMapController _mapController;
-  LatLng _selectedLocation = const LatLng(37.7749, -122.4194); // Default: San Francisco
+  LatLng _selectedLocation = const LatLng(37.7749, -122.4194);
   String _address = "Enter address or move the marker";
 
   final DraggableScrollableController _sheetController = DraggableScrollableController();
@@ -65,7 +68,7 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
 
       return;
     }
-
+    _updateAddress(_selectedLocation);
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return;
 
@@ -102,6 +105,11 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
           _selectedLocation = position;
         });
       }
+    } catch (e) {
+      setState(() {
+        _address = "Failed to get address";
+      });
+    } finally {
       _mapController.animateCamera(
         CameraUpdate.newLatLng(
           LatLng(
@@ -110,10 +118,6 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
           ),
         ),
       );
-    } catch (e) {
-      setState(() {
-        _address = "Failed to get address";
-      });
     }
   }
 
@@ -149,6 +153,16 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
         children: [
           // 📌 Google Map
           GoogleMap(
+            compassEnabled: true,
+            //  trafficEnabled: true,
+            buildingsEnabled: true,
+            tiltGesturesEnabled: true,
+            scrollGesturesEnabled: true,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            padding: EdgeInsets.only(bottom: context.height * 0.5),
+            mapToolbarEnabled: true,
+            indoorViewEnabled: true,
             style: mapStyle,
             initialCameraPosition: CameraPosition(
               target: _selectedLocation,
@@ -178,9 +192,9 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
             },
           ),
           DraggableScrollableSheet(
-              initialChildSize: 0.15,
+              initialChildSize: 0.18,
               controller: _sheetController,
-              minChildSize: 0.15,
+              minChildSize: 0.18,
               maxChildSize: 0.2,
               builder: (context, scrollController) {
                 return Container(
@@ -197,8 +211,17 @@ class _MapLocationPickerState extends ConsumerState<MapLocationPicker> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
-                        children: [const Icon(Icons.location_pin, color: Colors.red), Expanded(child: Text(_address))],
+                        children: [
+                          const Icon(Icons.location_pin, color: Colors.red),
+                          Expanded(
+                            child: Text(
+                              _address,
+                              style: TextStyles.robotoBold13,
+                            ),
+                          ),
+                        ],
                       ),
+                      xxxsSpacer(),
                       ElevatedButton(
                         onPressed: () {
                           ref.read(checkoutProvider.notifier).changeDeliveryAdress(LocationEntity(

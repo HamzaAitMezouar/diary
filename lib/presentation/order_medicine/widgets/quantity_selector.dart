@@ -17,7 +17,7 @@ class QuantitySelector extends ConsumerWidget {
     return Row(
       children: [
         QuanityButton(
-          color: medicament?.selectedQuantiy == 1 ? AppColors.grey : null,
+          color: medicament?.selectedQuantiy == 1 ? AppColors.grey.withOpacity(0.7) : null,
           onClick: medicament?.selectedQuantiy == 1
               ? null
               : () {
@@ -62,10 +62,10 @@ class QuanityButton extends StatelessWidget {
       onTap: onClick,
       child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(4),
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: color ?? AppColors.turquoise,
+            borderRadius: Borders.b12,
+            color: color ?? AppColors.turquoise.withOpacity(0.7),
           ),
           child: Center(child: child)),
     );

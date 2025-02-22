@@ -9,7 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/exports.dart';
 import '../../medicine/controllers/location_provider/position_provider.dart';
 import '../widgets/animated_delvery_type.dart';
+import '../widgets/delivery_schedule_type.dart';
 import '../widgets/delivery_type_map.dart';
+import '../widgets/payment_methods_widget.dart';
 
 class CheckoutPage extends ConsumerWidget {
   const CheckoutPage({
@@ -57,6 +59,9 @@ class CheckoutPage extends ConsumerWidget {
                     checkout.deliveryType == null ? xxsSpacer() : const SizedBox(),
                     const AnimatedDeliveryType(),
                     const DeliveryTypeMapWidget(),
+                    xxxsSpacer(),
+                    checkout.deliveryType == DeliveryType.home ? DeliveryScheduleType() : SizedBox(),
+                    PaymentMethodsWidget()
                   ],
                 ),
               ),

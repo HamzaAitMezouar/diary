@@ -1,6 +1,7 @@
 import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/checkout/widgets/map_and_address_card.dart';
+import 'package:diary/presentation/checkout/widgets/nearest_pharmacy_map.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,22 +25,11 @@ class DeliveryTypeMapWidget extends ConsumerWidget {
     final checkout = ref.watch(checkoutProvider);
 
     return AnimatedContainer(
-        transformAlignment: Alignment.bottomCenter,
+        transformAlignment: Alignment.topCenter,
         duration: Durations.extralong1,
         height: checkout?.deliveryType == null ? 0 : D.xxxxxxl * 2,
         width: double.infinity,
         child: checkout?.deliveryType == DeliveryType.home ? const UserLocationMap() : const NearestPharmacyMap());
-  }
-}
-
-class NearestPharmacyMap extends StatelessWidget {
-  const NearestPharmacyMap({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const SizedBox();
   }
 }
 
@@ -58,22 +48,27 @@ class _UserLocationMapState extends ConsumerState<UserLocationMap> {
     final position = ref.watch(positionProvider);
 
     if (position is UserLocationState) return MapAddressCard();
-    return Row(
+    return Column(
       children: [
-        IconButton(
-            onPressed: () {
-              AdaptiveDialogScreen()(
-                  context,
-                  "You did not allow location, you can choose the delivery location from map",
-                  "Choose location from map");
-            },
-            icon: const Icon(Icons.info)),
-        CustomButton(
-          onTap: () {
-            context.goNamed(RoutesNames.mapSearchPage);
-          },
-          title: "Choose from map",
-          style: TextStyles.montserratBold15,
+        Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  AdaptiveDialogScreen()(
+                      context,
+                      "You did not allow location, you can choose the delivery location from map",
+                      "Choose location from map");
+                },
+                icon: const Icon(Icons.info)),
+            CustomButton(
+              height: D.xxl,
+              onTap: () {
+                context.goNamed(RoutesNames.mapSearchPage);
+              },
+              title: "Choose from map",
+              style: TextStyles.montserratBold15,
+            ),
+          ],
         ),
       ],
     );

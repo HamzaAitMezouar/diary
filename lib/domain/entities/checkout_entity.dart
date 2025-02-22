@@ -4,29 +4,37 @@ import 'package:diary/domain/entities/pharmacy_entiy.dart';
 
 enum DeliveryType { home, pharmacy }
 
+enum Deliveryschedule { now, later }
+
 class CheckoutEntity {
   final MedicamentEntity medicament;
   final DeliveryType? deliveryType;
   final PharmacyEntity? pharmacy;
   final LocationEntity? address;
-
+  final Deliveryschedule deliveryschedule;
+  DateTime? deliveryTime;
   CheckoutEntity({
     required this.medicament,
     this.deliveryType,
     this.pharmacy,
     this.address,
+    this.deliveryschedule = Deliveryschedule.now,
+    this.deliveryTime,
   });
 
-  CheckoutEntity copyWith({
-    MedicamentEntity? medicament,
-    DeliveryType? deliveryType,
-    PharmacyEntity? pharmacy,
-    LocationEntity? address,
-  }) {
+  CheckoutEntity copyWith(
+      {MedicamentEntity? medicament,
+      DeliveryType? deliveryType,
+      PharmacyEntity? pharmacy,
+      LocationEntity? address,
+      DateTime? deliveryTime,
+      Deliveryschedule? deliveryschedule}) {
     return CheckoutEntity(
         medicament: medicament ?? this.medicament,
         deliveryType: deliveryType ?? this.deliveryType,
         pharmacy: pharmacy ?? this.pharmacy,
-        address: address ?? this.address);
+        address: address ?? this.address,
+        deliveryTime: deliveryTime ?? this.deliveryTime,
+        deliveryschedule: deliveryschedule ?? this.deliveryschedule);
   }
 }
