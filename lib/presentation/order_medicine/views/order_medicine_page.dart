@@ -1,20 +1,13 @@
 import 'package:diary/core/exports.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
-import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/position_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
 import 'package:diary/presentation/order_medicine/controller/selected_medecine_provider.dart';
 import 'package:diary/widgets/custom_long_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/buy_button_widget.dart';
 import '../widgets/circular_buttons.dart';
 import '../widgets/price_details.dart';
 import '../widgets/product_appbar.dart';
-import '../widgets/quantity_selector.dart';
 
 class OrderMedicinePage extends ConsumerWidget {
   const OrderMedicinePage({super.key});
@@ -47,7 +40,7 @@ class OrderMedicinePage extends ConsumerWidget {
                     delegate: SliverChildListDelegate(
                       [
                         Text(
-                          medicament.name + ' / ' + medicament.presentation.toString(),
+                          '${medicament.name} / ${medicament.presentation}',
                           style: TextStyles.montserratBold18,
                         ),
                         xxxxxsSpacer(),

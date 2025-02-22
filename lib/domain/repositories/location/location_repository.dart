@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/errors/exceptions.dart';
 import 'package:diary/domain/entities/location_entity.dart';
-import 'package:timezone/tzdata.dart';
 
 import '../../../data/datasource/location/location_datasource.dart';
 

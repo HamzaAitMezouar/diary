@@ -15,7 +15,7 @@ class PriceSumamryWidget extends ConsumerWidget {
     return Banner(
       textStyle: TextStyles.robotoBold10,
       message:
-          "${checkout!.medicament.selectedQuantiy} ${checkout!.medicament.selectedQuantiy == 1 ? "Item" : "Items"}",
+          "${checkout!.medicament.selectedQuantiy} ${checkout.medicament.selectedQuantiy == 1 ? "Item" : "Items"}",
       location: BannerLocation.topEnd,
       child: Card(
         margin: EdgeInsets.zero,
@@ -37,7 +37,7 @@ class PriceSumamryWidget extends ConsumerWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          "${(checkout!.medicament.ppv * checkout.medicament.selectedQuantiy).toStringAsFixed(2)} MAD",
+                          "${(checkout.medicament.ppv * checkout.medicament.selectedQuantiy).toStringAsFixed(2)} MAD",
                           style: TextStyles.montserratBold15,
                         ),
                       ],
@@ -53,7 +53,7 @@ class PriceSumamryWidget extends ConsumerWidget {
                               style: TextStyles.montserratBold13,
                             ),
                             xxxxsSpacer(),
-                            Icon(Icons.delivery_dining_rounded)
+                            const Icon(Icons.delivery_dining_rounded)
                           ],
                         ),
                         Text(
@@ -71,7 +71,7 @@ class PriceSumamryWidget extends ConsumerWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          "${(checkout!.medicament.ppv * checkout.medicament.selectedQuantiy + 10).toStringAsFixed(2)} MAD",
+                          "${(checkout.medicament.ppv * checkout.medicament.selectedQuantiy + 10).toStringAsFixed(2)} MAD",
                           style: TextStyles.montserratBold15.copyWith(color: AppColors.quickRed),
                         ),
                       ],

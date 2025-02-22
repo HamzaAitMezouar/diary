@@ -1,9 +1,5 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:diary/core/connection/connection.dart';
 import 'package:diary/core/constants/urls.dart';
 import 'package:diary/core/errors/exceptions.dart';
-import 'package:diary/core/helpers/either_error_handler.dart';
-import 'package:diary/core/services/localization_service.dart';
 import 'package:diary/data/datasource/authentication/authentication_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';

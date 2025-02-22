@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:diary/data/models/medicament_model.dart';
 import 'package:dio/dio.dart';

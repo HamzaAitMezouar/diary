@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
-import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:diary/presentation/map/controller/map_style_notifier.dart';

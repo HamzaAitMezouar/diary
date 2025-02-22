@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/DI/storage_provider.dart';

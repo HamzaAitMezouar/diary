@@ -1,13 +1,10 @@
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/exports.dart';
-import '../../medicine/controllers/location_provider/position_provider.dart';
 import '../widgets/animated_delvery_type.dart';
 import '../widgets/delivery_schedule_type.dart';
 import '../widgets/delivery_type_map.dart';
@@ -61,10 +58,10 @@ class CheckoutPage extends ConsumerWidget {
                     const AnimatedDeliveryType(),
                     const DeliveryTypeMapWidget(),
                     xxxsSpacer(),
-                    checkout.deliveryType == DeliveryType.home ? DeliveryScheduleType() : SizedBox(),
-                    PaymentMethodsWidget(),
+                    checkout.deliveryType == DeliveryType.home ? const DeliveryScheduleType() : const SizedBox(),
+                    const PaymentMethodsWidget(),
                     xxxsSpacer(),
-                    PriceSumamryWidget()
+                    const PriceSumamryWidget()
                   ],
                 ),
               ),

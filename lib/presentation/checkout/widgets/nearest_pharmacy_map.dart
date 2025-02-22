@@ -1,6 +1,5 @@
 import 'package:diary/domain/entities/pharmacy_entiy.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +10,6 @@ import '../../../core/routes/routes_names.dart';
 import '../../../widgets/markers.dart';
 import '../../map/controller/map_style_notifier.dart';
 import '../../medicine/controllers/location_provider/position_provider.dart';
-import '../controllers/checkout_provider.dart';
 
 class NearestPharmacyMap extends ConsumerStatefulWidget {
   const NearestPharmacyMap({

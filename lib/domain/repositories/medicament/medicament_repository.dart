@@ -18,7 +18,7 @@ class MedicamentRepositoryImpl implements MedicamentRepository {
   Future<Either<Failure, List<MedicamentEntity>>> getMedicaments() async {
     try {
       final result = await _dataSource.getMedicaments();
-      log("----------------------------" + result.toString());
+      log("----------------------------$result");
       return Right(result.map((e) => e.toEntity()).toList());
     } on CustomException catch (e) {
       log(e.message);

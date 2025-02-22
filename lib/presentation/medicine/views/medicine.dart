@@ -5,9 +5,7 @@ import 'package:diary/presentation/medicine/controllers/medicaments_categories_c
 import 'package:diary/presentation/medicine/controllers/medicaments_controller/medicament_provider.dart';
 import 'package:diary/presentation/medicine/controllers/medicaments_controller/medicaments_state.dart';
 import 'package:diary/widgets/custom_text_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,17 +33,17 @@ class MedicineScreen extends ConsumerWidget {
                   child: CustomTextField(
                 controller: TextEditingController(),
                 hintText: "Search",
-                suffix: Icon(Icons.search),
+                suffix: const Icon(Icons.search),
               )),
             ),
             SliverToBoxAdapter(
               child: xsSpacer(),
             ),
-            CategoriesPage(),
+            const CategoriesPage(),
             SliverToBoxAdapter(
               child: xsSpacer(),
             ),
-            MedicamentsPage()
+            const MedicamentsPage()
           ],
         ),
       ),
@@ -63,7 +61,7 @@ class CategoriesPage extends ConsumerWidget {
     final categoryState = ref.watch(categoryProvider);
 
     if (categoryState is CategoryLaoding) {
-      return SliverToBoxAdapter(
+      return const SliverToBoxAdapter(
         child: SizedBox(
           height: D.xxxxxl,
           child: Center(
@@ -113,14 +111,14 @@ class CategoriesPage extends ConsumerWidget {
             ),
           );
         },
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 2,
           crossAxisSpacing: 2,
         ),
       );
     }
-    return SliverToBoxAdapter(
+    return const SliverToBoxAdapter(
         child: SizedBox(
       child: Text("Error"),
     ));
@@ -137,7 +135,7 @@ class MedicamentsPage extends ConsumerWidget {
     final medicamentsState = ref.watch(medicamentProvider);
 
     if (medicamentsState is MedicamentLaoding) {
-      return SliverToBoxAdapter(
+      return const SliverToBoxAdapter(
         child: SizedBox(
           height: D.xxxxxl,
           child: Center(
@@ -153,12 +151,13 @@ class MedicamentsPage extends ConsumerWidget {
         (context, index) => MedicamentCard(medicament: medicamentsState.medicaments[index]),
       ));
     }
-    if (medicamentsState is MedicamentError)
+    if (medicamentsState is MedicamentError) {
       return SliverToBoxAdapter(
           child: SizedBox(
         child: Text(medicamentsState.errorMessage),
       ));
-    return SliverToBoxAdapter(
+    }
+    return const SliverToBoxAdapter(
         child: SizedBox(
       child: Text("Error"),
     ));
@@ -181,7 +180,7 @@ class MedicamentCard extends ConsumerWidget {
         context.goNamed(RoutesNames.orderMedicine);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxxs),
+        margin: const EdgeInsets.symmetric(horizontal: D.xs, vertical: D.xxxxs),
         decoration: BoxDecoration(
           borderRadius: Borders.b12,
           color: Theme.of(context).cardColor,
@@ -256,7 +255,7 @@ class ArticleImageWidget extends StatelessWidget {
         loadingBuilder: (context, child, loadingProgress) {
           return loadingProgress == null
               ? child
-              : SizedBox(
+              : const SizedBox(
                   height: D.xxxxxl * 1.8,
                   width: D.xxxxxl * 1.8,
                   child: Center(

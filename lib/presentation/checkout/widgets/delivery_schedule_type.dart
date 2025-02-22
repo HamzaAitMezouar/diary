@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:diary/core/constants/text_style.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +72,7 @@ class DeliveryScheduleType extends ConsumerWidget {
                   ),
                 ],
               )
-            : SizedBox.shrink()
+            : const SizedBox.shrink()
       ],
     );
   }
@@ -104,7 +103,7 @@ class ScheduleTypeCard extends StatelessWidget {
           duration: Durations.short2,
           padding: Paddings.horizontalXxxs,
           height: D.xl,
-          margin: EdgeInsetsDirectional.only(end: 4),
+          margin: const EdgeInsetsDirectional.only(end: 4),
           decoration: BoxDecoration(
             color: !isActive ? Theme.of(context).cardColor.withOpacity(0.4) : null,
             borderRadius: BorderRadius.circular(8),
@@ -144,9 +143,9 @@ Future<DateTime?> pickDateTime(BuildContext context) async {
   if (Platform.isAndroid) {
     DateTime? date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(Duration(hours: 1)),
-      firstDate: DateTime.now().add(Duration(hours: 1)),
-      lastDate: DateTime.now().add(Duration(days: 7)),
+      initialDate: DateTime.now().add(const Duration(hours: 1)),
+      firstDate: DateTime.now().add(const Duration(hours: 1)),
+      lastDate: DateTime.now().add(const Duration(days: 7)),
     );
     if (date == null) return null;
     TimeOfDay? time = await showTimePicker(
@@ -168,9 +167,9 @@ Future<DateTime?> pickDateTime(BuildContext context) async {
               Expanded(
                 child: CupertinoDatePicker(
                   mode: CupertinoDatePickerMode.dateAndTime,
-                  initialDateTime: DateTime.now().add(Duration(hours: 1)),
+                  initialDateTime: DateTime.now().add(const Duration(hours: 1)),
                   minimumDate: DateTime.now(),
-                  maximumDate: DateTime.now().add(Duration(days: 7)),
+                  maximumDate: DateTime.now().add(const Duration(days: 7)),
                   onDateTimeChanged: (DateTime dateTime) {
                     selectedDateTime = dateTime;
                   },

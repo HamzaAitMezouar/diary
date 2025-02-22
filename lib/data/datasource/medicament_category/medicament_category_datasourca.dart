@@ -1,5 +1,4 @@
 import 'package:diary/data/models/category_model.dart';
-import 'package:diary/data/models/medicament_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/urls.dart';

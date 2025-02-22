@@ -4,9 +4,7 @@ import 'package:diary/presentation/checkout/widgets/map_and_address_card.dart';
 import 'package:diary/presentation/checkout/widgets/nearest_pharmacy_map.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
 import 'package:diary/widgets/custom_long_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 

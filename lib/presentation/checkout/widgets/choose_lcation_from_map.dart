@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:io';
 
 import 'package:diary/core/constants/app_colors.dart';
 import 'package:diary/core/constants/dimensions.dart';
@@ -8,18 +6,13 @@ import 'package:diary/core/constants/text_style.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../map/controller/map_style_notifier.dart';
-import '../../medicine/controllers/location_provider/position_provider.dart';
 
 class MapLocationPicker extends ConsumerStatefulWidget {
   const MapLocationPicker({

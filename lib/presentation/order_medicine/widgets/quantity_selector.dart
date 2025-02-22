@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/exports.dart';
@@ -23,7 +22,7 @@ class QuantitySelector extends ConsumerWidget {
               : () {
                   ref.read(selectedMedicineProvider.notifier).changeQuantity(medicament!.selectedQuantiy - 1);
                 },
-          child: Icon(CupertinoIcons.minus),
+          child: const Icon(CupertinoIcons.minus),
         ),
         xxxsSpacer(),
         Text(
@@ -38,7 +37,7 @@ class QuantitySelector extends ConsumerWidget {
               : () {
                   ref.read(selectedMedicineProvider.notifier).changeQuantity(medicament.selectedQuantiy + 1);
                 },
-          child: Icon(CupertinoIcons.add),
+          child: const Icon(CupertinoIcons.add),
         ),
         xxxsSpacer(),
       ],
@@ -62,7 +61,7 @@ class QuanityButton extends StatelessWidget {
       onTap: onClick,
       child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             borderRadius: Borders.b12,
             color: color ?? AppColors.turquoise.withOpacity(0.7),

@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/domain/entities/location_entity.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
-import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:diary/presentation/medicine/controllers/location_provider/position_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

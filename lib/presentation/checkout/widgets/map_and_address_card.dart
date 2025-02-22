@@ -1,4 +1,3 @@
-import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -102,6 +101,6 @@ class _MapAddressCardState extends ConsumerState<MapAddressCard> {
         ],
       );
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }

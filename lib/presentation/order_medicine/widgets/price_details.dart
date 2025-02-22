@@ -1,4 +1,3 @@
-import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/exports.dart';
@@ -39,7 +38,7 @@ class PriceDetailsWidget extends StatelessWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          medicament.ppv.toString() + " MAD",
+                          "${medicament.ppv} MAD",
                           style: TextStyles.montserratBold15,
                         ),
                       ],
@@ -55,11 +54,11 @@ class PriceDetailsWidget extends StatelessWidget {
                               style: TextStyles.montserratBold13,
                             ),
                             xxxxsSpacer(),
-                            Icon(Icons.delivery_dining_rounded)
+                            const Icon(Icons.delivery_dining_rounded)
                           ],
                         ),
                         Text(
-                          (10).toString() + " MAD",
+                          "${10} MAD",
                           style: TextStyles.montserratBold15.copyWith(),
                         ),
                       ],
@@ -73,7 +72,7 @@ class PriceDetailsWidget extends StatelessWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          (medicament.selectedQuantiy * medicament.ppv).toStringAsFixed(2) + " MAD",
+                          "${(medicament.selectedQuantiy * medicament.ppv).toStringAsFixed(2)} MAD",
                           style: TextStyles.montserratBold15.copyWith(color: AppColors.quickRed),
                         ),
                       ],
@@ -93,7 +92,7 @@ class PriceDetailsWidget extends StatelessWidget {
                     style: TextStyles.montserratBold13,
                   ),
                 ),
-                QuantitySelector(),
+                const QuantitySelector(),
               ],
             ),
             xxxsSpacer(),

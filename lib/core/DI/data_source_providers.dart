@@ -6,7 +6,6 @@ import 'package:diary/data/datasource/medicament_category/medicament_category_da
 import 'package:diary/data/datasource/medicaments/medicament_remote_datasource/medicament_remote_datasource.dart';
 import 'package:diary/data/datasource/pharmacy/pharmacy_datasource.dart';
 import 'package:diary/data/datasource/reminder_datasource/reminder_local_datasource.dart';
-import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final reminderLocalDataSource = Provider<ReminderLocalDataSource>((ref) {

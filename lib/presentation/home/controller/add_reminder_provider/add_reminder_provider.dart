@@ -1,14 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:diary/core/constants/assets.dart';
-import 'package:diary/domain/entities/reminder_entity.dart';
 import 'package:diary/presentation/home/controller/notification_provider/reminder_notifications_provider.dart';
 import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/DI/use_cases_provider.dart';
 import 'add_reminder_state.dart';
 
 /// StateNotifier to manage medicine reminders
@@ -65,7 +62,7 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
 
   addReminder() async {
     DateTime now = DateTime.now();
-    ref.read(scheduleNotificationUseCaseProvider)(TimeOfDay(hour: 20, minute: 06), now);
+    ref.read(scheduleNotificationUseCaseProvider)(const TimeOfDay(hour: 20, minute: 06), now);
 
     // state = MedicineReminderLoading(
     //     intakeCount: state.intakeCount,
