@@ -30,7 +30,7 @@ class TypeOfDeliveryWidget extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               maxLines: 2,
-              style: TextStyles.robotoBold10.copyWith(color: Theme.of(context).scaffoldBackgroundColor),
+              style: TextStyles.robotoBold10.copyWith(color: Theme.of(context).textTheme.bodyLarge!.color),
             )
           ],
         ),

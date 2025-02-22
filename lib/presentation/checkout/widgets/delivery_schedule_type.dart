@@ -6,6 +6,7 @@ import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/exports.dart';
 import '../controllers/checkout_provider.dart';
@@ -59,14 +60,15 @@ class DeliveryScheduleType extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  xxsSpacer(),
                   Text(
-                    "Deliver Date:",
+                    "Deliver At:",
                     style: TextStyles.robotoBold13,
                   ),
                   xxsSpacer(),
                   Text(
-                    checkout.deliveryTime!.toIso8601String().replaceAll("T", " ").replaceAll(".000", ""),
+                    DateFormat(
+                      "d MMMM yyyy HH:mm",
+                    ).format(checkout.deliveryTime!),
                     style: TextStyles.roboto13,
                   ),
                 ],

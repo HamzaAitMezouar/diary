@@ -33,7 +33,7 @@ class LocatioNotifier extends StateNotifier<LocationState> {
 
   Future<void> manuallyEnterUserLocation(LocationEntity entiy) async {
     state = UserLocationState(entiy);
-
+    getNearestPharmacy();
     log(state.toString());
   }
 

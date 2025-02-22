@@ -34,7 +34,7 @@ class PaymentMethodsWidget extends ConsumerWidget {
           },
           title: 'Pay With Cash',
         ),
-        xxxsSpacer(),
+        xxxxsSpacer(),
         PaymentTile(
           icon: Icons.credit_card,
           isSelected: checkout.paymentType == PaymentType.card,
@@ -86,19 +86,19 @@ class PaymentTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: D.xxs, vertical: D.xxs),
           child: Row(
             children: [
-              Icon(icon, color: !isSelected ? Theme.of(context).scaffoldBackgroundColor : null),
+              Icon(icon, color: !isSelected ? Theme.of(context).textTheme.labelLarge!.color : null),
               xxxsSpacer(),
               Text(
                 title,
                 style: TextStyles.montserratBold13.copyWith(
-                  color: !isSelected ? Theme.of(context).scaffoldBackgroundColor : null,
+                  color: !isSelected ? Theme.of(context).textTheme.labelLarge!.color : null,
                 ),
               ),
               const Spacer(),
               Icon(
                 Icons.arrow_forward_ios_outlined,
                 size: 10,
-                color: !isSelected ? Theme.of(context).scaffoldBackgroundColor : null,
+                color: !isSelected ? Theme.of(context).textTheme.labelLarge!.color : null,
               ),
             ],
           ),

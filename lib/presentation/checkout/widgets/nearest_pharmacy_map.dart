@@ -59,7 +59,7 @@ class _NearestPharmacyMapState extends ConsumerState<NearestPharmacyMap> {
           children: [
             Expanded(
               child: Text(
-                'Pick up from the nearest pharmacy is not yet allowed in your area yet',
+                'Pick up from the nearest pharmacy is not allowed in your area yet',
                 textAlign: TextAlign.center,
                 style: TextStyles.robotoBold15,
               ),

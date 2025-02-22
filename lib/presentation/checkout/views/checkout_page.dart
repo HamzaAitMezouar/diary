@@ -12,6 +12,7 @@ import '../widgets/animated_delvery_type.dart';
 import '../widgets/delivery_schedule_type.dart';
 import '../widgets/delivery_type_map.dart';
 import '../widgets/payment_methods_widget.dart';
+import '../widgets/payment_summary_widget.dart';
 
 class CheckoutPage extends ConsumerWidget {
   const CheckoutPage({
@@ -62,6 +63,7 @@ class CheckoutPage extends ConsumerWidget {
                     xxxsSpacer(),
                     checkout.deliveryType == DeliveryType.home ? DeliveryScheduleType() : SizedBox(),
                     PaymentMethodsWidget(),
+                    xxxsSpacer(),
                     PriceSumamryWidget()
                   ],
                 ),

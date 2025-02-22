@@ -16,7 +16,7 @@ class MapStyleNotifier extends StateNotifier<String?> {
   final String darkAndroidStyle = "assets/styles/dark_map_style.txt";
   final String darkIosStyle = "assets/styles/dark_map_style.json";
   _initMapStyle() {
-    String? theme = _ref.read(sharedPreferencesHelperProvider).getString(AppStrings.ktheme) ?? "dark";
+    String? theme = _ref.read(sharedPreferencesHelperProvider).getString(AppStrings.ktheme) ?? "white";
     if (Platform.isAndroid) {
       rootBundle.loadString(theme == "white" ? whiteAndroidStyle : darkAndroidStyle).then((string) {
         state = string;
