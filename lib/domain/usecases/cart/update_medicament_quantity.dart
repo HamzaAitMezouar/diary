@@ -1,0 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:diary/domain/repositories/cart/cart_repository.dart';
+import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
+
+import '../../../core/errors/errors.dart';
+import '../../entities/medicament_entity.dart';
+
+class UpdateMedicamentQuanityFromCartUseCase {
+  final CartRepository repository;
+
+  UpdateMedicamentQuanityFromCartUseCase(this.repository);
+
+  Future<Either<Failure, MedicamentEntity>> call(int id, quantity) {
+    return repository.updateMedicamentQuantity(id, quantity);
+  }
+}
