@@ -1,32 +1,119 @@
-import 'package:diary/data/models/medicament_model.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
-import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
-
+import 'package:hive/hive.dart';
 import '../../domain/entities/cart_entity.dart';
+import 'medicament_model.dart';
 
+part 'cart_model.g.dart';
+
+@HiveType(typeId: 1, adapterName: 'CartModelAdapter')
 class CartModel {
-  final List<MedicamentModel> medicaments;
+  @HiveField(0)
+  final int id;
+  @HiveField(1)
+  final String? userId;
+  @HiveField(2)
+  final List<CartItemModel> cartItems;
 
-  CartModel({this.medicaments = const []});
+  CartModel({
+    required this.id,
+    this.userId,
+    this.cartItems = const [],
+  });
 
-  double get totalPrice => medicaments.fold(0, (sum, item) => sum + (item.ppv * item.selectedQuantiy));
+  double get totalPrice => cartItems.fold(0, (sum, item) => sum + (item.medicament.ppv * item.quantity));
 
-  CartModel addMedicament(MedicamentModel medicament) {
-    List<MedicamentModel> updatedList = List.from(medicaments);
-    updatedList.add(medicament);
-    return CartModel(medicaments: updatedList);
+  CartModel copyWith({
+    int? id,
+    String? userId,
+    List<CartItemModel>? cartItems,
+  }) {
+    return CartModel(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      cartItems: cartItems ?? this.cartItems,
+    );
   }
 
-  CartModel removeMedicament(int id) {
-    List<MedicamentModel> updatedList = medicaments.where((med) => med.id != id).toList();
-    return CartModel(medicaments: updatedList);
+  factory CartModel.fromJson(Map<String, dynamic> json) {
+    return CartModel(
+      id: json['id'],
+      userId: json['userId'],
+      cartItems: (json['cartItems'] as List<dynamic>).map((item) => CartItemModel.fromJson(item)).toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'cartItems': cartItems.map((item) => item.toJson()).toList(),
+    };
   }
 
   CartEntity toEntity() {
-    return CartEntity(medicaments: medicaments.map((e) => e.toEntity()).toList());
+    return CartEntity(
+      id: id,
+      userId: userId,
+      cartItems: cartItems.map((item) => item.toEntity()).toList(),
+    );
+  }
+}
+
+@HiveType(typeId: 2, adapterName: 'CarItemModelAdapter')
+class CartItemModel {
+  @HiveField(0)
+  final int id;
+  @HiveField(1)
+  final int cartId;
+  @HiveField(2)
+  final MedicamentModel medicament;
+  @HiveField(3)
+  final int quantity;
+
+  CartItemModel({
+    required this.id,
+    required this.cartId,
+    required this.medicament,
+    this.quantity = 1,
+  });
+
+  CartItemModel copyWith({
+    int? id,
+    int? cartId,
+    MedicamentModel? medicament,
+    int? quantity,
+  }) {
+    return CartItemModel(
+      id: id ?? this.id,
+      cartId: cartId ?? this.cartId,
+      medicament: medicament ?? this.medicament,
+      quantity: quantity ?? this.quantity,
+    );
   }
 
-  factory CartModel.fromEntity(CartEntity entity) {
-    return CartModel(medicaments: entity.medicaments.map((e) => e.toModel()).toList());
+  factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    return CartItemModel(
+      id: json['id'],
+      cartId: json['cartId'],
+      medicament: MedicamentModel.fromJson(json['medicament']),
+      quantity: json['quantity'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'cartId': cartId,
+      'medicament': medicament.toJson(),
+      'quantity': quantity,
+    };
+  }
+
+  CartItemEntity toEntity() {
+    return CartItemEntity(
+      id: id,
+      cartId: cartId,
+      medicament: medicament.toEntity(),
+      quantity: quantity,
+    );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:diary/core/exports.dart';
+import 'package:diary/domain/entities/cart_entity.dart';
+import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:diary/presentation/order_medicine/controller/selected_medecine_provider.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +115,15 @@ class OrderMedicinePage extends ConsumerWidget {
                             color: AppColors.white.withOpacity(0.9),
                           ),
                           backgorundColor: const Color.fromARGB(255, 9, 120, 90),
-                          onTap: () {},
+                          onTap: () {
+                            ref.read(cartProvider.notifier).addMedicamentToCart(
+                                  CartItemEntity(
+                                      id: medicament.id!,
+                                      cartId: 0,
+                                      medicament: medicament,
+                                      quantity: medicament.selectedQuantiy),
+                                );
+                          },
                           title: " Add To Cart")
                     ],
                   ),

@@ -1,5 +1,6 @@
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/core/theme/app_theme.dart';
+import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/data/models/reminder_model.dart';
 import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
@@ -10,6 +11,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/DI/router_provider.dart';
+import 'data/models/category_model.dart';
+import 'data/models/medicament_model.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,8 +25,13 @@ void main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(ReminderModelAdapter());
+  Hive.registerAdapter(CartModelAdapter());
+  Hive.registerAdapter(CarItemModelAdapter());
+  Hive.registerAdapter(MedicamentModelAdapter());
+  Hive.registerAdapter(CategoryModelAdapter());
 
   await Hive.openBox<ReminderModel>('remindersBox');
+  await Hive.openBox<CartModel>('cart');
   runApp(ProviderScope(overrides: [
     sharedPreferencesProvider.overrideWithValue(sharedPreferences),
   ], child: const MyApp()));

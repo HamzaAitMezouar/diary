@@ -11,7 +11,7 @@ class AddMedicamentToCartUseCase {
 
   AddMedicamentToCartUseCase(this.repository);
 
-  Future<Either<Failure, CartEntity>> call(MedicamentEntity medicament) {
-    return repository.addMedicament(medicament);
+  Future<Either<Failure, CartEntity>> call(CartItemEntity cartItemEntity) {
+    return repository.addMedicament(cartItemEntity);
   }
 }

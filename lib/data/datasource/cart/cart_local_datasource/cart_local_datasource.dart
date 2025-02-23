@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:diary/core/errors/exceptions.dart';
 import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/data/models/medicament_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class CartLocalDatasource {
-  Future<CartModel> addMedicament(MedicamentModel medicament);
+  Future<CartModel> addMedicament(CartItemModel cartItem);
   Future<CartModel> removeMedicament(int id);
   Future<CartModel> updateMedicamentQuantity(int id, int quantity);
   Future<CartModel> clearCart();
@@ -16,14 +18,20 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   CartLocalDatasourceImpl(this._cartBox);
 
   CartModel _getCart() {
-    return _cartBox.get('cart') ?? CartModel();
+    return _cartBox.get('cart') ?? CartModel(id: 0, userId: '', cartItems: []);
   }
 
   @override
-  Future<CartModel> addMedicament(MedicamentModel medicament) async {
+  Future<CartModel> addMedicament(CartItemModel cartItem) async {
     try {
       final cart = _getCart();
-      final updatedCart = cart.addMedicament(medicament);
+
+      final exists = cart.cartItems.any((item) => item.medicament.id == cartItem.medicament.id);
+      if (exists) {
+        return cart;
+      }
+      final updatedCart = cart.copyWith(cartItems: [...cart.cartItems, cartItem]);
+
       await _cartBox.put('cart', updatedCart);
       return updatedCart;
     } catch (e) {
@@ -35,7 +43,9 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   Future<CartModel> removeMedicament(int id) async {
     try {
       final cart = _getCart();
-      final updatedCart = cart.removeMedicament(id);
+      final updatedCart = cart.copyWith(
+        cartItems: cart.cartItems.where((item) => item.id != id).toList(),
+      );
       await _cartBox.put('cart', updatedCart);
       return updatedCart;
     } catch (e) {
@@ -47,15 +57,14 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   Future<CartModel> updateMedicamentQuantity(int id, int quantity) async {
     try {
       final cart = _getCart();
-      final medicamentIndex = cart.medicaments.indexWhere((med) => med.id == id);
-      if (medicamentIndex == -1) {
-        throw CustomException(message: "No Medicament with this id");
-      }
+      final updatedCartItems = cart.cartItems.map((item) {
+        if (item.id == id) {
+          return item.copyWith(quantity: quantity);
+        }
+        return item;
+      }).toList();
 
-      final updatedMedicaments = List<MedicamentModel>.from(cart.medicaments);
-      updatedMedicaments[medicamentIndex] = updatedMedicaments[medicamentIndex].copyWith(quantity: quantity);
-
-      final updatedCart = CartModel(medicaments: updatedMedicaments);
+      final updatedCart = cart.copyWith(cartItems: updatedCartItems);
       await _cartBox.put('cart', updatedCart);
       return updatedCart;
     } catch (e) {
@@ -66,7 +75,7 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   @override
   Future<CartModel> clearCart() async {
     try {
-      final emptyCart = CartModel();
+      final emptyCart = CartModel(id: 0, userId: '', cartItems: []);
       await _cartBox.put('cart', emptyCart);
       return emptyCart;
     } catch (e) {

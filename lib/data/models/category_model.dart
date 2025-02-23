@@ -1,8 +1,14 @@
 import 'package:diary/domain/entities/category_entity.dart';
+import 'package:hive/hive.dart';
+part 'category_model.g.dart';
 
+@HiveType(typeId: 4, adapterName: 'CategoryModelAdapter')
 class CategoryModel {
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String name;
+  @HiveField(2)
   String? imageUrl;
 
   CategoryModel({

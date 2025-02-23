@@ -1,14 +1,18 @@
+import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/exports.dart';
 
-class ProductDescriptionAppBar extends StatelessWidget {
+class ProductDescriptionAppBar extends ConsumerWidget {
   const ProductDescriptionAppBar({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final cart = ref.watch(cartProvider);
     return SliverAppBar(
       centerTitle: true,
       title: Text(
@@ -16,8 +20,14 @@ class ProductDescriptionAppBar extends StatelessWidget {
         style: TextStyles.robotoBold18,
       ),
       actions: [
-        const Icon(
-          Icons.shopping_cart_outlined,
+        GestureDetector(
+          child: Badge(
+            isLabelVisible: cart?.cartItems.isNotEmpty ?? false,
+            label: Text(cart?.cartItems.length.toString() ?? ""),
+            child: const Icon(
+              Icons.shopping_cart_outlined,
+            ),
+          ),
         ),
         xxsSpacer(),
       ],

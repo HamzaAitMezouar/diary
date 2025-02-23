@@ -1,3 +1,4 @@
+import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:diary/presentation/map/views/map_screen.dart';
 import 'package:diary/presentation/medicine/views/medicine.dart';
 import 'package:diary/presentation/profile/views/profile_screen.dart';
@@ -15,6 +16,7 @@ class NavBarScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(cartProvider);
     final currentItem = ref.watch(navigationControllerProvider);
     ref.listen(sessionProvider, (previous, next) {
       if (next == true) ExpiredSessionDialog()(context, ref);
