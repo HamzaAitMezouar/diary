@@ -1,5 +1,6 @@
 import 'package:diary/core/helpers/secure_storage_helper.dart';
 import 'package:diary/core/helpers/shared_prefrences_helper.dart';
+import 'package:diary/data/models/cart_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive/hive.dart';
@@ -24,4 +25,8 @@ final sharedPreferencesHelperProvider =
 
 final hivereminderBoxProvider = Provider<Box<ReminderModel>>((ref) {
   return Hive.box<ReminderModel>('remindersBox');
+});
+
+final hiveCartBoxProvider = Provider<Box<CartModel>>((ref) {
+  return Hive.box<CartModel>('cart');
 });

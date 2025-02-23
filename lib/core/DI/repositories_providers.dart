@@ -1,3 +1,4 @@
+import 'package:diary/domain/repositories/cart/cart_repository.dart';
 import 'package:diary/domain/repositories/location/location_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
@@ -29,4 +30,11 @@ final locationRepositoryProvider = Provider<LocationRepository>((ref) {
 final pharmacyRepositoryProvider = Provider<PharmacyRepository>((ref) {
   final pharmacyprovider = ref.watch(pharmacyDataSourceProvider);
   return PharmacyRepositoryImpl(pharmacyprovider);
+});
+
+//cart
+
+final cartRepositoryProvider = Provider<CartRepository>((ref) {
+  final cartLocalDataSource = ref.watch(cartLocalDataSourceProvider);
+  return CartRepositoryImpl(cartLocalDataSource);
 });

@@ -1,6 +1,7 @@
 import 'package:diary/core/DI/dio_provider.dart';
 import 'package:diary/core/DI/exception_handler_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
+import 'package:diary/data/datasource/cart/cart_local_datasource/cart_local_datasource.dart';
 import 'package:diary/data/datasource/location/location_datasource.dart';
 import 'package:diary/data/datasource/medicament_category/medicament_category_datasourca.dart';
 import 'package:diary/data/datasource/medicaments/medicament_remote_datasource/medicament_remote_datasource.dart';
@@ -36,4 +37,13 @@ final pharmacyDataSourceProvider = Provider<PharmacyDatasource>((ref) {
   final authDio = ref.watch(authDioProvider);
   final exceptionHandler = ref.watch(exceptionsHandlerProvider);
   return PharmacyDatasourceImpl(authDio, exceptionHandler);
+});
+// cart local
+
+final cartLocalDataSourceProvider = Provider<CartLocalDatasource>((ref) {
+  final hiveBox = ref.watch(hiveCartBoxProvider);
+
+  return CartLocalDatasourceImpl(
+    hiveBox,
+  );
 });

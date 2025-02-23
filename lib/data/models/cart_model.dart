@@ -17,7 +17,7 @@ class CartModel {
     return CartModel(medicaments: updatedList);
   }
 
-  CartModel removeMedicament(String id) {
+  CartModel removeMedicament(int id) {
     List<MedicamentModel> updatedList = medicaments.where((med) => med.id != id).toList();
     return CartModel(medicaments: updatedList);
   }

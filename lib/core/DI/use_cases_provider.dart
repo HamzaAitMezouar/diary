@@ -1,4 +1,9 @@
 import 'package:diary/core/DI/repositories_providers.dart';
+import 'package:diary/domain/usecases/cart/add_medicament.dart';
+import 'package:diary/domain/usecases/cart/clear_cart.dart';
+import 'package:diary/domain/usecases/cart/get_cart.dart';
+import 'package:diary/domain/usecases/cart/remove_medicament.dart';
+import 'package:diary/domain/usecases/cart/update_medicament_quantity.dart';
 import 'package:diary/domain/usecases/location/get_user_location_usecase.dart';
 import 'package:diary/domain/usecases/medicament/get_medicament_usecase.dart';
 import 'package:diary/domain/usecases/medicament_category/get_medicament_category_usecase.dart';
@@ -45,4 +50,29 @@ final getUserLocationUsecasesProvider = Provider<GetUserLocation>((ref) {
 final getNearestPharmacyUsecasesProvider = Provider<GetNearestPharmacyUseCase>((ref) {
   final repo = ref.watch(pharmacyRepositoryProvider);
   return GetNearestPharmacyUseCase(repo);
+});
+//cart
+final addMedicamentToCartUsecasesProvider = Provider<AddMedicamentToCartUseCase>((ref) {
+  final repo = ref.watch(cartRepositoryProvider);
+  return AddMedicamentToCartUseCase(repo);
+});
+
+final clearCartUsecasesProvider = Provider<ClearCartUseCase>((ref) {
+  final repo = ref.watch(cartRepositoryProvider);
+  return ClearCartUseCase(repo);
+});
+
+final getCartUsecasesProvider = Provider<GetCartUseCase>((ref) {
+  final repo = ref.watch(cartRepositoryProvider);
+  return GetCartUseCase(repo);
+});
+
+final removemredicamentFromCartUsecasesProvider = Provider<RemoveMedicamentFromCartUseCase>((ref) {
+  final repo = ref.watch(cartRepositoryProvider);
+  return RemoveMedicamentFromCartUseCase(repo);
+});
+
+final updateCartMedicamentQuantityUsecasesProvider = Provider<UpdateMedicamentQuanityFromCartUseCase>((ref) {
+  final repo = ref.watch(cartRepositoryProvider);
+  return UpdateMedicamentQuanityFromCartUseCase(repo);
 });

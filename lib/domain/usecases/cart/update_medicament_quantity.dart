@@ -3,6 +3,7 @@ import 'package:diary/domain/repositories/cart/cart_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 
 import '../../../core/errors/errors.dart';
+import '../../entities/cart_entity.dart';
 import '../../entities/medicament_entity.dart';
 
 class UpdateMedicamentQuanityFromCartUseCase {
@@ -10,7 +11,7 @@ class UpdateMedicamentQuanityFromCartUseCase {
 
   UpdateMedicamentQuanityFromCartUseCase(this.repository);
 
-  Future<Either<Failure, MedicamentEntity>> call(int id, quantity) {
+  Future<Either<Failure, CartEntity>> call(int id, quantity) {
     return repository.updateMedicamentQuantity(id, quantity);
   }
 }

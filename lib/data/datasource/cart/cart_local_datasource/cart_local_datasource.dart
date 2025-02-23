@@ -1,72 +1,83 @@
 import 'package:diary/core/errors/exceptions.dart';
+import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/data/models/medicament_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class CartLocalDatasource {
-  Future<MedicamentModel> addMedicament(MedicamentModel medicament);
-  Future<bool> removeMedicament(int id);
-  Future<MedicamentModel> updateMedicamentQuantity(int id, int quantity);
-  Future<bool> clearCart();
-  Future<List<MedicamentModel>> getCartItems();
+  Future<CartModel> addMedicament(MedicamentModel medicament);
+  Future<CartModel> removeMedicament(int id);
+  Future<CartModel> updateMedicamentQuantity(int id, int quantity);
+  Future<CartModel> clearCart();
+  Future<CartModel> getCartItems();
 }
 
 class CartLocalDatasourceImpl extends CartLocalDatasource {
-  static const String cartBoxName = "cartBox";
+  final Box<CartModel> _cartBox;
+  CartLocalDatasourceImpl(this._cartBox);
+
+  CartModel _getCart() {
+    return _cartBox.get('cart') ?? CartModel();
+  }
 
   @override
-  Future<MedicamentModel> addMedicament(MedicamentModel medicament) async {
+  Future<CartModel> addMedicament(MedicamentModel medicament) async {
     try {
-      final box = await Hive.openBox<MedicamentModel>(cartBoxName);
-      await box.put(medicament.id, medicament);
-      return medicament;
+      final cart = _getCart();
+      final updatedCart = cart.addMedicament(medicament);
+      await _cartBox.put('cart', updatedCart);
+      return updatedCart;
     } catch (e) {
       throw CustomException(message: e.toString());
     }
   }
 
   @override
-  Future<bool> removeMedicament(int id) async {
+  Future<CartModel> removeMedicament(int id) async {
     try {
-      final box = await Hive.openBox<MedicamentModel>(cartBoxName);
-      await box.delete(id);
-
-      return true;
+      final cart = _getCart();
+      final updatedCart = cart.removeMedicament(id);
+      await _cartBox.put('cart', updatedCart);
+      return updatedCart;
     } catch (e) {
       throw CustomException(message: e.toString());
     }
   }
 
   @override
-  Future<MedicamentModel> updateMedicamentQuantity(int id, int quantity) async {
+  Future<CartModel> updateMedicamentQuantity(int id, int quantity) async {
     try {
-      final box = await Hive.openBox<MedicamentModel>(cartBoxName);
-      final medicament = box.get(id);
-      if (medicament != null) {
-        await box.put(id, medicament.copyWith(quantity: quantity));
-        return medicament;
+      final cart = _getCart();
+      final medicamentIndex = cart.medicaments.indexWhere((med) => med.id == id);
+      if (medicamentIndex == -1) {
+        throw CustomException(message: "No Medicament with this id");
       }
-      throw CustomException(message: "No Medicament with this id");
+
+      final updatedMedicaments = List<MedicamentModel>.from(cart.medicaments);
+      updatedMedicaments[medicamentIndex] = updatedMedicaments[medicamentIndex].copyWith(quantity: quantity);
+
+      final updatedCart = CartModel(medicaments: updatedMedicaments);
+      await _cartBox.put('cart', updatedCart);
+      return updatedCart;
     } catch (e) {
       throw CustomException(message: e.toString());
     }
   }
 
   @override
-  Future<bool> clearCart() async {
+  Future<CartModel> clearCart() async {
     try {
-      final box = await Hive.openBox<MedicamentModel>(cartBoxName);
-      await box.clear();
-      return true;
+      final emptyCart = CartModel();
+      await _cartBox.put('cart', emptyCart);
+      return emptyCart;
     } catch (e) {
       throw CustomException(message: e.toString());
     }
   }
 
   @override
-  Future<List<MedicamentModel>> getCartItems() async {
+  Future<CartModel> getCartItems() async {
     try {
-      final box = await Hive.openBox<MedicamentModel>(cartBoxName);
-      return box.values.toList();
+      return _getCart();
     } catch (e) {
       throw CustomException(message: e.toString());
     }

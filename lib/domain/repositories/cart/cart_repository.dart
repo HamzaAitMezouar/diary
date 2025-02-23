@@ -1,72 +1,73 @@
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/data/datasource/cart/cart_local_datasource/cart_local_datasource.dart';
+import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 
 import '../../../core/errors/exceptions.dart';
 import '../../../data/models/medicament_model.dart';
 
 abstract class CartRepository {
-  Future<Either<Failure, MedicamentEntity>> addMedicament(MedicamentEntity medicament);
-  Future<Either<Failure, bool>> removeMedicament(int id);
-  Future<Either<Failure, MedicamentEntity>> updateMedicamentQuantity(int id, int quantity);
-  Future<Either<Failure, bool>> clearCart();
-  Future<Either<Failure, List<MedicamentEntity>>> getCartItems();
+  Future<Either<Failure, CartEntity>> addMedicament(MedicamentEntity medicament);
+  Future<Either<Failure, CartEntity>> removeMedicament(int id);
+  Future<Either<Failure, CartEntity>> updateMedicamentQuantity(int id, int quantity);
+  Future<Either<Failure, CartEntity>> clearCart();
+  Future<Either<Failure, CartEntity>> getCartItems();
 }
 
 class CartRepositoryImpl extends CartRepository {
-  CartLocalDatasource _cartLocalDatasource;
+  final CartLocalDatasource _cartLocalDatasource;
   CartRepositoryImpl(this._cartLocalDatasource);
   @override
-  Future<Either<Failure, MedicamentEntity>> addMedicament(MedicamentEntity medicament) async {
+  Future<Either<Failure, CartEntity>> addMedicament(MedicamentEntity medicament) async {
     try {
-      await _cartLocalDatasource.addMedicament(medicament.toModel());
+      final cart = await _cartLocalDatasource.addMedicament(medicament.toModel());
 
-      return Right(medicament);
+      return Right(cart.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> clearCart() async {
+  Future<Either<Failure, CartEntity>> clearCart() async {
     try {
-      await _cartLocalDatasource.clearCart();
+      final cart = await _cartLocalDatasource.clearCart();
 
-      return const Right(true);
+      return Right(cart.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
     }
   }
 
   @override
-  Future<Either<Failure, List<MedicamentEntity>>> getCartItems() async {
+  Future<Either<Failure, CartEntity>> getCartItems() async {
     try {
-      final medicaments = await _cartLocalDatasource.getCartItems();
+      final cart = await _cartLocalDatasource.getCartItems();
 
-      return Right(medicaments.map((e) => e.toEntity()).toList());
+      return Right(cart.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> removeMedicament(int id) async {
+  Future<Either<Failure, CartEntity>> removeMedicament(int id) async {
     try {
-      await _cartLocalDatasource.removeMedicament(id);
+      final cart = await _cartLocalDatasource.removeMedicament(id);
 
-      return const Right(true);
+      return Right(cart.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
     }
   }
 
   @override
-  Future<Either<Failure, MedicamentEntity>> updateMedicamentQuantity(int id, int quantity) async {
+  Future<Either<Failure, CartEntity>> updateMedicamentQuantity(int id, int quantity) async {
     try {
-      final medicament = await _cartLocalDatasource.updateMedicamentQuantity(id, quantity);
+      final cart = await _cartLocalDatasource.updateMedicamentQuantity(id, quantity);
 
-      return Right(medicament.toEntity());
+      return Right(cart.toEntity());
     } on CustomException catch (e) {
       return Left(CostumeFailure(errorMessage: e.message));
     }

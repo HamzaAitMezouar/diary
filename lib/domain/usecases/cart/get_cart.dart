@@ -3,6 +3,7 @@ import 'package:diary/domain/repositories/cart/cart_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 
 import '../../../core/errors/errors.dart';
+import '../../entities/cart_entity.dart';
 import '../../entities/medicament_entity.dart';
 
 class GetCartUseCase {
@@ -10,7 +11,7 @@ class GetCartUseCase {
 
   GetCartUseCase(this.repository);
 
-  Future<Either<Failure, List<MedicamentEntity>>> call() {
+  Future<Either<Failure, CartEntity>> call() {
     return repository.getCartItems();
   }
 }
