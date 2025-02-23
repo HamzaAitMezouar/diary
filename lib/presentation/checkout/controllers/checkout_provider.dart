@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/domain/entities/location_entity.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/position_provider.dart';
+import 'package:diary/presentation/medicine/controllers/position_provider/position_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectedMedicineNotifier extends StateNotifier<CheckoutEntity?> {

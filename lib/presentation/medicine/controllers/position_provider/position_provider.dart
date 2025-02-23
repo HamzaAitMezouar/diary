@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:diary/core/DI/use_cases_provider.dart';
-import 'package:diary/presentation/medicine/controllers/location_provider/position_state.dart';
+import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 

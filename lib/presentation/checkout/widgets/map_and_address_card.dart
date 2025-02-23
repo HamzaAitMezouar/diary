@@ -8,8 +8,8 @@ import '../../../core/exports.dart';
 import '../../../core/routes/routes_names.dart';
 import '../../../domain/entities/location_entity.dart';
 import '../../map/controller/map_style_notifier.dart';
-import '../../medicine/controllers/location_provider/position_provider.dart';
-import '../../medicine/controllers/location_provider/position_state.dart';
+import '../../medicine/controllers/position_provider/position_provider.dart';
+import '../../medicine/controllers/position_provider/position_state.dart';
 
 class MapAddressCard extends ConsumerStatefulWidget {
   const MapAddressCard({super.key});

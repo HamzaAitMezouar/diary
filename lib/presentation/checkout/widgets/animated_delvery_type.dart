@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/exports.dart';
 import '../../../domain/entities/checkout_entity.dart';
-import '../../medicine/controllers/location_provider/position_provider.dart';
+import '../../medicine/controllers/position_provider/position_provider.dart';
 import '../controllers/checkout_provider.dart';
 import 'deliver_type_card.dart';
 

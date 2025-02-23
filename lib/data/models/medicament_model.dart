@@ -43,20 +43,19 @@ class MedicamentModel {
   });
 
   factory MedicamentModel.fromJson(Map<String, dynamic> json) => MedicamentModel(
-      id: json["id"],
-      name: json["name"],
-      presentation: json["presentation"],
-      manufacturer: json["manufacturer"],
-      composition: List<String>.from(json["composition"].map((x) => x)),
-      status: json["status"],
-      ppv: json["ppv"]?.toDouble(),
-      hospitalPrice: json["hospitalPrice"]?.toDouble(),
-      table: json["table"],
-      productNature: json["productNature"],
-      imageUrl: json["imageUrl"],
-      category: CategoryModel(name: "TEST"),
-      selectedQuantiy: json["selectedQuantiy"]
-      // CategoryModel.fromJson(json["category"]),
+        id: json["id"],
+        name: json["name"],
+        presentation: json["presentation"],
+        manufacturer: json["manufacturer"],
+        composition: List<String>.from(json["composition"].map((x) => x)),
+        status: json["status"],
+        ppv: json["ppv"]?.toDouble(),
+        hospitalPrice: json["hospitalPrice"]?.toDouble(),
+        table: json["table"],
+        productNature: json["productNature"],
+        imageUrl: json["imageUrl"],
+        category: CategoryModel(name: "TEST"),
+        // CategoryModel.fromJson(json["category"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -72,7 +71,6 @@ class MedicamentModel {
         "productNature": productNature,
         "imageUrl": imageUrl,
         "category": category.toJson(),
-        "selectedQuantiy": selectedQuantiy
       };
   MedicamentEntity toEntity() {
     return MedicamentEntity(
