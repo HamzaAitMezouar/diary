@@ -63,7 +63,7 @@ class CartItemModel {
   @HiveField(0)
   final int id;
   @HiveField(1)
-  final int cartId;
+  final int? cartId;
   @HiveField(2)
   final MedicamentModel medicament;
   @HiveField(3)
@@ -71,7 +71,7 @@ class CartItemModel {
 
   CartItemModel({
     required this.id,
-    required this.cartId,
+    this.cartId,
     required this.medicament,
     this.quantity = 1,
   });

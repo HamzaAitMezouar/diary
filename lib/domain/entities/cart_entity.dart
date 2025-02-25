@@ -21,7 +21,7 @@ class CartEntity {
 class CartItemEntity {
   final int id;
 
-  final int cartId;
+  final int? cartId;
 
   final MedicamentEntity medicament;
 
@@ -29,7 +29,7 @@ class CartItemEntity {
 
   CartItemEntity({
     required this.id,
-    required this.cartId,
+    this.cartId,
     required this.medicament,
     this.quantity = 1,
   });
