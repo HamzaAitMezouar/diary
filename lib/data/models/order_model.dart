@@ -27,6 +27,6 @@ class OrderModel {
       cartItems: (json['cartItems'] as List).map((item) => CartItemModel.fromJson(item)).toList(),
     );
   }
-  OrderEntiy toModel() => OrderEntiy(
+  OrderEntiy toEntity() => OrderEntiy(
       userId: userId, status: status, cartItems: cartItems.map((e) => e.toEntity()).toList(), totalAmount: totalAmount);
 }
