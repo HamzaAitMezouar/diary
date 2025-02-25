@@ -1,6 +1,7 @@
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
+import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,7 @@ import '../../../core/exports.dart';
 import '../widgets/animated_delvery_type.dart';
 import '../widgets/delivery_schedule_type.dart';
 import '../widgets/delivery_type_map.dart';
+import '../widgets/make_order_button.dart';
 import '../widgets/payment_methods_widget.dart';
 import '../widgets/payment_summary_widget.dart';
 
@@ -21,8 +23,8 @@ class CheckoutPage extends ConsumerWidget {
     final checkout = ref.watch(checkoutProvider);
     if (checkout != null) {
       MedicamentEntity med = checkout.medicament;
-      return Material(
-        child: CustomScrollView(
+      return Scaffold(
+        body: CustomScrollView(
           slivers: [
             SliverPadding(
               padding: Paddings.allXs,
@@ -61,12 +63,18 @@ class CheckoutPage extends ConsumerWidget {
                     checkout.deliveryType == DeliveryType.home ? const DeliveryScheduleType() : const SizedBox(),
                     const PaymentMethodsWidget(),
                     xxxsSpacer(),
-                    const PriceSumamryWidget()
+                    const PriceSumamryWidget(),
+                    xxxsSpacer(),
                   ],
                 ),
               ),
             ),
           ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Padding(
+          padding: Paddings.horizontalXxxxs,
+          child: MakeOrderButton(),
         ),
       );
     }

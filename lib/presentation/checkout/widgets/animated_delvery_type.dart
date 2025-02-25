@@ -34,6 +34,7 @@ class AnimatedDeliveryType extends ConsumerWidget {
               title: "Pick up at the pharmacy",
               image: Assets.pickup,
               onClick: () {
+                ref.read(positionProvider.notifier).getNearestPharmacy();
                 ref.read(checkoutProvider.notifier).changeDeliveryType(DeliveryType.pharmacy);
               },
             ),
@@ -45,6 +46,7 @@ class AnimatedDeliveryType extends ConsumerWidget {
             GestureDetector(
               onTap: () {
                 if (checkout?.deliveryType == DeliveryType.home) {
+                  ref.read(positionProvider.notifier).getNearestPharmacy();
                   ref.read(checkoutProvider.notifier).changeDeliveryType(DeliveryType.pharmacy);
                   return;
                 }
