@@ -44,7 +44,7 @@ class OrdersDatasourceImpl implements OrdersDatasource {
       var response = await _dio.put(
         Urls.orders,
         data: {
-          {"orderId": orderId, "status": status.toString().toUpperCase()}
+          {"orderId": orderId, "status": status}
         },
       );
       final List<dynamic> data = response.data;

@@ -4,10 +4,12 @@ import 'package:diary/presentation/medicine/views/medicine.dart';
 import 'package:diary/presentation/profile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../core/exports.dart';
 import '../../../widgets/expired_session_dialog.dart';
 import '../../authentication/controllers/session_notifier.dart';
+import '../../authentication/views/authentication.dart';
 import '../../home/views/home_page.dart';
 import '../controller/navbar_provider.dart';
 
@@ -19,7 +21,13 @@ class NavBarScreen extends ConsumerWidget {
     ref.watch(cartProvider);
     final currentItem = ref.watch(navigationControllerProvider);
     ref.listen(sessionProvider, (previous, next) {
-      if (next == true) ExpiredSessionDialog()(context, ref);
+      if (next == true) {
+        showBarModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return const AuthenticationScreen();
+            });
+      }
     });
     return Scaffold(
       body: _pages[currentItem.index],

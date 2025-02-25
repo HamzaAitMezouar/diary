@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../../core/constants/urls.dart';
@@ -14,12 +16,12 @@ class TokenRemoteDataSourceImpl implements TokenRemoteDataSource {
   @override
   Future<TokenResponse> refreshToken(String refreshToken) async {
     try {
-      final response = await _publicDio.post(
+      final response = await _publicDio.get(
         Urls.refreshToken,
         data: {'refreshToken': refreshToken},
       );
 
-      final newAccessToken = response.data['accessToken'];
+      final newAccessToken = response.data['accesstoken'];
       final newRefreshToken = response.data['refreshToken'];
       //:todo save new User
 

@@ -64,7 +64,7 @@ class CheckoutPage extends ConsumerWidget {
                     const PaymentMethodsWidget(),
                     xxxsSpacer(),
                     const PriceSumamryWidget(),
-                    xxxsSpacer(),
+                    xxxlSpacer(),
                   ],
                 ),
               ),

@@ -1,14 +1,14 @@
 import 'package:diary/data/models/order_model.dart';
 import 'package:diary/domain/entities/cart_entity.dart';
 
-class OrderEntiy {
+class OrderEntity {
   final String? id;
   final String userId;
   final OrderStatus status;
   final List<CartItemEntity> cartItems;
   final double totalAmount;
 
-  OrderEntiy({
+  OrderEntity({
     this.id,
     required this.userId,
     required this.status,

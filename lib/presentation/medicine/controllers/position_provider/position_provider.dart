@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:diary/core/DI/use_cases_provider.dart';
+import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
 import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
@@ -14,9 +15,11 @@ final positionProvider = StateNotifierProvider<LocatioNotifier, LocationState>(
 class LocatioNotifier extends StateNotifier<LocationState> {
   Ref ref;
   LocatioNotifier(this.ref) : super(InitLocationState()) {
-    getUserLocation().then(
-      (value) => getNearestPharmacy(),
-    );
+    getUserLocation().then((value) {
+      addAdressToCheckout();
+
+      getNearestPharmacy();
+    });
   }
 
   Future<void> getUserLocation() async {
@@ -29,6 +32,13 @@ class LocatioNotifier extends StateNotifier<LocationState> {
     });
 
     log(state.toString());
+  }
+
+  addAdressToCheckout() {
+    if (state is UserLocationState) {
+      UserLocationState isLocationState = state as UserLocationState;
+      ref.read(checkoutProvider.notifier).changeDeliveryAdress(isLocationState.locationEntity);
+    }
   }
 
   Future<void> manuallyEnterUserLocation(LocationEntity entiy) async {

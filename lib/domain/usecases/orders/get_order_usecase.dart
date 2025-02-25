@@ -10,7 +10,7 @@ class GetOrdersUseCase {
 
   GetOrdersUseCase(this.repository);
 
-  Future<Either<Failure, List<OrderEntiy>>> call() {
+  Future<Either<Failure, List<OrderEntity>>> call() {
     return repository.getOrder();
   }
 }

@@ -61,7 +61,7 @@ class CartModel {
 @HiveType(typeId: 2, adapterName: 'CarItemModelAdapter')
 class CartItemModel {
   @HiveField(0)
-  final int id;
+  final int? id;
   @HiveField(1)
   final int? cartId;
   @HiveField(2)
@@ -70,7 +70,7 @@ class CartItemModel {
   final int quantity;
 
   CartItemModel({
-    required this.id,
+    this.id,
     this.cartId,
     required this.medicament,
     this.quantity = 1,

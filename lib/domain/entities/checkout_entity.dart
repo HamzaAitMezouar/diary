@@ -1,6 +1,9 @@
+import 'package:diary/core/params/orders_params.dart';
 import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/domain/entities/pharmacy_entiy.dart';
+
+import '../../data/models/cart_model.dart';
 
 enum DeliveryType { home, pharmacy }
 
@@ -41,6 +44,21 @@ class CheckoutEntity {
       deliveryTime: deliveryTime ?? this.deliveryTime,
       deliveryschedule: deliveryschedule ?? this.deliveryschedule,
       paymentType: paymentType ?? this.paymentType,
+    );
+  }
+
+  OrdersParams toOrderParams() {
+    return OrdersParams(
+      items: [CartItemModel(medicament: medicament.toModel())],
+      paymentMethod: paymentType.name,
+      deliveryDetails: DeliveryDetails(
+        address: address?.address ?? "",
+        lat: address?.latitude ?? 0,
+        lang: address?.longitude ?? 0,
+        type: deliveryType ?? DeliveryType.home,
+        schedule: deliveryschedule,
+        date: deliveryTime,
+      ),
     );
   }
 }

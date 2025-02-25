@@ -39,6 +39,11 @@ class SelectedMedicineNotifier extends StateNotifier<CheckoutEntity?> {
     state = ch;
   }
 
+  changeLangLatAndAdress(LocationEntity locationEntity) {
+    CheckoutEntity ch = state!.copyWith(address: locationEntity);
+    state = ch;
+  }
+
   changeDeliveryAdress(LocationEntity entity) {
     if (state == null) return;
     CheckoutEntity ch = state!.copyWith(address: entity, deliveryType: DeliveryType.home);

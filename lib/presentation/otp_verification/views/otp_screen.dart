@@ -42,8 +42,8 @@ class OtpScreen extends ConsumerWidget {
       }
       if (next is Authenticated) {
         if (navigateTo != null) {
-          //    context.pop();
-          context.goNamed(navigateTo!);
+          context.pop();
+          //   context.goNamed(navigateTo!);
           return;
         }
         context.replaceNamed(RoutesNames.introPage);

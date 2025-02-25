@@ -10,7 +10,7 @@ class AddOrderUseCase {
 
   AddOrderUseCase(this.repository);
 
-  Future<Either<Failure, List<OrderEntiy>>> call(OrdersParams params) {
+  Future<Either<Failure, List<OrderEntity>>> call(OrdersParams params) {
     return repository.addOrder(params);
   }
 }

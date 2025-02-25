@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
@@ -17,7 +19,7 @@ class OrdersParams {
   Map<String, dynamic> toJson() {
     return {
       "items": items.map((item) => item.toJson()).toList(), // Convert list of items
-      "paymentMethod": paymentMethod,
+      "paymentType": paymentMethod,
       "deliveryDetails": deliveryDetails.toJson(), // Convert DeliveryDetails
     };
   }
@@ -41,6 +43,7 @@ class DeliveryDetails {
   });
 
   Map<String, dynamic> toJson() {
+    log(lat.toString());
     return {
       "address": address,
       "lat": lat,

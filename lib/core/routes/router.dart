@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../presentation/nav_bar/views/nav_bar.dart';
+import '../../presentation/orders/views/orders_screen.dart';
 import '../DI/storage_provider.dart';
 
 final GlobalKey<NavigatorState> _navKey = GlobalKey(debugLabel: "root");
@@ -71,6 +72,12 @@ class GoRouterProvider {
                               }),
                         ]),
                   ]),
+              GoRoute(
+                  path: Routes.ordersScreenPage,
+                  name: RoutesNames.ordersScreenPage,
+                  builder: (context, state) {
+                    return OrderScreen();
+                  }),
             ]),
       ],
       errorBuilder: (context, e) {

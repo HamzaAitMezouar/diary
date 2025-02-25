@@ -11,16 +11,16 @@ import '../../../core/params/orders_params.dart';
 import '../../../data/models/order_model.dart';
 
 abstract class OrdersRepository {
-  Future<Either<Failure, List<OrderEntiy>>> addOrder(OrdersParams params);
-  Future<Either<Failure, List<OrderEntiy>>> getOrder();
-  Future<Either<Failure, List<OrderEntiy>>> updateOrder(int orderId, OrderStatus status);
+  Future<Either<Failure, List<OrderEntity>>> addOrder(OrdersParams params);
+  Future<Either<Failure, List<OrderEntity>>> getOrder();
+  Future<Either<Failure, List<OrderEntity>>> updateOrder(int orderId, OrderStatus status);
 }
 
 class OrdersRepositoryImpl extends OrdersRepository {
   final OrdersDatasource _datasource;
   OrdersRepositoryImpl(this._datasource);
   @override
-  Future<Either<Failure, List<OrderEntiy>>> addOrder(OrdersParams params) async {
+  Future<Either<Failure, List<OrderEntity>>> addOrder(OrdersParams params) async {
     try {
       final result = await _datasource.addOrder(params);
       return Right(result.map((e) => e.toEntity()).toList());
@@ -36,7 +36,7 @@ class OrdersRepositoryImpl extends OrdersRepository {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntiy>>> getOrder() async {
+  Future<Either<Failure, List<OrderEntity>>> getOrder() async {
     try {
       final result = await _datasource.getOrder();
       return Right(result.map((e) => e.toEntity()).toList());
@@ -52,7 +52,7 @@ class OrdersRepositoryImpl extends OrdersRepository {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntiy>>> updateOrder(int orderId, OrderStatus status) async {
+  Future<Either<Failure, List<OrderEntity>>> updateOrder(int orderId, OrderStatus status) async {
     try {
       final result = await _datasource.updateOrder(orderId, status);
       return Right(result.map((e) => e.toEntity()).toList());

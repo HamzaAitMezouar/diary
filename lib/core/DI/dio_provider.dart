@@ -23,5 +23,6 @@ final tokenRepositoryProvider = Provider<TokenRepository>((ref) {
 
 final authDioProvider = Provider<Dio>((ref) {
   final sessionNot = ref.watch(sessionProvider.notifier);
-  return AuthDio(ref.watch(tokenRepositoryProvider), sessionNot).call();
+  final secureStorage = ref.watch(secureStorageHelperProvider);
+  return AuthDio(ref.watch(tokenRepositoryProvider), sessionNot, secureStorage).call();
 });

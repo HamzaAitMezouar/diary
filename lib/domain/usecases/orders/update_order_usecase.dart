@@ -11,7 +11,7 @@ class UpdateOrdersUseCase {
 
   UpdateOrdersUseCase(this.repository);
 
-  Future<Either<Failure, List<OrderEntiy>>> call(int orderId, OrderStatus status) {
+  Future<Either<Failure, List<OrderEntity>>> call(int orderId, OrderStatus status) {
     return repository.updateOrder(orderId, status);
   }
 }
