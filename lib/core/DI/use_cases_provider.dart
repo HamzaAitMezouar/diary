@@ -7,6 +7,9 @@ import 'package:diary/domain/usecases/cart/update_medicament_quantity.dart';
 import 'package:diary/domain/usecases/location/get_user_location_usecase.dart';
 import 'package:diary/domain/usecases/medicament/get_medicament_usecase.dart';
 import 'package:diary/domain/usecases/medicament_category/get_medicament_category_usecase.dart';
+import 'package:diary/domain/usecases/orders/add_order_usecase.dart';
+import 'package:diary/domain/usecases/orders/get_order_usecase.dart';
+import 'package:diary/domain/usecases/orders/update_order_usecase.dart';
 import 'package:diary/domain/usecases/pharmacy/get_nearest_pharmacy_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -75,4 +78,20 @@ final removemredicamentFromCartUsecasesProvider = Provider<RemoveMedicamentFromC
 final updateCartMedicamentQuantityUsecasesProvider = Provider<UpdateMedicamentQuanityFromCartUseCase>((ref) {
   final repo = ref.watch(cartRepositoryProvider);
   return UpdateMedicamentQuanityFromCartUseCase(repo);
+});
+//orders
+
+final addOrderUseCase = Provider<AddOrderUseCase>((ref) {
+  final repo = ref.watch(ordersRepositoryProvider);
+  return AddOrderUseCase(repo);
+});
+
+final getOrderUseCase = Provider<GetOrdersUseCase>((ref) {
+  final repo = ref.watch(ordersRepositoryProvider);
+  return GetOrdersUseCase(repo);
+});
+
+final updateOrderUseCase = Provider<UpdateOrdersUseCase>((ref) {
+  final repo = ref.watch(ordersRepositoryProvider);
+  return UpdateOrdersUseCase(repo);
 });
