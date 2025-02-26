@@ -14,8 +14,7 @@ class PriceSumamryWidget extends ConsumerWidget {
     final checkout = ref.watch(checkoutProvider);
     return Banner(
       textStyle: TextStyles.robotoBold10,
-      message:
-          "${checkout!.medicament.selectedQuantiy} ${checkout.medicament.selectedQuantiy == 1 ? "Item" : "Items"}",
+      message: "${checkout!.items.length} ${checkout.items.length == 1 ? "Item" : "Items"}",
       location: BannerLocation.topEnd,
       child: Card(
         margin: EdgeInsets.zero,
@@ -29,19 +28,21 @@ class PriceSumamryWidget extends ConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Price",
-                          style: TextStyles.montserratBold13,
-                        ),
-                        Text(
-                          "${(checkout.medicament.ppv * checkout.medicament.selectedQuantiy).toStringAsFixed(2)} MAD",
-                          style: TextStyles.montserratBold15,
-                        ),
-                      ],
-                    ),
+                    ...checkout.items.map((e) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            e.medicament.name,
+                            style: TextStyles.montserratBold13,
+                          ),
+                          Text(
+                            "${(e.medicament.ppv * e.quantity).toStringAsFixed(2)} MAD",
+                            style: TextStyles.montserratBold15,
+                          ),
+                        ],
+                      );
+                    }),
                     xxxsSpacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +72,7 @@ class PriceSumamryWidget extends ConsumerWidget {
                           style: TextStyles.montserratBold13,
                         ),
                         Text(
-                          "${(checkout.medicament.ppv * checkout.medicament.selectedQuantiy + 10).toStringAsFixed(2)} MAD",
+                          "${ref.read(checkoutProvider.notifier).totale().toStringAsFixed(2)} MAD",
                           style: TextStyles.montserratBold15.copyWith(color: AppColors.quickRed),
                         ),
                       ],

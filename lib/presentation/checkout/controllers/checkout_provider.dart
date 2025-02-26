@@ -50,6 +50,11 @@ class SelectedMedicineNotifier extends StateNotifier<CheckoutEntity?> {
     state = ch;
     ref.read(positionProvider.notifier).manuallyEnterUserLocation(entity);
   }
+
+  double totale() {
+    if (state == null) return 0;
+    return state!.items.fold(0.0, (sum, item) => sum + item.quantity.toDouble() * item.medicament.ppv.toDouble());
+  }
 }
 
 final checkoutProvider = StateNotifierProvider<SelectedMedicineNotifier, CheckoutEntity?>(

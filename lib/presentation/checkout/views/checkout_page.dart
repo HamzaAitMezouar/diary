@@ -22,7 +22,7 @@ class CheckoutPage extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final checkout = ref.watch(checkoutProvider);
     if (checkout != null) {
-      MedicamentEntity med = checkout.medicament;
+      MedicamentEntity med = checkout.items.first.medicament;
       return Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -50,6 +50,14 @@ class CheckoutPage extends ConsumerWidget {
                             style: TextStyles.robotoBold18,
                           ),
                         ),
+                        checkout.items.length > 1
+                            ? IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.warning,
+                                ),
+                              )
+                            : SizedBox.shrink()
                       ],
                     ),
                     Text(

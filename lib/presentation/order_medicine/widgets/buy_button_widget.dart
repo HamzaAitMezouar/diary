@@ -1,4 +1,5 @@
 import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/presentation/authentication/views/authentication.dart';
@@ -42,7 +43,14 @@ class BuyWidget extends ConsumerWidget {
             if (authState is Authenticated) {
               Future.delayed(Duration.zero).then(
                 (value) => ref.read(checkoutProvider.notifier).selectCheckout(
-                      CheckoutEntity(medicament: medicament!),
+                      CheckoutEntity(
+                        items: [
+                          CartItemEntity(
+                            medicament: medicament!,
+                            quantity: medicament.selectedQuantiy,
+                          ),
+                        ],
+                      ),
                     ),
               );
               context.goNamed(RoutesNames.checkoutPgae);

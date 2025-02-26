@@ -13,13 +13,12 @@ class CartNotifier extends StateNotifier<CartEntity> {
 
   void getCart() async {
     final res = await ref.watch(getCartUsecasesProvider)();
-    res.fold((l) => null, (r) => state = r);
+    res.fold((l) => log(l.errorMessage), (r) => state = r);
   }
 
   void addMedicamentToCart(CartItemEntity cartItemEntity) async {
     final res = await ref.watch(addMedicamentToCartUsecasesProvider)(cartItemEntity);
     res.fold((l) => log(l.errorMessage.toString()), (r) {
-      log(r.cartItems.toString());
       state = r;
     });
   }
@@ -38,6 +37,8 @@ class CartNotifier extends StateNotifier<CartEntity> {
     final res = await ref.watch(clearCartUsecasesProvider)();
     res.fold((l) => null, (r) => state = r);
   }
+
+  double totale() => state.cartItems.fold(0, (sum, item) => sum + item.quantity * item.medicament.ppv);
 }
 
 final cartProvider = StateNotifierProvider<CartNotifier, CartEntity?>(

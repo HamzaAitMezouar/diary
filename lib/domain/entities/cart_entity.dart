@@ -34,5 +34,10 @@ class CartItemEntity {
     this.quantity = 1,
   });
 
-  CartItemModel toModel() => CartItemModel(id: id, cartId: cartId, medicament: medicament.toModel());
+  CartItemModel toModel() => CartItemModel(
+        id: id,
+        cartId: cartId,
+        medicament: medicament.toModel(),
+        quantity: quantity,
+      );
 }

@@ -50,18 +50,18 @@ class MedicamentEntity {
 
   MedicamentModel toModel() {
     return MedicamentModel(
-      id: id,
-      name: name,
-      presentation: presentation,
-      manufacturer: manufacturer,
-      composition: composition,
-      status: status,
-      ppv: ppv,
-      hospitalPrice: hospitalPrice,
-      table: table,
-      productNature: productNature,
-      imageUrl: imageUrl,
-      category: category.toModel(),
-    );
+        id: id,
+        name: name,
+        presentation: presentation,
+        manufacturer: manufacturer,
+        composition: composition,
+        status: status,
+        ppv: ppv,
+        hospitalPrice: hospitalPrice,
+        table: table,
+        productNature: productNature,
+        imageUrl: imageUrl,
+        category: category.toModel(),
+        selectedQuantiy: selectedQuantiy);
   }
 }

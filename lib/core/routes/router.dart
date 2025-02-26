@@ -80,8 +80,8 @@ class GoRouterProvider {
                     return OrderScreen();
                   }),
               GoRoute(
-                  path: Routes.ordersPage,
-                  name: RoutesNames.ordersPage,
+                  path: Routes.cartPage,
+                  name: RoutesNames.cartPage,
                   builder: (context, state) {
                     return CartScreen();
                   }),

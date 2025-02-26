@@ -41,7 +41,7 @@ class MedicamentModel {
   @HiveField(11)
   CategoryModel category;
   @HiveField(12)
-  int selectedQuantiy;
+  int? selectedQuantiy;
   MedicamentModel({
     this.id,
     required this.name,
@@ -102,7 +102,7 @@ class MedicamentModel {
         productNature: productNature,
         imageUrl: imageUrl,
         category: category.toEntity(),
-        selectedQuantiy: selectedQuantiy);
+        selectedQuantiy: selectedQuantiy ?? 1);
   }
 
   MedicamentModel copyWith({int? quantity}) {

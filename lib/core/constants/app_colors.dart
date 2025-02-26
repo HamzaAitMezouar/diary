@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
   static var loadingBarColor = AppColors.black;
-  static const Color turquoise = Color(0xFF2AE3B1);
+  static const Color turquoise = const Color.fromARGB(255, 15, 93, 72);
+  // Color(0xFF2AE3B1);
   static const Color darkGreen = Color(0xFF142527);
   static const Color superDark = Color(0xFF0A1314);
   static const Color pink = Color(0xFFE33CA0);

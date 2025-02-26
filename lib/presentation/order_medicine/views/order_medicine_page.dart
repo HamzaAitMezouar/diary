@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:diary/core/exports.dart';
 import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
@@ -118,10 +120,7 @@ class OrderMedicinePage extends ConsumerWidget {
                           onTap: () {
                             ref.read(cartProvider.notifier).addMedicamentToCart(
                                   CartItemEntity(
-                                      id: medicament.id!,
-                                      cartId: 0,
-                                      medicament: medicament,
-                                      quantity: medicament.selectedQuantiy),
+                                      id: medicament.id!, medicament: medicament, quantity: medicament.selectedQuantiy),
                                 );
                           },
                           title: " Add To Cart")

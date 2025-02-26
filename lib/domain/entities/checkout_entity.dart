@@ -1,4 +1,5 @@
 import 'package:diary/core/params/orders_params.dart';
+import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/domain/entities/pharmacy_entiy.dart';
@@ -12,7 +13,7 @@ enum Deliveryschedule { now, later }
 enum PaymentType { cash, card }
 
 class CheckoutEntity {
-  final MedicamentEntity medicament;
+  final List<CartItemEntity> items;
   final DeliveryType? deliveryType;
   final PharmacyEntity? pharmacy;
   final LocationEntity? address;
@@ -20,7 +21,7 @@ class CheckoutEntity {
   DateTime? deliveryTime;
   final PaymentType paymentType;
   CheckoutEntity(
-      {required this.medicament,
+      {required this.items,
       this.deliveryType,
       this.pharmacy,
       this.address,
@@ -29,7 +30,7 @@ class CheckoutEntity {
       this.paymentType = PaymentType.cash});
 
   CheckoutEntity copyWith(
-      {MedicamentEntity? medicament,
+      {List<CartItemEntity>? items,
       DeliveryType? deliveryType,
       PharmacyEntity? pharmacy,
       LocationEntity? address,
@@ -37,7 +38,7 @@ class CheckoutEntity {
       Deliveryschedule? deliveryschedule,
       PaymentType? paymentType}) {
     return CheckoutEntity(
-      medicament: medicament ?? this.medicament,
+      items: items ?? this.items,
       deliveryType: deliveryType ?? this.deliveryType,
       pharmacy: pharmacy ?? this.pharmacy,
       address: address ?? this.address,
@@ -49,7 +50,7 @@ class CheckoutEntity {
 
   OrdersParams toOrderParams() {
     return OrdersParams(
-      items: [CartItemModel(medicament: medicament.toModel())],
+      items: items.map((e) => e.toModel()).toList(),
       paymentMethod: paymentType.name,
       deliveryDetails: DeliveryDetails(
         address: address?.address ?? "",

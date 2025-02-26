@@ -71,6 +71,7 @@ class ConfirmActionDialog {
                           )
                         : const SizedBox(),
                     //
+                    xsSpacer(),
                     ...actions,
 
                     xsSpacer(),

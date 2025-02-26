@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/data/datasource/cart/cart_local_datasource/cart_local_datasource.dart';
@@ -9,7 +11,7 @@ import '../../../core/errors/exceptions.dart';
 import '../../../data/models/medicament_model.dart';
 
 abstract class CartRepository {
-  Future<Either<Failure, CartEntity>> addMedicament(CartItemEntity medicament);
+  Future<Either<Failure, CartEntity>> addMedicament(CartItemEntity cartItem);
   Future<Either<Failure, CartEntity>> removeMedicament(int id);
   Future<Either<Failure, CartEntity>> updateMedicamentQuantity(int id, int quantity);
   Future<Either<Failure, CartEntity>> clearCart();

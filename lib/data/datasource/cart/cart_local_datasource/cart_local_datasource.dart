@@ -24,12 +24,21 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   @override
   Future<CartModel> addMedicament(CartItemModel cartItem) async {
     try {
+      log("message-----------" + cartItem.quantity.toString());
       final cart = _getCart();
 
-      final exists = cart.cartItems.any((item) => item.medicament.id == cartItem.medicament.id);
-      if (exists) {
-        return cart;
+      final index = cart.cartItems.indexWhere((item) => item.medicament.id == cartItem.medicament.id);
+
+      if (index != -1) {
+        final updatedItems = List<CartItemModel>.from(cart.cartItems);
+        final existingItem = updatedItems[index];
+        updatedItems[index] = existingItem.copyWith(quantity: cartItem.quantity);
+
+        final updatedCart = cart.copyWith(cartItems: updatedItems);
+        await _cartBox.put('cart', updatedCart);
+        return updatedCart;
       }
+
       final updatedCart = cart.copyWith(cartItems: [...cart.cartItems, cartItem]);
 
       await _cartBox.put('cart', updatedCart);

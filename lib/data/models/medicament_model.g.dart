@@ -29,7 +29,7 @@ class MedicamentModelAdapter extends TypeAdapter<MedicamentModel> {
       productNature: fields[9] as String?,
       imageUrl: fields[10] as String?,
       category: fields[11] as CategoryModel,
-      selectedQuantiy: fields[12] as int,
+      selectedQuantiy: fields[12] as int?,
     );
   }
 
