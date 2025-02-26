@@ -5,7 +5,8 @@ class RoutesNames {
   static String orderMedicine = "ordermedicine";
   static String checkoutPgae = "checkout";
   static String mapSearchPage = "map-search";
-  static String ordersScreenPage = "orders-screen";
+  static String ordersPage = "orders";
+  static String cartPage = "cart";
 }
 
 class Routes {
@@ -15,5 +16,6 @@ class Routes {
   static String orderMedicine = "order-medicine-page";
   static String checkoutPgae = "checkout-page";
   static String mapSearchPage = "map-search-page";
-  static String ordersScreenPage = "orders-screen-page";
+  static String ordersPage = "orders-page";
+  static String cartPage = "cart-page";
 }

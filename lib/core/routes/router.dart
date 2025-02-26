@@ -1,4 +1,5 @@
 import 'package:diary/core/routes/routes_names.dart';
+import 'package:diary/presentation/cart/views/cart_screen.dart';
 import 'package:diary/presentation/checkout/views/checkout_page.dart';
 import 'package:diary/presentation/checkout/widgets/choose_lcation_from_map.dart';
 import 'package:diary/presentation/home/views/add_reminder.dart';
@@ -73,10 +74,16 @@ class GoRouterProvider {
                         ]),
                   ]),
               GoRoute(
-                  path: Routes.ordersScreenPage,
-                  name: RoutesNames.ordersScreenPage,
+                  path: Routes.ordersPage,
+                  name: RoutesNames.ordersPage,
                   builder: (context, state) {
                     return OrderScreen();
+                  }),
+              GoRoute(
+                  path: Routes.ordersPage,
+                  name: RoutesNames.ordersPage,
+                  builder: (context, state) {
+                    return CartScreen();
                   }),
             ]),
       ],

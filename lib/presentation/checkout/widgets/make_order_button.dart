@@ -32,7 +32,7 @@ class MakeOrderButton extends ConsumerWidget {
     ref.listen(ordersProvider, (previous, next) {
       if (next is OrdersAddedSuccessState) {
         context.replaceNamed(RoutesNames.introPage);
-        context.goNamed(RoutesNames.ordersScreenPage);
+        context.goNamed(RoutesNames.ordersPage);
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           margin: Paddings.allXs,
           behavior: SnackBarBehavior.floating,
