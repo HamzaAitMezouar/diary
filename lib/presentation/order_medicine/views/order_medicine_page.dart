@@ -7,6 +7,7 @@ import 'package:diary/presentation/order_medicine/controller/selected_medecine_p
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/buy_button_widget.dart';
 import '../widgets/circular_buttons.dart';
@@ -96,7 +97,7 @@ class OrderMedicinePage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Text(
-                            "2 items",
+                            itemCountText(medicament.selectedQuantiy),
                             style: TextStyles.robotoBold13.copyWith(
                               fontSize: 15,
                             ),
@@ -130,5 +131,17 @@ class OrderMedicinePage extends ConsumerWidget {
               ),
             ),
           );
+  }
+
+  String itemCountText(int quantity) {
+    return Intl.plural(
+      quantity,
+      zero: 'No items',
+      one: '1 item',
+      other: '$quantity items',
+      name: 'itemCountText',
+      args: [quantity],
+      desc: 'Indicates the number of items selected',
+    );
   }
 }

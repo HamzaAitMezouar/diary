@@ -220,7 +220,7 @@ class MedicamentCard extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.end,
                         maxLines: 3,
-                        style: TextStyles.robotoBold13.copyWith(color: AppColors.black),
+                        style: TextStyles.montserratBold18.copyWith(),
                       ),
                       xxxsSpacer(),
                     ],
@@ -249,8 +249,8 @@ class ArticleImageWidget extends StatelessWidget {
       borderRadius: Borders.b12,
       child: Image.network(
         medicament.imageUrl ?? "",
-        height: D.xxxxxl * 1.8,
-        width: D.xxxxxl * 1.8,
+        height: D.xxxxl * 1.8,
+        width: D.xxxxl * 1.8,
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           return loadingProgress == null
