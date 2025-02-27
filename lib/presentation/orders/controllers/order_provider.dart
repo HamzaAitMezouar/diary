@@ -1,5 +1,6 @@
 import 'package:diary/core/DI/use_cases_provider.dart';
 import 'package:diary/core/params/orders_params.dart';
+import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:diary/presentation/orders/controllers/orders_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,8 +24,10 @@ class LocatioNotifier extends StateNotifier<OrdersState> {
 
   Future<void> addOrders(OrdersParams params) async {
     state = OrdersLoadingState(state.orders);
+
     final res = await ref.read(addOrderUseCase)(params);
     state = await res.fold((l) => OrdersAddingErrorState(state.orders, l.errorMessage), (r) async {
+      ref.read(cartProvider.notifier).clearCart();
       return OrdersAddedSuccessState(r);
     });
   }

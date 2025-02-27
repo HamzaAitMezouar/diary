@@ -26,40 +26,51 @@ class CheckoutPage extends ConsumerWidget {
       return Scaffold(
         body: CustomScrollView(
           slivers: [
+            SliverAppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              title: Text(
+                "Checkout",
+                style: TextStyles.robotoBold18,
+              ),
+            ),
             SliverPadding(
-              padding: Paddings.allXs,
+              padding: Paddings.horizontalXs,
               sliver: SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Center(
-                      child: Text(
-                        "Checkout",
-                        style: TextStyles.robotoBold18,
-                      ),
-                    ),
-                    xxxsSpacer(),
-                    Row(
-                      children: [
-                        Text(
-                          "Medicament: ",
-                          style: TextStyles.robotoBold13,
-                        ),
-                        Expanded(
-                          child: Text(
-                            med.name,
-                            style: TextStyles.robotoBold18,
-                          ),
-                        ),
-                        checkout.items.length > 1
-                            ? IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.warning,
+                    checkout.items.length > 1
+                        ? ExpansionTile(
+                            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                            expandedAlignment: Alignment.bottomLeft,
+                            tilePadding: EdgeInsets.zero,
+                            title: Text(
+                              "Medicament: ",
+                              style: TextStyles.robotoBold15,
+                            ),
+                            children: [
+                              ...checkout.items.map(
+                                (e) => Text(
+                                  e.medicament.name,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyles.montserratBold13,
                                 ),
-                              )
-                            : SizedBox.shrink()
-                      ],
-                    ),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              Text(
+                                "Medicament: ",
+                                style: TextStyles.robotoBold13,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  med.name,
+                                  style: TextStyles.robotoBold18,
+                                ),
+                              ),
+                            ],
+                          ),
                     Text(
                       "Delivery Details",
                       style: TextStyles.robotoBold15,
@@ -80,7 +91,7 @@ class CheckoutPage extends ConsumerWidget {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
+        floatingActionButton: const Padding(
           padding: Paddings.horizontalXxxxs,
           child: MakeOrderButton(),
         ),

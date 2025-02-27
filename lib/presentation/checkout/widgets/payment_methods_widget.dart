@@ -80,7 +80,7 @@ class PaymentTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        color: isSelected ? AppColors.turquoise.withOpacity(0.9) : AppColors.white.withOpacity(0.9),
+        color: isSelected ? AppColors.turquoise.withOpacity(0.9) : AppColors.white.withOpacity(0.5),
         shape: RoundedRectangleBorder(borderRadius: Borders.b12),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: D.xxs, vertical: D.xxs),

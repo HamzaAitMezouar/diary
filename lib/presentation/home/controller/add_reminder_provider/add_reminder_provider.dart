@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:diary/core/constants/assets.dart';
@@ -6,6 +7,8 @@ import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/DI/use_cases_provider.dart';
+import '../../../../domain/entities/reminder_entity.dart';
 import 'add_reminder_state.dart';
 
 /// StateNotifier to manage medicine reminders
@@ -64,36 +67,36 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
     DateTime now = DateTime.now();
     ref.read(scheduleNotificationUseCaseProvider)(const TimeOfDay(hour: 20, minute: 06), now);
 
-    // state = MedicineReminderLoading(
-    //     intakeCount: state.intakeCount,
-    //     intakeTimes: state.intakeTimes,
-    //     medicineName: state.medicineName,
-    //     icon: state.icon,
-    //     note: state.note);
-    // final addReminderUseCase = ref.read(addReminderUseCaseProvider);
-    // final response = await addReminderUseCase(ReminderEntity(
-    //   dosage: state.intakeTimes,
-    //   medicineName: state.medicineName,
-    //   notes: state.note,
-    //   time: now,
-    //   consumationDates: [],
-    //   icon: state.icon,
-    // ));
-    // state = response.fold((l) {
-    //   return MedicineReminderError(
-    //       errorMessage: l.errorMessage,
-    //       intakeCount: state.intakeCount,
-    //       intakeTimes: state.intakeTimes,
-    //       medicineName: state.medicineName,
-    //       icon: state.icon,
-    //       note: state.note);
-    // }, (r) {
-    //   for (TimeOfDay timeOfDay in state.intakeTimes) {
-    //     log(timeOfDay.toString());
-    //     ref.read(scheduleNotificationUseCaseProvider)(timeOfDay, now);
-    //   }
-    //   return MedicineReminderDone();
-    // });
+    state = MedicineReminderLoading(
+        intakeCount: state.intakeCount,
+        intakeTimes: state.intakeTimes,
+        medicineName: state.medicineName,
+        icon: state.icon,
+        note: state.note);
+    final addReminderUseCase = ref.read(addReminderUseCaseProvider);
+    final response = await addReminderUseCase(ReminderEntity(
+      dosage: state.intakeTimes,
+      medicineName: state.medicineName,
+      notes: state.note,
+      time: now,
+      consumationDates: [],
+      icon: state.icon,
+    ));
+    state = response.fold((l) {
+      return MedicineReminderError(
+          errorMessage: l.errorMessage,
+          intakeCount: state.intakeCount,
+          intakeTimes: state.intakeTimes,
+          medicineName: state.medicineName,
+          icon: state.icon,
+          note: state.note);
+    }, (r) {
+      for (TimeOfDay timeOfDay in state.intakeTimes) {
+        log(timeOfDay.toString());
+        ref.read(scheduleNotificationUseCaseProvider)(timeOfDay, now);
+      }
+      return MedicineReminderDone();
+    });
   }
 
   alterReminder() {}
