@@ -25,6 +25,7 @@ class LocatioNotifier extends StateNotifier<LocationState> {
   Future<void> getUserLocation() async {
     final res = await ref.read(getUserLocationUsecasesProvider)();
     state = await res.fold((l) => LocationErrorState(l.errorMessage), (r) async {
+      state = UserLocationState(r);
       String? address = await _getAddressFromLatLng(r.latitude, r.longitude);
       log(address.toString());
 
