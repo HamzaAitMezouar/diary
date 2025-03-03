@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:image_cropper/image_cropper.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/domain/entities/language.dart';
 import 'package:diary/domain/entities/location_entity.dart';
@@ -38,7 +38,7 @@ class ProfileScreen extends ConsumerWidget {
                       Stack(
                         children: [
                           _profileImageWidget(context, authState.user),
-                          _uploadProfileImageIcon(authState.user, context)
+                          _uploadProfileImageIcon(authState.user, context, ref)
                         ],
                       ),
                     ],
@@ -58,22 +58,13 @@ class ProfileScreen extends ConsumerWidget {
   }
 }
 
-Positioned _uploadProfileImageIcon(UserEntity user, BuildContext context) {
+Positioned _uploadProfileImageIcon(UserEntity user, BuildContext context, WidgetRef ref) {
   return Positioned(
     bottom: 0,
     right: 0,
     child: IconButton(
         onPressed: () async {
-          // CroppedFile? croppedFile = await uploadImage(user.id.toString(), user.name, "profile");
-
-          // if (croppedFile != null) {
-          //   setState(() {
-          //     image = croppedFile.path;
-          //   });
-          // ignore: use_build_context_synchronously
-          // BlocProvider.of<LoggedInBloc>(context).add(
-          //     ChangeProfileImageEvent(
-          //         imagPath: croppedFile.path));
+          ref.read(authNotifierProvider.notifier).uploadImage();
         },
         icon: Container(
           padding: const EdgeInsets.all(6),

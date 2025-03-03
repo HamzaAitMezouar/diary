@@ -1,6 +1,6 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/DI/storage_provider.dart';
+import 'package:diary/core/helpers/upload_and_crop_image.dart';
 import 'package:diary/data/models/facebook_user.dart';
 import 'package:diary/data/models/user_model.dart';
 import 'package:diary/domain/entities/user_entity.dart';
@@ -46,7 +46,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = Unauthenticated();
       return;
     }
-    state = Authenticated(UserModel.fromJsonString(userString).toEntity());
+    state = Authenticated(user: UserModel.fromJsonString(userString).toEntity());
   }
 
   Future<void> requestOtp(String phoneNumber) async {
@@ -72,7 +72,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     Either<Failure, UserEntity> result = await verifyOtpUseCase(phoneNumber, code);
     state = result.fold(
       (failure) => AuthError(failure.errorMessage),
-      (user) => Authenticated(user),
+      (user) => Authenticated(user: user),
     );
   }
 
@@ -103,7 +103,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     Either<Failure, UserEntity> result = await socialMediaLoginUseCase(params);
     state = result.fold(
       (failure) => AuthError(failure.errorMessage),
-      (user) => Authenticated(user),
+      (user) => Authenticated(user: user),
     );
   }
 
@@ -116,6 +116,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
     /// = result.fold((failure) => AuthError(failure.errorMessage), (_) {
     //  return
     //});
+  }
+
+  uploadImage() {
+    if (state is Authenticated) {
+      final myState = state as Authenticated;
+      UploadAndCropImage.uploadImage(myState.user.id);
+    }
   }
 }
 

@@ -27,8 +27,8 @@ class VerifyOtpSuccess extends AuthState {}
 
 class Authenticated extends AuthState {
   final UserEntity user;
-
-  Authenticated(this.user);
+  final String? uploadedImagePath;
+  Authenticated({required this.user, this.uploadedImagePath});
 
   @override
   List<Object?> get props => [user];
