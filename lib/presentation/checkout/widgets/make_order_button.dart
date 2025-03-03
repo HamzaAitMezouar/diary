@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:diary/core/constants/app_colors.dart';
 import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/constants/paddings.dart';
@@ -27,8 +29,8 @@ class MakeOrderButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    final position = ref.read(positionProvider);
-    final checkout = ref.read(checkoutProvider);
+    final position = ref.watch(positionProvider);
+    final checkout = ref.watch(checkoutProvider);
     ref.listen(ordersProvider, (previous, next) {
       if (next is OrdersAddedSuccessState) {
         context.replaceNamed(RoutesNames.introPage);
@@ -43,6 +45,7 @@ class MakeOrderButton extends ConsumerWidget {
       }
     });
     bool checkIfLocationisValid() {
+      log(position.toString());
       if (position is UserLocationState && checkout!.deliveryType == DeliveryType.home) return false;
       if (position is UserLocationState &&
           position.locationEntity.pharmacy != null &&

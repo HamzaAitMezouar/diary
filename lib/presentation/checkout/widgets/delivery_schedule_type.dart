@@ -37,15 +37,11 @@ class DeliveryScheduleType extends ConsumerWidget {
               ScheduleTypeCard(
                 isActive: checkout.deliveryschedule == Deliveryschedule.later,
                 onTap: () async {
-                  log("message");
-                  if (checkout.deliveryschedule == Deliveryschedule.later) {
-                    DateTime? time = await pickDateTime(context);
-                    if (time == null) return;
-                    ref.read(checkoutProvider.notifier).changeDeliveryTime(time);
-                    return;
-                  }
+                  DateTime? time = await pickDateTime(context);
+                  if (time == null) return;
+                  ref.read(checkoutProvider.notifier).changeDeliveryTime(time);
+
                   ref.read(checkoutProvider.notifier).changeDeliveryScheduleType(Deliveryschedule.later);
-                  log("message");
                 },
                 subtitle: "Schedule a date and time",
                 title: "Schedule",

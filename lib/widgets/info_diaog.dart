@@ -33,6 +33,7 @@ class ConfirmActionDialog {
   }) {
     return showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return Dialog(
           child: Container(

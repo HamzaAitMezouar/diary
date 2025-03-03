@@ -12,7 +12,8 @@ abstract class Assets {
   static String drugs = "assets/icons/drug.png";
   static String pickup = "assets/icons/pickup.png";
   static String delivery = "assets/icons/delivery.png";
-
+  static String dark = "assets/icons/dark.jpeg";
+  static String light = "assets/icons/light.png";
   static String map = "assets/icons/map.png";
   static String profile = "assets/icons/user.png";
   static String marker = "assets/icons/marker2.png";
@@ -20,6 +21,7 @@ abstract class Assets {
   static String facebook = "assets/icons/facebook.png";
 
   static String placeholder = "assets/images/placeholder.jpg";
+  static String avatarholder = "assets/images/user_avatar.png";
 
   static String syrop = "assets/icons/med_icons/syrop.png";
   static String bandage = "assets/icons/med_icons/bandage.png";

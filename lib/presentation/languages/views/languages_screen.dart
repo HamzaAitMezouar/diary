@@ -1,4 +1,3 @@
-
 import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
@@ -14,11 +13,6 @@ class LanguagesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    List<Language> languages = [
-      Language(code: "ar"),
-      Language(code: "fr"),
-      Language(code: "en"),
-    ];
     final localeNotifier = ref.watch(localizationProvider.notifier);
     final locale = ref.watch(localizationProvider);
     return Scaffold(

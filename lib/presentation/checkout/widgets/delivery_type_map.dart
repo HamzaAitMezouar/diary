@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/exports.dart';
 import '../../../widgets/info_diaog.dart';
+import '../../../widgets/shimmer_loadings.dart';
 import '../../medicine/controllers/position_provider/position_provider.dart';
 import '../controllers/checkout_provider.dart';
 
@@ -48,7 +49,7 @@ class _UserLocationMapState extends ConsumerState<UserLocationMap> {
   @override
   Widget build(BuildContext context) {
     final position = ref.watch(positionProvider);
-
+    if (position is LocationLaodingState) return const ShimmerCarLoading();
     if (position is UserLocationState) return const MapAddressCard();
     return Column(
       children: [

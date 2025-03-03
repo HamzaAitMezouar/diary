@@ -4,6 +4,8 @@ abstract class LocationState {}
 
 class InitLocationState extends LocationState {}
 
+class LocationLaodingState extends LocationState {}
+
 class UserLocationState extends LocationState {
   final LocationEntity locationEntity;
   UserLocationState(this.locationEntity);
