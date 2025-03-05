@@ -22,6 +22,7 @@ abstract class Assets {
 
   static String placeholder = "assets/images/placeholder.jpg";
   static String avatarholder = "assets/images/user_avatar.png";
+  static String pharmacyPlaceholder = "assets/images/pharma_ph.png";
 
   static String syrop = "assets/icons/med_icons/syrop.png";
   static String bandage = "assets/icons/med_icons/bandage.png";

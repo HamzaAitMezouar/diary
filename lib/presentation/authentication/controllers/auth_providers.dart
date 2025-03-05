@@ -5,6 +5,7 @@ import 'package:diary/data/datasource/authentication/authentication_datasource.d
 import 'package:diary/data/datasource/authentication/social_media__datasource.dart';
 import 'package:diary/data/datasource/authentication/social_media_services.dart';
 import 'package:diary/domain/repositories/authentication/social_media_repository.dart';
+import 'package:diary/domain/usecases/authentication/add_token.dart';
 import 'package:diary/domain/usecases/authentication/facebook_login.dart';
 import 'package:diary/domain/usecases/authentication/google_login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,7 +21,8 @@ import '../../../domain/usecases/authentication/social_media_login_case.dart';
 import '../../../domain/usecases/authentication/verify_otp_case.dart';
 
 final authDatasourceProvider = Provider<AuthenticationDatasource>(
-  (ref) => AuthenticationDatasourceImpl(ref.watch(publicDioProvider), ref.watch(exceptionsHandlerProvider)),
+  (ref) => AuthenticationDatasourceImpl(
+      ref.watch(publicDioProvider), ref.watch(exceptionsHandlerProvider), ref.watch(authDioProvider)),
 );
 final authRepositoryProvider = Provider<AuthenticationRepository>(
   (ref) => AuthenticationRepositoryImpl(
@@ -47,6 +49,9 @@ final socialMediaLoginUseCaseProvider = Provider<SocialMediaLoginUseCase>(
 
 final logoutUseCaseProvider = Provider<LogOutUseCase>(
   (ref) => LogOutUseCase(ref.watch(authRepositoryProvider)),
+);
+final addTokenProvider = Provider<AddTokenUseCase>(
+  (ref) => AddTokenUseCase(ref.watch(authRepositoryProvider)),
 );
 
 // social media services

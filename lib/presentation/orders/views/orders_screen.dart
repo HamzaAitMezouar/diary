@@ -2,7 +2,11 @@ import 'dart:developer';
 
 import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/constants/app_colors.dart';
+import 'package:diary/core/constants/border.dart';
+import 'package:diary/core/constants/dimensions.dart';
+import 'package:diary/core/constants/paddings.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
+import 'package:diary/domain/entities/pharmacy_order.dart';
 import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/presentation/orders/controllers/order_provider.dart';
@@ -13,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/pharmacies_request.dart';
+import '../widgets/pharmacy_invitation_card.dart';
 
 class OrderScreen extends ConsumerStatefulWidget {
   const OrderScreen({
@@ -29,7 +34,7 @@ class _OrderScreenState extends ConsumerState<OrderScreen> {
     final pharmacies = ref.watch(pharmacyNotifierProvider);
     final orders = ref.watch(ordersProvider);
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(orders.orders.last.deliveryLat.toString()),
         elevation: 0,
@@ -50,15 +55,34 @@ class _OrderScreenState extends ConsumerState<OrderScreen> {
           ),
           Positioned(
             bottom: 0,
-            top: 10,
+            top: 0,
             right: 0,
             left: 0,
             child: Container(
               color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-              child: ListView.builder(
-                itemCount: pharmacies.length,
-                itemBuilder: (_, index) => ListTile(title: Text(pharmacies[index].toString())),
-              ),
+              child: pharmacies.isEmpty
+                  ? Container(
+                      padding: Paddings.allXs,
+                      decoration:
+                          BoxDecoration(borderRadius: Borders.b12, color: Theme.of(context).scaffoldBackgroundColor),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Text("Waiting for pharmacies response"),
+                          ),
+                          xxsSpacer(),
+                          CupertinoActivityIndicator()
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: pharmacies.length,
+                      itemBuilder: (_, index) {
+                        final op = pharmacies[index];
+                        return PharmacyInvitationCard(op: op);
+                      }),
             ),
           ),
         ],

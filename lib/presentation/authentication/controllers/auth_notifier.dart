@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/core/helpers/upload_and_crop_image.dart';
@@ -7,6 +9,7 @@ import 'package:diary/domain/entities/user_entity.dart';
 import 'package:diary/domain/usecases/authentication/facebook_login.dart';
 import 'package:diary/domain/usecases/authentication/google_login.dart';
 import 'package:diary/domain/usecases/authentication/resend_otp_case.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/errors/errors.dart';
@@ -47,6 +50,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
       return;
     }
     state = Authenticated(user: UserModel.fromJsonString(userString).toEntity());
+    addToken();
+  }
+
+  addToken() async {
+    String? token = await FirebaseMessaging.instance.getToken();
+    if (token == null) return;
+    log(token.toString());
+    ref.read(addTokenProvider)(token);
   }
 
   Future<void> requestOtp(String phoneNumber) async {
@@ -70,10 +81,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> verifyOtp(String phoneNumber, String code) async {
     state = PhoneAuthLoading();
     Either<Failure, UserEntity> result = await verifyOtpUseCase(phoneNumber, code);
-    state = result.fold(
-      (failure) => AuthError(failure.errorMessage),
-      (user) => Authenticated(user: user),
-    );
+    result.fold((failure) => state = AuthError(failure.errorMessage), (user) {
+      state = Authenticated(user: user);
+      addToken();
+    });
   }
 
   Future<Either<Failure, SocialMediaUser>> _loginWithProvider(SocialMediaProvider provider) async {

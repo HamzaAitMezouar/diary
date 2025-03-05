@@ -124,7 +124,7 @@ class LocalNotificationService {
 
     // Check if the app was launched from a notification
     final details = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    log("DETAILS WHEN APP IS TERM" + details.toString());
+    log("DETAILS WHEN APP IS TERM" + details!.didNotificationLaunchApp.toString());
     if (details?.didNotificationLaunchApp ?? false) {
       // The app was launched from a notification
       final String? payload = details!.notificationResponse?.payload;

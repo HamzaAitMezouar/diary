@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/helpers/secure_storage_helper.dart';
@@ -13,6 +15,7 @@ abstract class AuthenticationRepository {
   Future<Either<Failure, bool>> resendOtp(String phoneNumber);
   Future<Either<Failure, UserEntity>> socialMediaLogin(SocialMediaParams params);
   Future logout();
+  Future addToken(String token);
 }
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
@@ -76,6 +79,18 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       storageHelper.saveUser(result.user.toJsonString());
       return Right(result.user.toEntity());
     } on CustomException catch (e) {
+      return Left(CostumeFailure(errorMessage: e.message));
+    } on UnexpectedException catch (e) {
+      return Left(UnexpectedFailure(errorMessage: e.message));
+    }
+  }
+
+  @override
+  Future addToken(String token) async {
+    try {
+      await remoteDataSource.addToken(token);
+    } on CustomException catch (e) {
+      log(e.message.toString());
       return Left(CostumeFailure(errorMessage: e.message));
     } on UnexpectedException catch (e) {
       return Left(UnexpectedFailure(errorMessage: e.message));

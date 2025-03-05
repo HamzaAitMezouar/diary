@@ -33,8 +33,6 @@ class FirebaseMessagingServie {
 
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-    String? token = await FirebaseMessaging.instance.getToken();
-    log(token.toString());
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       String orderId = message.data.toString();
       log("User tapped notification from background with orderId: ${orderId}");

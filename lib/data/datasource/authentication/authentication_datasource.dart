@@ -13,12 +13,14 @@ abstract class AuthenticationDatasource {
   Future loginMail(String email, String password);
   Future<AuthResponse> socialMediaLogin(SocialMediaParams params);
   Future logout();
+  Future addToken(String token);
 }
 
 class AuthenticationDatasourceImpl extends AuthenticationDatasource {
   final Dio _dio;
+  final Dio _authDio;
   final ExceptionsHandler _exceptionsHandler;
-  AuthenticationDatasourceImpl(this._dio, this._exceptionsHandler);
+  AuthenticationDatasourceImpl(this._dio, this._exceptionsHandler, this._authDio);
   @override
   Future loginMail(String email, String password) {
     // TODO: implement loginMail
@@ -76,6 +78,21 @@ class AuthenticationDatasourceImpl extends AuthenticationDatasource {
     return _exceptionsHandler.dioExceptionsHandler(() async {
       var response = await _dio.post(
         Urls.verifyOtp,
+        data: data,
+      );
+
+      return AuthResponse.fromJson(response.data);
+    });
+  }
+
+  @override
+  Future addToken(String token) {
+    var data = json.encode({
+      "token": token,
+    });
+    return _exceptionsHandler.dioExceptionsHandler(() async {
+      var response = await _authDio.post(
+        Urls.addToken,
         data: data,
       );
 

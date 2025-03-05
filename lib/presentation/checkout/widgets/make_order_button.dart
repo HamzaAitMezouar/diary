@@ -58,26 +58,28 @@ class MakeOrderButton extends ConsumerWidget {
 
     return CustomButton(
       onTap: () {
-        final order = ref.read(ordersProvider);
         ConfirmActionDialog().showActionDialog(
           context,
           "Confirm order",
           "Do you want to confirm this Order?",
           [
             xxsSpacer(),
-            CustomButton(
-              height: D.xxl,
-              style: TextStyles.montserratBold15,
-              backgorundColor: const Color.fromARGB(255, 21, 154, 118),
-              onTap: () {
-                final authState = ref.watch(authNotifierProvider) as Authenticated;
-                final positionState = ref.watch(positionProvider) as UserLocationState;
-                ref.read(ordersProvider.notifier).addOrders(checkout!.toOrderParams(), authState.user,
-                    positionState.locationEntity.latitude, positionState.locationEntity.longitude);
-              },
-              title: "Yes",
-              isLoading: order is OrdersLoadingState,
-            ),
+            Consumer(builder: (context, ref, child) {
+              final order = ref.watch(ordersProvider);
+              return CustomButton(
+                height: D.xxl,
+                style: TextStyles.montserratBold15,
+                backgorundColor: const Color.fromARGB(255, 21, 154, 118),
+                onTap: () {
+                  final authState = ref.watch(authNotifierProvider) as Authenticated;
+                  final positionState = ref.watch(positionProvider) as UserLocationState;
+                  ref.read(ordersProvider.notifier).addOrders(checkout!.toOrderParams(), authState.user,
+                      positionState.locationEntity.latitude, positionState.locationEntity.longitude);
+                },
+                title: "Yes",
+                isLoading: order is OrdersLoadingState,
+              );
+            }),
             xxsSpacer(),
           ],
         );

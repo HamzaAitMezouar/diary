@@ -6,6 +6,8 @@ abstract class Urls {
   static String auth = "${baseUrl}auth/";
   static String requestOtp = "${auth}request-otp";
   static String verifyOtp = "${auth}verify-otp";
+  static String addToken = "${auth}add-token";
+
   static String resenOtp = "${auth}resend-otp";
   static String loginMail = "${auth}login-email";
   static String socialMediaLogin = "${auth}social-media-login";
