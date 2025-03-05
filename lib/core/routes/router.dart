@@ -14,12 +14,12 @@ import '../../presentation/nav_bar/views/nav_bar.dart';
 import '../../presentation/orders/views/orders_screen.dart';
 import '../DI/storage_provider.dart';
 
-final GlobalKey<NavigatorState> _navKey = GlobalKey(debugLabel: "root");
+final GlobalKey<NavigatorState> navKey = GlobalKey(debugLabel: "root");
 //final GlobalKey<NavigatorState> _shelKey = GlobalKey(debugLabel: "shell");
 
 class GoRouterProvider {
   static final GoRouter _router = GoRouter(
-      navigatorKey: _navKey,
+      navigatorKey: navKey,
       initialLocation: "/",
       routes: [
         GoRoute(

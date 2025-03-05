@@ -1,10 +1,14 @@
+import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
+import 'package:diary/core/services/firebase_messaging_service.dart';
+import 'package:diary/core/services/notifications_service.dart';
 import 'package:diary/core/theme/app_theme.dart';
 import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/data/models/reminder_model.dart';
 import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,7 +24,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  FirebaseMessagingServie.initFirebase();
+  LocalNotificationService().initWhenAppIsTerminated();
   final sharedPreferences = await SharedPreferences.getInstance();
   await Hive.initFlutter();
 
@@ -44,8 +49,9 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final provider = ref.watch(localizationProvider);
     ref.watch(authNotifierProvider);
+
     return MaterialApp.router(
-      theme: AppThemes.getDarkTheme(),
+      theme: AppThemes.getLightTheme(),
       debugShowCheckedModeBanner: false,
       routerConfig: ref.watch(goRouterProviderProvider).router,
       title: 'Language Selector App',

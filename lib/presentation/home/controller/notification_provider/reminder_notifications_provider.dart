@@ -21,10 +21,8 @@ final flutterLocalNotificationsPluginProvider = Provider<FlutterLocalNotificatio
 });
 
 // Service Provider
-final notificationServiceProvider = Provider<NotificationService>((ref) {
-  final pluh = ref.read(flutterLocalNotificationsPluginProvider);
-
-  return NotificationService(pluh);
+final notificationServiceProvider = Provider<LocalNotificationService>((ref) {
+  return LocalNotificationService();
 });
 
 // Repository Provider

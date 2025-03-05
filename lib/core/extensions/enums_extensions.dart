@@ -44,3 +44,14 @@ extension PaymentTypeExtension on PaymentType {
 
   String toJson() => name; // Convert enum to string
 }
+
+extension PaymentStatusExtension on PaymentType {
+  static PaymentType fromString(String status) {
+    return PaymentType.values.firstWhere(
+      (e) => e.name == status,
+      orElse: () => PaymentType.cash, // Default value
+    );
+  }
+
+  String toJson() => name; // Convert enum to string
+}

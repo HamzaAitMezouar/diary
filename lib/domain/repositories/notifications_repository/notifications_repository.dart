@@ -14,7 +14,7 @@ abstract class NotificationRepository {
 }
 
 class NotificationRepositoryImpl implements NotificationRepository {
-  final NotificationService _notificationSerive;
+  final LocalNotificationService _notificationSerive;
 
   NotificationRepositoryImpl(this._notificationSerive);
 

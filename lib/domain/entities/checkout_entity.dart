@@ -53,13 +53,13 @@ class CheckoutEntity {
       items: items.map((e) => e.toModel()).toList(),
       paymentMethod: paymentType.name,
       deliveryDetails: DeliveryDetails(
-        address: address?.address ?? "",
-        lat: address?.latitude ?? 0,
-        lang: address?.longitude ?? 0,
-        type: deliveryType ?? DeliveryType.home,
-        schedule: deliveryschedule,
-        date: deliveryTime,
-      ),
+          address: address?.address ?? "",
+          lat: address?.latitude ?? 0,
+          lang: address?.longitude ?? 0,
+          type: deliveryType ?? DeliveryType.home,
+          schedule: deliveryschedule,
+          date: deliveryTime,
+          deliveryFee: 10),
     );
   }
 }

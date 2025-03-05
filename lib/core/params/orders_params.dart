@@ -32,7 +32,7 @@ class DeliveryDetails {
   final DeliveryType type;
   final Deliveryschedule schedule;
   final DateTime? date;
-
+  final double deliveryFee;
   DeliveryDetails({
     required this.address,
     required this.lat,
@@ -40,6 +40,7 @@ class DeliveryDetails {
     required this.type,
     required this.schedule,
     this.date,
+    required this.deliveryFee,
   });
 
   Map<String, dynamic> toJson() {
@@ -50,7 +51,8 @@ class DeliveryDetails {
       "lang": lang,
       "type": type.name, // Convert enum to string
       "schedule": schedule.name, // Convert enum to string
-      "date": date?.toIso8601String(), // Convert DateTime to string or null
+      "date": date?.toIso8601String(),
+      "deliveryFee": deliveryFee
     };
   }
 }

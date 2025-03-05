@@ -34,7 +34,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
 
   LatLng position = const LatLng(32.3388, -6.353);
   cretaeMarkers() async {
-    final myMarker = await CustomMarkers.createMarker();
+    final myMarker = await CustomMarkers.createMarker(Assets.marker);
     markers.addAll([
       Marker(
         markerId: const MarkerId('my_marker'),

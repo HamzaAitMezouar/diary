@@ -113,7 +113,7 @@ Padding _userNameWidget(UserEntity user) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Text(
-      user.name ?? "",
+      user.id ?? "",
       style: TextStyles.robotoBold13,
     ),
   );

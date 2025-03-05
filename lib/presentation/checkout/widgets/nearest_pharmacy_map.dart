@@ -28,7 +28,7 @@ class _NearestPharmacyMapState extends ConsumerState<NearestPharmacyMap> {
     _mapController?.animateCamera(CameraUpdate.newLatLng(position));
     lastCameraPosition = CameraPosition(target: position);
     _mapController?.animateCamera(CameraUpdate.newLatLng(position));
-    final myMarker = await CustomMarkers.createMarker();
+    final myMarker = await CustomMarkers.createMarker(Assets.marker);
     markers.addAll([
       Marker(
         markerId: const MarkerId('nearest_pharmacy_marker'),

@@ -70,7 +70,7 @@ class MedicamentModel {
         table: json["table"],
         productNature: json["productNature"],
         imageUrl: json["imageUrl"],
-        category: CategoryModel(name: "TEST"),
+        category: CategoryModel(name: "TEST", id: 1),
         // CategoryModel.fromJson(json["category"]),
       );
 

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:diary/core/DI/dio_provider.dart';
 import 'package:diary/core/constants/app_colors.dart';
 import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/constants/paddings.dart';
@@ -7,6 +8,8 @@ import 'package:diary/core/constants/text_style.dart';
 import 'package:diary/core/params/orders_params.dart';
 import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
+import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
+import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/presentation/checkout/widgets/delivery_schedule_type.dart';
 import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
 import 'package:diary/presentation/orders/controllers/order_provider.dart';
@@ -67,7 +70,10 @@ class MakeOrderButton extends ConsumerWidget {
               style: TextStyles.montserratBold15,
               backgorundColor: const Color.fromARGB(255, 21, 154, 118),
               onTap: () {
-                ref.read(ordersProvider.notifier).addOrders(checkout!.toOrderParams());
+                final authState = ref.watch(authNotifierProvider) as Authenticated;
+                final positionState = ref.watch(positionProvider) as UserLocationState;
+                ref.read(ordersProvider.notifier).addOrders(checkout!.toOrderParams(), authState.user,
+                    positionState.locationEntity.latitude, positionState.locationEntity.longitude);
               },
               title: "Yes",
               isLoading: order is OrdersLoadingState,

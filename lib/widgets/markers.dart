@@ -7,8 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../core/exports.dart';
 
 class CustomMarkers {
-  static Future<BitmapDescriptor> createMarker() async {
-    final data = await rootBundle.load(Assets.marker); // Path to your asset
+  static Future<BitmapDescriptor> createMarker(String marker) async {
+    final data = await rootBundle.load(marker); // Path to your asset
     final Uint8List bytes = data.buffer.asUint8List();
 
     // Create an image from the bytes
@@ -17,7 +17,7 @@ class CustomMarkers {
     final ui.Image image = frameInfo.image;
 
     // Create a Canvas to resize the image
-    const size = Size(80, 80); // Set the desired size for the marker
+    const size = Size(120, 120); // Set the desired size for the marker
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder, Rect.fromPoints(const Offset(0, 0), Offset(size.width, size.height)));
 

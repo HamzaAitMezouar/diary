@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import '../../../core/DI/socket_provider.dart';
 import '../../../core/exports.dart';
 import '../../../widgets/custom_long_button.dart';
 import '../../../widgets/custom_text_field.dart';
