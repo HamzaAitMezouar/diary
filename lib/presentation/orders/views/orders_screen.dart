@@ -63,17 +63,19 @@ class _OrderScreenState extends ConsumerState<OrderScreen> {
               child: pharmacies.isEmpty
                   ? Container(
                       padding: Paddings.allXs,
-                      decoration:
-                          BoxDecoration(borderRadius: Borders.b12, color: Theme.of(context).scaffoldBackgroundColor),
+                      decoration: BoxDecoration(
+                        borderRadius: Borders.b12,
+                        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Center(
+                          const Center(
                             child: Text("Waiting for pharmacies response"),
                           ),
                           xxsSpacer(),
-                          CupertinoActivityIndicator()
+                          const CupertinoActivityIndicator()
                         ],
                       ),
                     )

@@ -23,7 +23,7 @@ class ReminderEntity {
       required this.icon});
   ReminderModel toModel() {
     return ReminderModel(
-      id: const Uuid().v4(),
+      id: id,
       medicineName: medicineName,
       time: time,
       dosage: convertTimeOfDayListToStringList(dosage),

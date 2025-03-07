@@ -6,10 +6,12 @@ import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/core/routes/router.dart';
 import 'package:diary/data/models/order_model.dart';
+import 'package:diary/data/models/reminder_model.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -83,7 +85,12 @@ class LocalNotificationService {
 
   void onDidReceiveNotificationResponse(NotificationResponse notificationResponse) async {
     log("🔔 Notification Clicked!");
-
+    if (notificationResponse.actionId == 'YES_ACTION') {
+      log("YESSSS");
+    }
+    if (notificationResponse.actionId == 'NO_ACTION') {
+      log("Noo");
+    }
     if (notificationResponse.payload != null && notificationResponse.payload!.isNotEmpty) {
       try {
         // Decode JSON payload
@@ -142,36 +149,51 @@ class LocalNotificationService {
     await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  Future<void> scheduleDailyNotification(int id, int hour, int minute) async {
-    await flutterLocalNotificationsPlugin.show(
-      id,
-      'Medicine Reminder',
-      'It\'s time to take your medicine!',
-      // _nextInstanceOfTime(hour, minute),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'daily_reminder', // Channel ID
-          'Daily Reminder', // Channel Name
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(),
-      ),
-      //  androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      //  uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      //  matchDateTimeComponents: DateTimeComponents.time, // Triggers daily
-    );
-  }
-
-  /// Helper function to get the next scheduled time
-  tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
+  Future<void> scheduleDailyNotification(TimeOfDay time, ReminderModel reminder) async {
     final now = tz.TZDateTime.now(tz.local);
-    var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);
+    log("Current Local Time: ${DateTime.now()}");
+    // Schedule notification for the next occurrence of the given time
+    tz.TZDateTime scheduledDate = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
 
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
-    return scheduledDate;
+
+    log("Scheduled for: ${scheduledDate.toIso8601String()}");
+
+    const androidDetails = AndroidNotificationDetails(
+      'daily_notification_channel',
+      'Daily Reminders',
+      importance: Importance.high,
+      priority: Priority.high,
+      fullScreenIntent: true,
+      playSound: true,
+      actions: [
+        AndroidNotificationAction('YES_ACTION', 'Yes', showsUserInterface: true),
+        AndroidNotificationAction('NO_ACTION', 'No'),
+      ],
+    );
+
+    const platformDetails = NotificationDetails(android: androidDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      time.hashCode,
+      'Medicine Reminder',
+      'It\'s time to take your medicine!',
+      scheduledDate,
+      platformDetails,
+      payload: reminderModelToJson(reminder),
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time, // Repeat daily
+      androidScheduleMode: AndroidScheduleMode.alarmClock,
+    );
   }
 
   /// Cancel a notification

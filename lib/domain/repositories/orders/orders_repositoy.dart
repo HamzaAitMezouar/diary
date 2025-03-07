@@ -14,6 +14,7 @@ abstract class OrdersRepository {
   Future<Either<Failure, List<OrderEntity>>> addOrder(OrdersParams params);
   Future<Either<Failure, List<OrderEntity>>> getOrder();
   Future<Either<Failure, List<OrderEntity>>> updateOrder(int orderId, OrderStatus status);
+  Future<Either<Failure, OrderEntity>> acceptPharmacyOrder(int orderId, int pharmacyId);
 }
 
 class OrdersRepositoryImpl extends OrdersRepository {
@@ -56,6 +57,22 @@ class OrdersRepositoryImpl extends OrdersRepository {
     try {
       final result = await _datasource.updateOrder(orderId, status);
       return Right(result.map((e) => e.toEntity()).toList());
+    } on CustomException catch (e) {
+      log(e.message);
+
+      return Left(CostumeFailure(errorMessage: e.message));
+    } on UnexpectedException catch (e) {
+      log(e.message);
+
+      return Left(UnexpectedFailure(errorMessage: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, OrderEntity>> acceptPharmacyOrder(int orderId, int pharmacyId) async {
+    try {
+      final result = await _datasource.acceptPharmacyOrder(orderId, pharmacyId);
+      return Right(result.toEntity());
     } on CustomException catch (e) {
       log(e.message);
 

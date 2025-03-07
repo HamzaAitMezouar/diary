@@ -13,6 +13,7 @@ import 'package:diary/domain/usecases/orders/update_order_usecase.dart';
 import 'package:diary/domain/usecases/pharmacy/get_nearest_pharmacy_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/usecases/orders/accept_pharmacy_order.dart';
 import '../../domain/usecases/reminder_usecases/add_reminder.dart';
 import '../../domain/usecases/reminder_usecases/alter_reminder.dart';
 import '../../domain/usecases/reminder_usecases/get_reminder.dart';
@@ -94,4 +95,8 @@ final getOrderUseCase = Provider<GetOrdersUseCase>((ref) {
 final updateOrderUseCase = Provider<UpdateOrdersUseCase>((ref) {
   final repo = ref.watch(ordersRepositoryProvider);
   return UpdateOrdersUseCase(repo);
+});
+final acceptPharmacyOrderUsecase = Provider<AcceptPharmacyOrderUsecase>((ref) {
+  final repo = ref.watch(ordersRepositoryProvider);
+  return AcceptPharmacyOrderUsecase(repo);
 });

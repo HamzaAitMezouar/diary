@@ -3,12 +3,14 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/services/notifications_service.dart';
+import 'package:diary/domain/entities/reminder_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 abstract class NotificationRepository {
-  Future<Either<Failure, bool>> scheduleNotification(TimeOfDay time, DateTime reminderTime);
+  Future<Either<Failure, bool>> scheduleNotification(
+      TimeOfDay time, DateTime reminderTime, ReminderEntity reminderEntity);
   Future<Either<Failure, bool>> cancelNotification(int notificationId);
   Future<Either<Failure, bool>> cancelAllNotifications();
 }
@@ -19,28 +21,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
   NotificationRepositoryImpl(this._notificationSerive);
 
   @override
-  Future<Either<Failure, bool>> scheduleNotification(TimeOfDay time, DateTime reminderTime) async {
+  Future<Either<Failure, bool>> scheduleNotification(
+      TimeOfDay time, DateTime reminderTime, ReminderEntity reminderEntity) async {
     try {
-      final now = DateTime.now();
-      final scheduledDate = DateTime(now.year, now.month, now.day, time.hour, time.minute);
-      final tz.TZDateTime tzScheduledDate = tz.TZDateTime.from(scheduledDate, tz.local);
-
-      int notificationId = reminderTime.millisecondsSinceEpoch;
-
-      var androidDetails = const AndroidNotificationDetails(
-        'daily_notification_channel',
-        'Daily Reminders',
-        importance: Importance.high,
-        priority: Priority.high,
-        actions: [
-          AndroidNotificationAction('YES_ACTION', 'Yes'),
-          AndroidNotificationAction('NO_ACTION', 'No'),
-        ],
-      );
-
-      var platformDetails = NotificationDetails(android: androidDetails);
-
-      await _notificationSerive.scheduleDailyNotification(1, 1, 1);
+      await _notificationSerive.scheduleDailyNotification(time, reminderEntity.toModel());
       log("DONE");
       return right(true);
     } catch (e) {

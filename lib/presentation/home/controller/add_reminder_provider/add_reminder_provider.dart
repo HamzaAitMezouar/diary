@@ -6,6 +6,7 @@ import 'package:diary/presentation/home/controller/notification_provider/reminde
 import 'package:diary/widgets/cupertino_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../core/DI/use_cases_provider.dart';
 import '../../../../domain/entities/reminder_entity.dart';
@@ -65,7 +66,6 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
 
   addReminder() async {
     DateTime now = DateTime.now();
-    ref.read(scheduleNotificationUseCaseProvider)(const TimeOfDay(hour: 20, minute: 06), now);
 
     state = MedicineReminderLoading(
         intakeCount: state.intakeCount,
@@ -74,14 +74,16 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
         icon: state.icon,
         note: state.note);
     final addReminderUseCase = ref.read(addReminderUseCaseProvider);
-    final response = await addReminderUseCase(ReminderEntity(
+    final reminder = ReminderEntity(
+      id: const Uuid().v4(),
       dosage: state.intakeTimes,
       medicineName: state.medicineName,
       notes: state.note,
       time: now,
       consumationDates: [],
       icon: state.icon,
-    ));
+    );
+    final response = await addReminderUseCase(reminder);
     state = response.fold((l) {
       return MedicineReminderError(
           errorMessage: l.errorMessage,
@@ -92,8 +94,8 @@ class MedicineReminderNotifier extends StateNotifier<MedicineReminderState> {
           note: state.note);
     }, (r) {
       for (TimeOfDay timeOfDay in state.intakeTimes) {
-        log(timeOfDay.toString());
-        ref.read(scheduleNotificationUseCaseProvider)(timeOfDay, now);
+        log(state.intakeTimes.length.toString() + timeOfDay.toString());
+        ref.read(scheduleNotificationUseCaseProvider)(timeOfDay, now, reminder);
       }
       return MedicineReminderDone();
     });

@@ -19,7 +19,6 @@ class FirebaseMessagingServie {
       sound: true,
     );
 
-    LocalNotificationService().init();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       log("Foreground message received: ${message.notification?.title}");
 

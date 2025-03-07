@@ -8,15 +8,27 @@ class ShimmerCarLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-        baseColor: AppColors.tibbleGrauBg,
-        highlightColor: AppColors.sofGrey,
-        child: Container(
-          height: D.xxl,
-          decoration: BoxDecoration(
-            borderRadius: Borders.b12,
-            color: AppColors.activeButtonColor,
-          ),
-        ));
+    return Column(
+      children: [
+        Shimmer.fromColors(
+            baseColor: AppColors.tibbleGrauBg,
+            highlightColor: AppColors.sofGrey,
+            child: Container(
+              height: D.xxxxl,
+              decoration: BoxDecoration(
+                borderRadius: Borders.b12,
+                color: AppColors.activeButtonColor,
+              ),
+            )),
+        Shimmer.fromColors(
+            baseColor: AppColors.tibbleGrauBg,
+            highlightColor: AppColors.sofGrey,
+            child: Container(
+              height: 15,
+              width: 100,
+              color: Colors.red,
+            ))
+      ],
+    );
   }
 }

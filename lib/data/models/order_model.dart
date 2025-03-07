@@ -64,33 +64,51 @@ class OrderModel extends Equatable {
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     try {
       return OrderModel(
-        id: int.tryParse(json['id'].toString()) ?? 0, // Ensures int conversion
-        userId: json['userId'] as String,
-        status: OrderStatusExtension.fromString(json['status'].toString()),
-        subtotal: double.tryParse(json['subtotal'].toString()) ?? 0.0,
-        tax: double.tryParse(json['tax'].toString()) ?? 0.0,
-        discount: double.tryParse(json['discount'].toString()) ?? 0.0,
-        totalAmount: double.tryParse(json['totalAmount'].toString()) ?? 0.0,
-        paymentType: PaymentTypeExtension.fromString(json['paymentType'].toString()),
-        transactionId: json['transactionId'] as String?,
-        deliveryAddress: json['deliveryAddress'] as String,
-        deliveryLat: double.tryParse(json['deliveryLat'].toString()) ?? 0.0,
-        deliveryLng: double.tryParse(json['deliveryLng'].toString()) ?? 0.0,
-        deliveryType: DeliveryTypeExtension.fromString(json['deliveryType'].toString()),
-        deliveryDate: json['deliveryDate'] != null ? DateTime.tryParse(json['deliveryDate'].toString()) : null,
-        deliveryFee: double.tryParse(json['deliveryFee'].toString()) ?? 0.0,
-        estimatedDeliveryTime:
-            json['estimatedDeliveryTime'] != null ? DateTime.tryParse(json['estimatedDeliveryTime'].toString()) : null,
-        prescriptionRequired: json['prescriptionRequired'] == true || json['prescriptionRequired'] == "true",
-        prescriptionUrl: json['prescriptionUrl'] as String?,
-        pharmacyId: json['pharmacyId'] != null ? int.tryParse(json['pharmacyId'].toString()) : null,
-        cartItems: (json['cartItems'] is List)
-            ? (json['cartItems'] as List).map((item) => CartItemModel.fromJson(item as Map<String, dynamic>)).toList()
-            : [],
-      );
+          id: int.tryParse(json['id'].toString()) ?? 0, // Ensures int conversion
+          userId: json['userId'] as String,
+          status: OrderStatusExtension.fromString(json['status'].toString()),
+          subtotal: double.tryParse(json['subtotal'].toString()) ?? 0.0,
+          tax: double.tryParse(json['tax'].toString()) ?? 0.0,
+          discount: double.tryParse(json['discount'].toString()) ?? 0.0,
+          totalAmount: double.tryParse(json['totalAmount'].toString()) ?? 0.0,
+          paymentType: PaymentTypeExtension.fromString(json['paymentType'].toString()),
+          transactionId: json['transactionId'] as String?,
+          deliveryAddress: json['deliveryAddress'] as String,
+          deliveryLat: double.tryParse(json['deliveryLat'].toString()) ?? 0.0,
+          deliveryLng: double.tryParse(json['deliveryLng'].toString()) ?? 0.0,
+          deliveryType: DeliveryTypeExtension.fromString(json['deliveryType'].toString()),
+          deliveryDate: json['deliveryDate'] != null ? DateTime.tryParse(json['deliveryDate'].toString()) : null,
+          deliveryFee: double.tryParse(json['deliveryFee'].toString()) ?? 0.0,
+          estimatedDeliveryTime: json['estimatedDeliveryTime'] != null
+              ? DateTime.tryParse(json['estimatedDeliveryTime'].toString())
+              : null,
+          prescriptionRequired: json['prescriptionRequired'] == true || json['prescriptionRequired'] == "true",
+          prescriptionUrl: json['prescriptionUrl'] as String?,
+          pharmacyId: json['pharmacyId'] != null ? int.tryParse(json['pharmacyId'].toString()) : null,
+          cartItems: _getCartItems(json['cartItems']));
     } catch (e) {
-      log(e.toString());
+      log("ERRORRR " + e.toString());
       rethrow;
+    }
+  }
+  static List<CartItemModel> _getCartItems(dynamic cartItemsJson) {
+    log(cartItemsJson.toString());
+    if (cartItemsJson is String) {
+      // If it's a string, try to parse it as a JSON string into a list
+      try {
+        // If the string is a valid JSON array, parse it
+        final List<dynamic> parsedList = jsonDecode(cartItemsJson);
+        return parsedList.map((item) => CartItemModel.fromJson(item as Map<String, dynamic>)).toList();
+      } catch (e) {
+        // If it's not a valid JSON array, handle it gracefully (e.g., return an empty list or log an error)
+        return [];
+      }
+    } else if (cartItemsJson is List<dynamic>) {
+      // If it's already a list, map it directly
+      return cartItemsJson.map((item) => CartItemModel.fromJson(item as Map<String, dynamic>)).toList();
+    } else {
+      // Handle unexpected cases, like null or other types
+      return [];
     }
   }
 

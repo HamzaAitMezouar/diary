@@ -13,20 +13,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/DI/router_provider.dart';
 import 'data/models/category_model.dart';
 import 'data/models/medicament_model.dart';
 import 'firebase_options.dart';
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
+
+Future<void> requestFullScreenPermission() async {
+  final intent = AndroidIntent(
+    action: 'android.settings.ACTION_MANAGE_OVERLAY_PERMISSION',
+    flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+  );
+  await intent.launch();
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  requestFullScreenPermission();
   FirebaseMessagingServie.initFirebase();
   LocalNotificationService().initWhenAppIsTerminated();
   final sharedPreferences = await SharedPreferences.getInstance();
+  tz.initializeTimeZones();
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(ReminderModelAdapter());

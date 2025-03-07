@@ -9,6 +9,7 @@ abstract class OrdersDatasource {
   Future<List<OrderModel>> addOrder(OrdersParams params);
   Future<List<OrderModel>> getOrder();
   Future<List<OrderModel>> updateOrder(int orderId, OrderStatus status);
+  Future<OrderModel> acceptPharmacyOrder(int orderId, int pharmacyId);
 }
 
 class OrdersDatasourceImpl implements OrdersDatasource {
@@ -49,6 +50,15 @@ class OrdersDatasourceImpl implements OrdersDatasource {
       );
       final List<dynamic> data = response.data;
       return data.map((e) => OrderModel.fromJson(e)).toList();
+    });
+  }
+
+  @override
+  Future<OrderModel> acceptPharmacyOrder(int orderId, int pharmacyId) {
+    return _exceptionsHandler.dioExceptionsHandler(() async {
+      var response = await _dio.post(Urls.acceptPharmacyOrder, data: {"orderId": orderId, "pharmacyId": pharmacyId});
+
+      return OrderModel.fromJson(response.data);
     });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:diary/core/DI/use_cases_provider.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/presentation/medicine/controllers/position_provider/position_provider.dart';
 import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
@@ -74,14 +75,18 @@ class PharmacyInvitationCard extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               CustomButton(
-                onTap: () {},
+                onTap: () {
+                  ref.watch(pharmacyNotifierProvider.notifier).accept(op, context);
+                },
                 title: "Accept",
                 height: D.xlg,
                 backgorundColor: Theme.of(context).primaryColor.withOpacity(0.8),
               ),
               CustomButton(
                 onTap: () {
-                  ref.watch(pharmacyNotifierProvider.notifier).decline(op);
+                  ref.watch(pharmacyNotifierProvider.notifier).decline(
+                        op,
+                      );
                 },
                 title: "Decline",
                 height: D.xlg,

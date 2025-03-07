@@ -1,8 +1,12 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/DI/socket_provider.dart';
+import '../../../core/DI/use_cases_provider.dart';
+import '../../../core/routes/routes_names.dart';
 import '../../../core/services/socket_io_service.dart';
 import '../../../domain/entities/pharmacy_order.dart';
 import '../../authentication/controllers/auth_notifier.dart';
@@ -10,8 +14,8 @@ import '../../authentication/controllers/auth_state.dart';
 
 class PharmacyNotifier extends StateNotifier<List<PharmacyOrderEntity>> {
   final SocketService socketService;
-
-  PharmacyNotifier(this.socketService) : super([]) {
+  Ref ref;
+  PharmacyNotifier(this.socketService, this.ref) : super([]) {
     _listenToPharmacyStream();
   }
 
@@ -41,12 +45,20 @@ class PharmacyNotifier extends StateNotifier<List<PharmacyOrderEntity>> {
     state = state.where((element) => element.pharmcay.id != op.pharmcay.id).toList();
   }
 
-  accept() {}
+  accept(PharmacyOrderEntity op, BuildContext context) async {
+    final res = await ref.read(acceptPharmacyOrderUsecase)(
+      op.order.id!,
+      op.pharmcay.id,
+    );
+    res.fold((l) => null, (r) {
+      //  context.replaceNamed(RoutesNames.introPage);
+    });
+  }
 }
 
 final pharmacyNotifierProvider = StateNotifierProvider.autoDispose<PharmacyNotifier, List<PharmacyOrderEntity>>(
   (ref) {
     final socketService = ref.watch(socketProvider);
-    return PharmacyNotifier(socketService);
+    return PharmacyNotifier(socketService, ref);
   },
 );

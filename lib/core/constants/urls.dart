@@ -19,4 +19,5 @@ abstract class Urls {
 
   static String pharmacy = "${baseUrl}pharmacy";
   static String orders = "${baseUrl}order";
+  static String acceptPharmacyOrder = "${baseUrl}order/accept_order";
 }

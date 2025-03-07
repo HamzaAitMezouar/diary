@@ -10,7 +10,7 @@ class ReminderNotifier extends StateNotifier<List<ReminderEntity>> {
 
   void addReminder(ReminderEntity reminder) {
     for (TimeOfDay timeOfDay in reminder.dosage) {
-      _notificationRepository.scheduleNotification(timeOfDay, reminder.time);
+      _notificationRepository.scheduleNotification(timeOfDay, reminder.time, reminder);
     }
     state = [...state, reminder];
   }

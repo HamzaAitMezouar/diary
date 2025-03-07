@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/reminder_entity.dart';
 import 'package:hive/hive.dart';
 
 part 'reminder_model.g.dart';
+
+ReminderModel reminderModelFromJson(String str) => ReminderModel.fromJson(json.decode(str));
+
+String reminderModelToJson(ReminderModel data) => json.encode(data.toJson());
 
 @HiveType(typeId: 0, adapterName: 'ReminderModelAdapter')
 class ReminderModel {
