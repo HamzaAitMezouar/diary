@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/core/services/firebase_messaging_service.dart';
@@ -23,11 +25,19 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 
 Future<void> requestFullScreenPermission() async {
-  final intent = AndroidIntent(
-    action: 'android.settings.ACTION_MANAGE_OVERLAY_PERMISSION',
-    flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
-  );
-  await intent.launch();
+  if (Platform.isAndroid) {
+    try {
+      final intent = AndroidIntent(
+        action: 'android.settings.ACTION_MANAGE_OVERLAY_PERMISSION',
+        data: 'com.example.diary', // Replace with your app's package name
+        flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+        package: 'com.android.settings',
+      );
+      await intent.launch();
+    } catch (e) {
+      print('Error launching overlay permission intent: $e');
+    }
+  }
 }
 
 void main() async {

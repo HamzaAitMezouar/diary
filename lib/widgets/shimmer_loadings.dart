@@ -14,7 +14,7 @@ class ShimmerCarLoading extends StatelessWidget {
             baseColor: AppColors.tibbleGrauBg,
             highlightColor: AppColors.sofGrey,
             child: Container(
-              height: D.xxxxl,
+              height: D.xxxxxl,
               decoration: BoxDecoration(
                 borderRadius: Borders.b12,
                 color: AppColors.activeButtonColor,
