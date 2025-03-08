@@ -7,12 +7,15 @@ class PaymentMethodEntity {
   final String userId;
   final String stripePaymentMethodId;
   final List<TransactionEntity> transactions;
-
+  final String date;
+  final String codeFirstDigits;
   PaymentMethodEntity({
     required this.id,
     required this.userId,
     required this.stripePaymentMethodId,
     required this.transactions,
+    required this.date,
+    required this.codeFirstDigits,
   });
 
   // Convert entity to model
@@ -34,17 +37,8 @@ class PaymentMethodEntity {
       userId: userId,
       stripePaymentMethodId: stripePaymentMethodId,
       transactions: transactions.map((transaction) => transaction.toModel()).toList(),
-    );
-  }
-
-  // Convert JSON to entity
-  static PaymentMethodEntity fromJson(Map<String, dynamic> json) {
-    return PaymentMethodEntity(
-      id: json['id'],
-      userId: json['userId'],
-      stripePaymentMethodId: json['stripePaymentMethodId'],
-      transactions:
-          (json['transactions'] as List).map((transactionJson) => TransactionEntity.fromJson(transactionJson)).toList(),
+      date: date,
+      codeFirstDigits: codeFirstDigits,
     );
   }
 }
