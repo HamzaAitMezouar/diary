@@ -26,30 +26,30 @@ class NavBarScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(authNotifierProvider, (previous, next) {
-      log("iiiiiiiiiiiiiiiiiin");
+    // ref.listen(authNotifierProvider, (previous, next) {
+    //   log("iiiiiiiiiiiiiiiiiin");
 
-      if (next is Authenticated && next.user.name == null) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          try {
-            ConfirmActionDialog().showActionDialog(
-              context,
-              "Add name",
-              "Please enter your name",
-              [
-                Padding(
-                  padding: Paddings.allXs,
-                  child: CustomTextField(controller: TextEditingController(), hintText: "Name"),
-                ),
-                CustomButton(onTap: () {}, title: "Enter"),
-              ],
-            );
-          } catch (e) {
-            log("Dialog Error: ${e.toString()}");
-          }
-        });
-      }
-    });
+    //   // if (next is Authenticated && next.user.name == null) {
+    //   //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   //     try {
+    //   //       ConfirmActionDialog().showActionDialog(
+    //   //         context,
+    //   //         "Add name",
+    //   //         "Please enter your name",
+    //   //         [
+    //   //           Padding(
+    //   //             padding: Paddings.allXs,
+    //   //             child: CustomTextField(controller: TextEditingController(), hintText: "Name"),
+    //   //           ),
+    //   //           CustomButton(onTap: () {}, title: "Enter"),
+    //   //         ],
+    //   //       );
+    //   //     } catch (e) {
+    //   //       log("Dialog Error: ${e.toString()}");
+    //   //     }
+    //   //   });
+    //   // }
+    // });
     ref.watch(cartProvider);
     final currentItem = ref.watch(navigationControllerProvider);
     ref.listen(sessionProvider, (previous, next) {
