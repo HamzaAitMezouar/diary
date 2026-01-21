@@ -1,10 +1,8 @@
-import 'dart:developer';
 
 import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/exports.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/widgets/markers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

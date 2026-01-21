@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/DI/storage_provider.dart';
 import 'package:diary/core/services/firebase_messaging_service.dart';
 import 'package:diary/core/services/notifications_service.dart';
@@ -10,7 +9,6 @@ import 'package:diary/data/models/reminder_model.dart';
 import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/languages/languages_provider/localization_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -27,7 +25,7 @@ import 'package:android_intent_plus/flag.dart';
 Future<void> requestFullScreenPermission() async {
   if (Platform.isAndroid) {
     try {
-      final intent = AndroidIntent(
+      const intent = AndroidIntent(
         action: 'android.settings.ACTION_MANAGE_OVERLAY_PERMISSION',
         data: 'com.example.diary', // Replace with your app's package name
         flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],

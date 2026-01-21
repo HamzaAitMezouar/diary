@@ -1,18 +1,11 @@
-import 'dart:developer';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:diary/core/exports.dart';
-import 'package:diary/domain/entities/language.dart';
-import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/domain/entities/user_entity.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
-import 'package:diary/widgets/custom_text_field.dart';
-import 'package:diary/widgets/info_diaog.dart';
 import 'package:diary/widgets/loading_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../widgets/custom_long_button.dart';
 import '../../authentication/controllers/auth_notifier.dart';
 import '../../authentication/views/authentication.dart';
 import '../widgets/profile_action_list.dart';
@@ -69,7 +62,7 @@ Positioned _uploadProfileImageIcon(UserEntity user, BuildContext context, Widget
         icon: Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-          child: Icon(
+          child: const Icon(
             CupertinoIcons.camera,
           ),
         )),

@@ -1,19 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:diary/core/constants/assets.dart';
-import 'package:diary/core/constants/text_style.dart';
 import 'package:diary/core/exports.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/routes/routes_names.dart';
-import '../../../domain/entities/cart_entity.dart';
-import '../../../domain/entities/checkout_entity.dart';
-import '../../../widgets/custom_long_button.dart';
-import '../../authentication/controllers/auth_state.dart';
-import '../../checkout/controllers/checkout_provider.dart';
 import '../widgets/cart_item_widget.dart';
 import '../widgets/go_to_checkout_button.dart';
 
@@ -77,6 +66,6 @@ class CartScreen extends ConsumerWidget {
               ],
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: GoToCheckoutButton());
+            floatingActionButton: const GoToCheckoutButton());
   }
 }

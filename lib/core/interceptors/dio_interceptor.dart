@@ -44,7 +44,7 @@ class AuthInterceptor extends Interceptor {
           isRefreshing = false;
           return handler.next(err);
         }, (r) async {
-          log("----------------------------------------------" + r.accessToken.toString());
+          log("----------------------------------------------${r.accessToken}");
           if (r.accessToken == null || r.refreshToken == null) {
             refreshCompleter?.complete();
             isRefreshing = false;

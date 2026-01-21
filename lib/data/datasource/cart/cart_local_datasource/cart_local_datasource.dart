@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:diary/core/errors/exceptions.dart';
 import 'package:diary/data/models/cart_model.dart';
-import 'package:diary/data/models/medicament_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class CartLocalDatasource {
@@ -24,7 +23,7 @@ class CartLocalDatasourceImpl extends CartLocalDatasource {
   @override
   Future<CartModel> addMedicament(CartItemModel cartItem) async {
     try {
-      log("message-----------" + cartItem.quantity.toString());
+      log("message-----------${cartItem.quantity}");
       final cart = _getCart();
 
       final index = cart.cartItems.indexWhere((item) => item.medicament.id == cartItem.medicament.id);

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:diary/domain/entities/checkout_entity.dart';

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../core/exports.dart';
 
 class CustomMarkers {
   static Future<BitmapDescriptor> createMarker(String marker) async {

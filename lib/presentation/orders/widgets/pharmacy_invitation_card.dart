@@ -1,8 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:diary/core/DI/use_cases_provider.dart';
 import 'package:diary/core/exports.dart';
-import 'package:diary/presentation/medicine/controllers/position_provider/position_provider.dart';
-import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,7 +52,7 @@ class PharmacyInvitationCard extends ConsumerWidget {
                       style: TextStyles.robotoBold10,
                     ),
                     Text(
-                      op.order.subtotal.toString() + " MAD",
+                      "${op.order.subtotal} MAD",
                       maxLines: 1,
                       style: TextStyles.robotoBold10.copyWith(color: Theme.of(context).colorScheme.error),
                     ),

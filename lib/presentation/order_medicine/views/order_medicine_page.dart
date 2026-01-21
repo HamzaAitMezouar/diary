@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:diary/core/exports.dart';
 import 'package:diary/domain/entities/cart_entity.dart';

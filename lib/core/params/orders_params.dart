@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
-import 'package:diary/presentation/checkout/widgets/delivery_schedule_type.dart';
 
 class OrdersParams {
   final List<CartItemModel> items;

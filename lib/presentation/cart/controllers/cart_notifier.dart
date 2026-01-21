@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:diary/core/DI/use_cases_provider.dart';
-import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

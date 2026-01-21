@@ -1,4 +1,3 @@
-import 'package:diary/domain/entities/location_entity.dart';
 import 'package:diary/domain/entities/order_entity.dart';
 
 abstract class OrdersState {

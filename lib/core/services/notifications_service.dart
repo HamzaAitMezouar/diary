@@ -1,22 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:diary/core/exports.dart';
-import 'package:diary/core/extensions/conntext_extension.dart';
 import 'package:diary/core/routes/router.dart';
 import 'package:diary/data/models/order_model.dart';
 import 'package:diary/data/models/reminder_model.dart';
-import 'package:diary/widgets/custom_long_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:go_router/go_router.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../widgets/accept_or_refuse_order_bottomsheet.dart';
 
@@ -131,10 +122,10 @@ class LocalNotificationService {
 
     // Check if the app was launched from a notification
     final details = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    log("DETAILS WHEN APP IS TERM" + details!.didNotificationLaunchApp.toString());
-    if (details?.didNotificationLaunchApp ?? false) {
+    log("DETAILS WHEN APP IS TERM${details!.didNotificationLaunchApp}");
+    if (details.didNotificationLaunchApp ?? false) {
       // The app was launched from a notification
-      final String? payload = details!.notificationResponse?.payload;
+      final String? payload = details.notificationResponse?.payload;
       if (payload != null && payload.isNotEmpty) {
         handleNotificationPayloadWhenAppIsTerminated(payload); // Handle it when app starts
       }

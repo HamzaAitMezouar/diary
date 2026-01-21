@@ -1,16 +1,10 @@
-import 'dart:developer';
 
-import 'package:diary/core/DI/socket_provider.dart';
 import 'package:diary/core/constants/app_colors.dart';
 import 'package:diary/core/constants/border.dart';
 import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/constants/paddings.dart';
 import 'package:diary/core/extensions/conntext_extension.dart';
-import 'package:diary/domain/entities/pharmacy_order.dart';
-import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
-import 'package:diary/presentation/authentication/controllers/auth_state.dart';
 import 'package:diary/presentation/orders/controllers/order_provider.dart';
-import 'package:diary/presentation/orders/controllers/orders_state.dart';
 import 'package:diary/widgets/accept_or_refuse_order_bottomsheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

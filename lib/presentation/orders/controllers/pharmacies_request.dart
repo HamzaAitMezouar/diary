@@ -2,15 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/DI/socket_provider.dart';
 import '../../../core/DI/use_cases_provider.dart';
-import '../../../core/routes/routes_names.dart';
 import '../../../core/services/socket_io_service.dart';
 import '../../../domain/entities/pharmacy_order.dart';
-import '../../authentication/controllers/auth_notifier.dart';
-import '../../authentication/controllers/auth_state.dart';
 
 class PharmacyNotifier extends StateNotifier<List<PharmacyOrderEntity>> {
   final SocketService socketService;

@@ -1,7 +1,5 @@
-import 'package:diary/core/constants/dimensions.dart';
 import 'package:flutter/material.dart';
 
-import '../core/constants/border.dart';
 import '../core/exports.dart';
 
 class AdaptiveDialogScreen {

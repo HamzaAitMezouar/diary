@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:diary/presentation/cart/controllers/cart_notifier.dart';
 import 'package:diary/presentation/map/views/map_screen.dart';
@@ -8,14 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import '../../../core/DI/socket_provider.dart';
 import '../../../core/exports.dart';
-import '../../../widgets/custom_long_button.dart';
-import '../../../widgets/custom_text_field.dart';
-import '../../../widgets/expired_session_dialog.dart';
-import '../../../widgets/info_diaog.dart';
-import '../../authentication/controllers/auth_notifier.dart';
-import '../../authentication/controllers/auth_state.dart';
 import '../../authentication/controllers/session_notifier.dart';
 import '../../authentication/views/authentication.dart';
 import '../../home/views/home_page.dart';

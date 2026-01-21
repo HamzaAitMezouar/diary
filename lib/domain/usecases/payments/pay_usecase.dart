@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:diary/domain/entities/payment_method_entity.dart';
 import 'package:diary/domain/entities/transaction_entity.dart';
 import 'package:diary/domain/repositories/payments/payments_repository.dart';
 

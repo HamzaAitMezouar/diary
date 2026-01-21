@@ -87,7 +87,7 @@ class OrderModel extends Equatable {
           pharmacyId: json['pharmacyId'] != null ? int.tryParse(json['pharmacyId'].toString()) : null,
           cartItems: _getCartItems(json['cartItems']));
     } catch (e) {
-      log("ERRORRR " + e.toString());
+      log("ERRORRR $e");
       rethrow;
     }
   }

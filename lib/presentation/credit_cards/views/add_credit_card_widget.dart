@@ -1,14 +1,8 @@
 import 'dart:developer';
 
-import 'package:diary/core/constants/border.dart';
-import 'package:diary/core/constants/text_style.dart';
-import 'package:diary/core/params/payment_params.dart';
-import 'package:diary/presentation/credit_cards/controller/credit_cards_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../core/exports.dart';
 
@@ -104,7 +98,7 @@ class AddCreditCardWidgetState extends ConsumerState<AddCreditCardWidget> {
                       style: BorderStyle.solid,
                       color: Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(15),
                     ),
                   ),
@@ -120,7 +114,7 @@ class AddCreditCardWidgetState extends ConsumerState<AddCreditCardWidget> {
                       style: BorderStyle.solid,
                       color: Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(15),
                     ),
                   ),
@@ -135,7 +129,7 @@ class AddCreditCardWidgetState extends ConsumerState<AddCreditCardWidget> {
                       style: BorderStyle.solid,
                       color: Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(15),
                     ),
                   ),
@@ -149,7 +143,7 @@ class AddCreditCardWidgetState extends ConsumerState<AddCreditCardWidget> {
                         style: BorderStyle.solid,
                         color: Theme.of(context).primaryColor,
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(15),
                       ),
                     )),

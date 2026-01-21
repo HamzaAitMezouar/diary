@@ -1,7 +1,6 @@
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/presentation/checkout/controllers/checkout_provider.dart';
-import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

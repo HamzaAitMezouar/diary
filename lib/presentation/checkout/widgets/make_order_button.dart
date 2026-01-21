@@ -1,22 +1,16 @@
 import 'dart:developer';
 
-import 'package:diary/core/DI/dio_provider.dart';
-import 'package:diary/core/constants/app_colors.dart';
 import 'package:diary/core/constants/dimensions.dart';
 import 'package:diary/core/constants/paddings.dart';
 import 'package:diary/core/constants/text_style.dart';
-import 'package:diary/core/params/orders_params.dart';
-import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/presentation/authentication/controllers/auth_notifier.dart';
 import 'package:diary/presentation/authentication/controllers/auth_state.dart';
-import 'package:diary/presentation/checkout/widgets/delivery_schedule_type.dart';
 import 'package:diary/presentation/medicine/controllers/position_provider/position_state.dart';
 import 'package:diary/presentation/orders/controllers/order_provider.dart';
 import 'package:diary/presentation/orders/controllers/orders_state.dart';
 import 'package:diary/widgets/info_diaog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -52,7 +46,9 @@ class MakeOrderButton extends ConsumerWidget {
       if (position is UserLocationState && checkout!.deliveryType == DeliveryType.home) return false;
       if (position is UserLocationState &&
           position.locationEntity.pharmacy != null &&
-          checkout!.deliveryType == DeliveryType.pharmacy) return false;
+          checkout!.deliveryType == DeliveryType.pharmacy) {
+        return false;
+      }
       return true;
     }
 

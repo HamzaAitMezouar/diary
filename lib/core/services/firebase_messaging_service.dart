@@ -34,7 +34,7 @@ class FirebaseMessagingServie {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       String orderId = message.data.toString();
-      log("User tapped notification from background with orderId: ${orderId}");
+      log("User tapped notification from background with orderId: $orderId");
       // Navigate to order details
     });
   }

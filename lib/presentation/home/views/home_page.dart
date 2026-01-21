@@ -31,7 +31,7 @@ class HomeScreen extends ConsumerWidget {
                           [
                             xxlSpacer(),
                             home.reminders.isEmpty
-                                ? EmptyReminderList()
+                                ? const EmptyReminderList()
                                 : Column(
                                     children: [
                                       ...home.reminders.map((reminder) => CupertinoContextMenu(

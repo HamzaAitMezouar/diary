@@ -1,7 +1,4 @@
-import 'package:diary/core/constants/border.dart';
-import 'package:diary/core/constants/text_style.dart';
 import 'package:diary/core/exports.dart';
-import 'package:diary/domain/entities/language.dart';
 import 'package:diary/domain/entities/user_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +68,7 @@ class AndroidSwitchTheme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Switch(
-        activeColor: Colors.grey,
+        activeThumbColor: Colors.grey,
         activeThumbImage: AssetImage(Assets.dark),
         inactiveThumbImage: AssetImage(Assets.light),
         inactiveTrackColor: const Color.fromARGB(255, 224, 224, 224),

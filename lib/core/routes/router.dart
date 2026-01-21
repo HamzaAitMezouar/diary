@@ -84,19 +84,19 @@ class GoRouterProvider {
                   path: Routes.ordersPage,
                   name: RoutesNames.ordersPage,
                   builder: (context, state) {
-                    return OrderScreen();
+                    return const OrderScreen();
                   }),
               GoRoute(
                   path: Routes.cartPage,
                   name: RoutesNames.cartPage,
                   builder: (context, state) {
-                    return CartScreen();
+                    return const CartScreen();
                   }),
               GoRoute(
                   path: Routes.addCreditCardPage,
                   name: RoutesNames.addCreditCardPage,
                   builder: (context, state) {
-                    return AddCreditCardWidget();
+                    return const AddCreditCardWidget();
                   }),
             ]),
       ],
