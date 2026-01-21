@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/DI/socket_provider.dart';
 import '../../../domain/entities/reminder_entity.dart';
 import '../widgets/week_days_history.dart';
 
@@ -46,12 +45,13 @@ class HomeScreen extends ConsumerWidget {
                                                   child: const Text("Delete"),
                                                 ),
                                               ],
-                                              previewBuilder: (context, animation, child) {
-                                                return SizedBox(
-                                                  height: 80,
-                                                  child: ReminderCard(reminder: reminder),
-                                                );
-                                              },
+                                              //TODO:WHY
+                                              // previewBuilder: (context, animation, child) {
+                                              //   return SizedBox(
+                                              //     height: 80,
+                                              //     child: ReminderCard(reminder: reminder),
+                                              //   );
+                                              // },
                                               child: ReminderCard(reminder: reminder)))
                                     ],
                                   ),

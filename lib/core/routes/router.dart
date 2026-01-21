@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../presentation/credit_cards/views/add_credit_card_widget.dart';
 import '../../presentation/nav_bar/views/nav_bar.dart';
 import '../../presentation/orders/views/orders_screen.dart';
 import '../DI/storage_provider.dart';
@@ -71,6 +72,12 @@ class GoRouterProvider {
                                   latLng: latLng,
                                 );
                               }),
+                          // GoRoute(
+                          //     path: Routes.addCreditCardPage,
+                          //     name: RoutesNames.addCreditCardPage,
+                          //     builder: (context, state) {
+                          //       return AddCreditCardWidget();
+                          //     }),
                         ]),
                   ]),
               GoRoute(
@@ -84,6 +91,12 @@ class GoRouterProvider {
                   name: RoutesNames.cartPage,
                   builder: (context, state) {
                     return CartScreen();
+                  }),
+              GoRoute(
+                  path: Routes.addCreditCardPage,
+                  name: RoutesNames.addCreditCardPage,
+                  builder: (context, state) {
+                    return AddCreditCardWidget();
                   }),
             ]),
       ],

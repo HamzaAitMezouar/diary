@@ -10,6 +10,9 @@ import 'package:diary/domain/usecases/medicament_category/get_medicament_categor
 import 'package:diary/domain/usecases/orders/add_order_usecase.dart';
 import 'package:diary/domain/usecases/orders/get_order_usecase.dart';
 import 'package:diary/domain/usecases/orders/update_order_usecase.dart';
+import 'package:diary/domain/usecases/payments/get_payment_methods.dart';
+import 'package:diary/domain/usecases/payments/pay_usecase.dart';
+import 'package:diary/domain/usecases/payments/save_card_usecase.dart';
 import 'package:diary/domain/usecases/pharmacy/get_nearest_pharmacy_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -99,4 +102,20 @@ final updateOrderUseCase = Provider<UpdateOrdersUseCase>((ref) {
 final acceptPharmacyOrderUsecase = Provider<AcceptPharmacyOrderUsecase>((ref) {
   final repo = ref.watch(ordersRepositoryProvider);
   return AcceptPharmacyOrderUsecase(repo);
+});
+// payment methods
+
+final getPaymenthMethodsUseCase = Provider<GetPaymentMethodsUseCase>((ref) {
+  final repo = ref.watch(paymentMthodsRepositoryProvider);
+  return GetPaymentMethodsUseCase(repo);
+});
+
+final addPaymenthMethodsUseCase = Provider<AddPaymentMethodUseCase>((ref) {
+  final repo = ref.watch(paymentMthodsRepositoryProvider);
+  return AddPaymentMethodUseCase(repo);
+});
+
+final payUseCase = Provider<PayUseCase>((ref) {
+  final repo = ref.watch(paymentMthodsRepositoryProvider);
+  return PayUseCase(repo);
 });

@@ -17,6 +17,8 @@ abstract class Assets {
   static String map = "assets/icons/map.png";
   static String profile = "assets/icons/user.png";
   static String marker = "assets/icons/marker2.png";
+  static String visa = "assets/icons/visa.png";
+  static String mastercard = "assets/icons/mastercard.png";
 
   static String facebook = "assets/icons/facebook.png";
 

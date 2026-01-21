@@ -6,6 +6,7 @@ import 'package:diary/data/datasource/location/location_datasource.dart';
 import 'package:diary/data/datasource/medicament_category/medicament_category_datasourca.dart';
 import 'package:diary/data/datasource/medicaments/medicament_remote_datasource/medicament_remote_datasource.dart';
 import 'package:diary/data/datasource/orders/orders.datasource.dart';
+import 'package:diary/data/datasource/payments/payment_datasource.dart';
 import 'package:diary/data/datasource/pharmacy/pharmacy_datasource.dart';
 import 'package:diary/data/datasource/reminder_datasource/reminder_local_datasource.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,4 +56,11 @@ final orderDataSourceProvider = Provider<OrdersDatasource>((ref) {
   final authDio = ref.watch(authDioProvider);
   final exceptionHandler = ref.watch(exceptionsHandlerProvider);
   return OrdersDatasourceImpl(authDio, exceptionHandler);
+});
+
+// payment methods
+final paymenthMethodsDataSourceProvider = Provider<PaymentDataSource>((ref) {
+  final authDio = ref.watch(authDioProvider);
+  final exceptionHandler = ref.watch(exceptionsHandlerProvider);
+  return PaymentDataSourceImpl(authDio, exceptionHandler);
 });

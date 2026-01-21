@@ -1,9 +1,11 @@
 import 'package:diary/core/exports.dart';
+import 'package:diary/core/routes/routes_names.dart';
 import 'package:diary/domain/entities/checkout_entity.dart';
 import 'package:diary/widgets/custom_long_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../controllers/checkout_provider.dart';
@@ -51,7 +53,10 @@ class PaymentMethodsWidget extends ConsumerWidget {
                         CustomButton(
                           height: 50,
                           backgorundColor: Theme.of(context).scaffoldBackgroundColor,
-                          onTap: () {},
+                          onTap: () {
+                            context.pop();
+                            context.pushNamed(RoutesNames.addCreditCardPage);
+                          },
                           title: "Add a card",
                           // ignore: prefer_const_constructors
                           icon: Icon(Icons.credit_card),

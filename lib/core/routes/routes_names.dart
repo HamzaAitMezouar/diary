@@ -7,6 +7,7 @@ class RoutesNames {
   static String mapSearchPage = "map-search";
   static String ordersPage = "orders";
   static String cartPage = "cart";
+  static String addCreditCardPage = "add-credit-card";
 }
 
 class Routes {
@@ -18,4 +19,5 @@ class Routes {
   static String mapSearchPage = "map-search-page";
   static String ordersPage = "orders-page";
   static String cartPage = "cart-page";
+  static String addCreditCardPage = "add-credit-card-page";
 }

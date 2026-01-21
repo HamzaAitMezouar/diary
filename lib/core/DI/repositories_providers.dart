@@ -3,6 +3,7 @@ import 'package:diary/domain/repositories/location/location_repository.dart';
 import 'package:diary/domain/repositories/medicament/medicament_repository.dart';
 import 'package:diary/domain/repositories/medicament_category/medicament_category_repository.dart';
 import 'package:diary/domain/repositories/orders/orders_repositoy.dart';
+import 'package:diary/domain/repositories/payments/payments_repository.dart';
 import 'package:diary/domain/repositories/pharmacy/pharmacy_repositoy.dart';
 import 'package:diary/domain/repositories/reminder_repository/reminder_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,4 +46,9 @@ final cartRepositoryProvider = Provider<CartRepository>((ref) {
 final ordersRepositoryProvider = Provider<OrdersRepository>((ref) {
   final datasource = ref.watch(orderDataSourceProvider);
   return OrdersRepositoryImpl(datasource);
+});
+// payment methods
+final paymentMthodsRepositoryProvider = Provider<PaymentRepository>((ref) {
+  final datasource = ref.watch(paymenthMethodsDataSourceProvider);
+  return PaymentRepositoryImpl(datasource);
 });

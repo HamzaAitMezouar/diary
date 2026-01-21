@@ -72,6 +72,8 @@ class NavBarScreen extends ConsumerWidget {
         unselectedLabelStyle: TextStyles.roboto13.copyWith(fontSize: 11),
         selectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
         unselectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
