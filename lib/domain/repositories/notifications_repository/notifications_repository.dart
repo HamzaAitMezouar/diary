@@ -5,7 +5,6 @@ import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/services/notifications_service.dart';
 import 'package:diary/domain/entities/reminder_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 abstract class NotificationRepository {
@@ -33,6 +32,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  // ignore: unused_element
   tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
     final now = tz.TZDateTime.now(tz.local);
     var scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);

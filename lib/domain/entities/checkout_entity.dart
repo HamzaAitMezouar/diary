@@ -1,10 +1,7 @@
 import 'package:diary/core/params/orders_params.dart';
 import 'package:diary/domain/entities/cart_entity.dart';
 import 'package:diary/domain/entities/location_entity.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
 import 'package:diary/domain/entities/pharmacy_entiy.dart';
-
-import '../../data/models/cart_model.dart';
 
 enum DeliveryType { home, pharmacy }
 

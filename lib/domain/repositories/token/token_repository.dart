@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/core/helpers/either_error_handler.dart';

@@ -1,14 +1,9 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:diary/core/errors/errors.dart';
 import 'package:diary/data/datasource/cart/cart_local_datasource/cart_local_datasource.dart';
-import 'package:diary/data/models/cart_model.dart';
 import 'package:diary/domain/entities/cart_entity.dart';
-import 'package:diary/domain/entities/medicament_entity.dart';
 
 import '../../../core/errors/exceptions.dart';
-import '../../../data/models/medicament_model.dart';
 
 abstract class CartRepository {
   Future<Either<Failure, CartEntity>> addMedicament(CartItemEntity cartItem);
